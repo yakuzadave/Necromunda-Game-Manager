@@ -1,0 +1,18 @@
+entrypoint = "main.py"
+run = ["streamlit", "run", "main.py", "--server.headless", "true"]
+
+modules = ["python-3.10"]
+
+hidden = [".pythonlibs"]
+
+[nix]
+channel = "stable-23_05"
+
+[deployment]
+ignorePorts = false
+deploymentTarget = "cloudrun"
+run = ["sh", "-c", "streamlit run main.py --server.headless true"]
+
+[[ports]]
+localPort = 8501
+externalPort = 80

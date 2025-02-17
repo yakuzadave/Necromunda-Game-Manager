@@ -1,0 +1,11 @@
+OrderID,Product,OrderDate,QuantityChange
+1,Widget A,2023-10-01,10
+2,Widget B,2023-10-01,-5
+3,Widget A,2023-10-02,3
+4,Widget C,2023-10-02,7
+5,Widget B,2023-10-03,10
+6,Widget A,2023-10-03,-2
+7,Widget C,2023-10-04,-4
+8,Widget B,2023-10-04,5
+9,Widget A,2023-10-05,6
+10,Widget C,2023-10-05,-3
