@@ -1,64 +1,95 @@
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-
 from streamlit_chat import message
-from streamlit.components.v1 import html
 
-# Set the title of the web app
-st.title("Tabletop Manager")
+# Page configuration
+st.set_page_config(page_title="Tabletop Manager", layout="wide")
 
-# Create a sidebar with a text input and a button
-st.sidebar.title("Tabletop Manager")
+# Custom CSS
+st.markdown("""
+    <style>
+    .main {
+        padding: 2rem;
+    }
+    .stButton>button {
+        width: 100%;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
+# Initialize session state
+if 'games' not in st.session_state:
+    st.session_state.games = []
+if 'players' not in st.session_state:
+    st.session_state.players = []
 
-def on_input_change():
-    user_input = st.session_state.user_input
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append("The messages from Bot\nWith new line")
+# Main title with styling
+st.title("🎲 Tabletop Manager")
 
-def on_btn_click():
-    del st.session_state.past[:]
-    del st.session_state.generated[:]
+# Create two columns for the main layout
+col1, col2 = st.columns([2, 3])
 
-# Create the base sidebar in streamlit with default width 
-# Create a sidebar with a selectbox for choosing the game type
-sidebar_option = st.sidebar.selectbox("Select Game Type:", ('Board Game', 'Card Game', 'RPG'))
+with col1:
+    st.subheader("Add New Game")
+    game_name = st.text_input("Game Name")
+    game_type = st.selectbox("Game Type", ['Board Game', 'Card Game', 'RPG'])
+    min_players = st.number_input("Minimum Players", 1, 10, 2)
+    max_players = st.number_input("Maximum Players", min_players, 10, 4)
+    game_duration = st.slider("Estimated Duration (minutes)", 15, 240, 60)
+    
+    if st.button("Add Game"):
+        if game_name:
+            new_game = {
+                'name': game_name,
+                'type': game_type,
+                'min_players': min_players,
+                'max_players': max_players,
+                'duration': game_duration
+            }
+            st.session_state.games.append(new_game)
+            st.success(f"Added {game_name} to the collection!")
 
-# Create a sidebar with a slider for the number of players
-num_players = st.sidebar.slider("Number of Players:", 1, 10)
+with col2:
+    st.subheader("Game Collection")
+    if st.session_state.games:
+        for idx, game in enumerate(st.session_state.games):
+            with st.expander(f"{game['name']} ({game['type']})"):
+                st.write(f"Players: {game['min_players']} - {game['max_players']}")
+                st.write(f"Duration: {game['duration']} minutes")
+                if st.button("Remove Game", key=f"remove_{idx}"):
+                    st.session_state.games.pop(idx)
+                    st.rerun()
+    else:
+        st.info("No games added yet. Add your first game!")
 
-# Create a sidebar with a checkbox for game availability
-is_available = st.sidebar.checkbox("Available")
+# Sidebar for player management
+st.sidebar.title("Player Management")
+player_name = st.sidebar.text_input("Player Name")
+if st.sidebar.button("Add Player"):
+    if player_name and player_name not in st.session_state.players:
+        st.session_state.players.append(player_name)
+        st.sidebar.success(f"Added {player_name} to players list!")
 
-# Create a text input for the user to enter their name
-name = st.sidebar.text_input("Enter your name:")
-# Create a button for the user to click
-button = st.sidebar.button("Submit")
-# If the button is clicked, display a message with the user's name
-if button:
-    st.sidebar.success(f"Hello, {name}!")
+st.sidebar.subheader("Current Players")
+for player in st.session_state.players:
+    st.sidebar.write(f"• {player}")
 
-# Create a text input for the user to enter the name of the tabletop
+# Game Statistics
+if st.session_state.games:
+    st.subheader("Collection Statistics")
+    col3, col4, col5 = st.columns(3)
+    
+    with col3:
+        st.metric("Total Games", len(st.session_state.games))
+    
+    with col4:
+        game_types = [game['type'] for game in st.session_state.games]
+        most_common = max(set(game_types), key=game_types.count)
+        st.metric("Most Common Type", most_common)
+    
+    with col5:
+        avg_duration = sum(game['duration'] for game in st.session_state.games) / len(st.session_state.games)
+        st.metric("Average Duration", f"{int(avg_duration)} min")
 
-
-# Define constant variables for the data source and date column name
-DATE_COLUMN = 'OrderDate'
-DATA_URL = 'quantity.csv'
-
-# Function to load data from the CSV file with a specified number of rows
-def load_data(nrows):
-    data = pd.read_csv(DATA_URL, nrows=nrows)
-    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-    return data
-
-# Create a text element to let the reader know the data is loading
-data_load_state = st.text('Loading data...')
-# Load 10,000 rows of data into the dataframe
-data = load_data(10000)
-# Notify the reader that the data was successfully loaded
-data_load_state.text('Loading data...done!')
-
-# Display the raw data in a subheader
-st.subheader('Raw data')
-st.write(data)
