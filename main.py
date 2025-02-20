@@ -1,95 +1,107 @@
 
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-from streamlit_chat import message
 
 # Page configuration
-st.set_page_config(page_title="Tabletop Manager", layout="wide")
+st.set_page_config(page_title="Necromunda Manager", layout="wide")
 
 # Custom CSS
 st.markdown("""
     <style>
-    .main {
-        padding: 2rem;
-    }
-    .stButton>button {
-        width: 100%;
-    }
+    .main { padding: 2rem; }
+    .stButton>button { width: 100%; }
     </style>
 """, unsafe_allow_html=True)
 
 # Initialize session state
-if 'games' not in st.session_state:
-    st.session_state.games = []
-if 'players' not in st.session_state:
-    st.session_state.players = []
+if 'gangs' not in st.session_state:
+    st.session_state.gangs = []
+if 'territories' not in st.session_state:
+    st.session_state.territories = []
 
 # Main title with styling
-st.title("🎲 Tabletop Manager")
+st.title("⚔️ Necromunda Campaign Manager")
 
 # Create two columns for the main layout
 col1, col2 = st.columns([2, 3])
 
 with col1:
-    st.subheader("Add New Game")
-    game_name = st.text_input("Game Name")
-    game_type = st.selectbox("Game Type", ['Board Game', 'Card Game', 'RPG'])
-    min_players = st.number_input("Minimum Players", 1, 10, 2)
-    max_players = st.number_input("Maximum Players", min_players, 10, 4)
-    game_duration = st.slider("Estimated Duration (minutes)", 15, 240, 60)
+    st.subheader("Register New Gang")
+    gang_name = st.text_input("Gang Name")
+    house = st.selectbox("House", [
+        'Goliath', 'Escher', 'Van Saar', 'Orlock', 'Cawdor', 'Delaque',
+        'Corpse Grinders', 'Palanite Enforcers', 'Other'
+    ])
+    credits = st.number_input("Starting Credits", 1000, 2000, 1000)
+    reputation = st.number_input("Reputation", 0, 100, 0)
     
-    if st.button("Add Game"):
-        if game_name:
-            new_game = {
-                'name': game_name,
-                'type': game_type,
-                'min_players': min_players,
-                'max_players': max_players,
-                'duration': game_duration
+    if st.button("Register Gang"):
+        if gang_name:
+            new_gang = {
+                'name': gang_name,
+                'house': house,
+                'credits': credits,
+                'reputation': reputation,
+                'territories': [],
+                'resources': 0
             }
-            st.session_state.games.append(new_game)
-            st.success(f"Added {game_name} to the collection!")
+            st.session_state.gangs.append(new_gang)
+            st.success(f"Registered {gang_name} to the campaign!")
 
 with col2:
-    st.subheader("Game Collection")
-    if st.session_state.games:
-        for idx, game in enumerate(st.session_state.games):
-            with st.expander(f"{game['name']} ({game['type']})"):
-                st.write(f"Players: {game['min_players']} - {game['max_players']}")
-                st.write(f"Duration: {game['duration']} minutes")
-                if st.button("Remove Game", key=f"remove_{idx}"):
-                    st.session_state.games.pop(idx)
+    st.subheader("Active Gangs")
+    if st.session_state.gangs:
+        for idx, gang in enumerate(st.session_state.gangs):
+            with st.expander(f"{gang['name']} ({gang['house']})"):
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.write(f"Credits: {gang['credits']}")
+                    st.write(f"Reputation: {gang['reputation']}")
+                with col_b:
+                    st.write(f"Territories: {len(gang['territories'])}")
+                    st.write(f"Resources: {gang['resources']}")
+                
+                if st.button("Record Battle", key=f"battle_{idx}"):
+                    gang['reputation'] += 5
+                    gang['credits'] += 100
+                    st.success("Battle recorded!")
+                
+                if st.button("Remove Gang", key=f"remove_{idx}"):
+                    st.session_state.gangs.pop(idx)
                     st.rerun()
     else:
-        st.info("No games added yet. Add your first game!")
+        st.info("No gangs registered yet. Register your first gang!")
 
-# Sidebar for player management
-st.sidebar.title("Player Management")
-player_name = st.sidebar.text_input("Player Name")
-if st.sidebar.button("Add Player"):
-    if player_name and player_name not in st.session_state.players:
-        st.session_state.players.append(player_name)
-        st.sidebar.success(f"Added {player_name} to players list!")
+# Sidebar for territory management
+st.sidebar.title("Territory Control")
+territory_name = st.sidebar.text_input("Territory Name")
+territory_type = st.sidebar.selectbox("Territory Type", [
+    'Trading Post', 'Mineral Deposits', 'Archaeotech Site', 
+    'Promethium Cache', 'Water Still', 'Manufactory'
+])
 
-st.sidebar.subheader("Current Players")
-for player in st.session_state.players:
-    st.sidebar.write(f"• {player}")
+if st.sidebar.button("Add Territory"):
+    if territory_name:
+        new_territory = {
+            'name': territory_name,
+            'type': territory_type,
+            'controlled_by': None
+        }
+        st.session_state.territories.append(new_territory)
+        st.sidebar.success(f"Added {territory_name} to territories!")
 
-# Game Statistics
-if st.session_state.games:
-    st.subheader("Collection Statistics")
+# Campaign Statistics
+if st.session_state.gangs:
+    st.subheader("Campaign Statistics")
     col3, col4, col5 = st.columns(3)
     
     with col3:
-        st.metric("Total Games", len(st.session_state.games))
+        st.metric("Total Gangs", len(st.session_state.gangs))
     
     with col4:
-        game_types = [game['type'] for game in st.session_state.games]
-        most_common = max(set(game_types), key=game_types.count)
-        st.metric("Most Common Type", most_common)
+        total_credits = sum(gang['credits'] for gang in st.session_state.gangs)
+        st.metric("Total Credits in Campaign", total_credits)
     
     with col5:
-        avg_duration = sum(game['duration'] for game in st.session_state.games) / len(st.session_state.games)
-        st.metric("Average Duration", f"{int(avg_duration)} min")
-
+        top_gang = max(st.session_state.gangs, key=lambda x: x['reputation'])
+        st.metric("Top Gang", f"{top_gang['name']} ({top_gang['reputation']} rep)")
