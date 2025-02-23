@@ -1,7 +1,7 @@
 # pages/FighterDetails.py
 
 import streamlit as st
-from pages.2_Gangs import show_gangs
+from pages/2_Gangs import show_gangs
 from common import Gang, GangFighter
 
 def show_fighter_details():
