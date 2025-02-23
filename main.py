@@ -23,8 +23,8 @@ if 'gangs' not in st.session_state:
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
             data = json.load(f)
-            # When loading, we convert dictionaries into our models via persistence functions.
-            st.session_state.gangs = data.get("gangs", [])
+            # Convert gang dictionaries to Gang objects
+            st.session_state.gangs = [Gang(**g) for g in data.get("gangs", [])]
             st.session_state.territories = data.get("territories", [])
             st.session_state.battles = data.get("battles", [])
     else:
@@ -259,15 +259,26 @@ def assign_territory(territory_name: str, gang_name: str):
 
 def show_dashboard():
     st.subheader("Dashboard")
+    # Convert gangs to proper Gang objects
+    gang_objects = []
+    for g in st.session_state.gangs:
+        if isinstance(g, dict):
+            try:
+                gang_objects.append(Gang(**g))
+            except Exception as e:
+                st.error(f"Error converting gang: {e}")
+        else:
+            gang_objects.append(g)
+            
     col3, col4, col5 = st.columns(3)
     with col3:
-        st.metric("Total Gangs", len(st.session_state.gangs))
+        st.metric("Total Gangs", len(gang_objects))
     with col4:
-        total_credits = sum(g.credits for g in st.session_state.gangs)
+        total_credits = sum(g.credits for g in gang_objects)
         st.metric("Total Credits", total_credits)
     with col5:
-        if st.session_state.gangs:
-            top_gang = max(st.session_state.gangs, key=lambda g: g.reputation)
+        if gang_objects:
+            top_gang = max(gang_objects, key=lambda g: g.reputation)
             st.metric("Top Gang", f"{top_gang.gang_name} ({top_gang.reputation} rep)")
     if st.session_state.battles:
         with st.expander("Battle Log"):
