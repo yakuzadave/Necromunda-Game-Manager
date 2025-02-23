@@ -111,6 +111,3 @@ with col2:
 def run_gangs_page():
     show_gangs()
 
-def show_gangs():
-    #This function is now empty because all its functionality is in the main body of the script
-    pass
