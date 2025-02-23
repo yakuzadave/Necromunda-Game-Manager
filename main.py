@@ -18,11 +18,12 @@ st.set_page_config(
 DATA_FILE = "campaign_data.json"
 FULL_CAMPAIGN_DATA_FILE = "full_campaign_data.json"
 
-# Initialize session state
+# -------------------- Session State Initialization --------------------
 if 'gangs' not in st.session_state:
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
             data = json.load(f)
+            # When loading, we convert dictionaries into our models via persistence functions.
             st.session_state.gangs = data.get("gangs", [])
             st.session_state.territories = data.get("territories", [])
             st.session_state.battles = data.get("battles", [])
@@ -30,8 +31,10 @@ if 'gangs' not in st.session_state:
         st.session_state.gangs = []
         st.session_state.territories = []
         st.session_state.battles = []
+if "equipment_list" not in st.session_state:
+    st.session_state.equipment_list = []
 
-# Main page content
+# -------------------- Main Page Content --------------------
 st.title("Welcome to Necromunda Campaign Manager")
 st.markdown("""
 ## Getting Started
@@ -40,6 +43,8 @@ Use the sidebar to navigate between different sections:
 - **Gangs**: Manage your gangs and fighters
 - **Territories**: Control territory distribution
 - **Battles**: Record battle outcomes
+- **Equipment**: Manage your equipment library
+- **Full Campaign Overview**: View imported campaign data
 - **Export Campaign**: Export your campaign data
 """)
 
@@ -55,12 +60,14 @@ if st.session_state.gangs or st.session_state.territories or st.session_state.ba
 else:
     st.info("Start by adding your first gang in the Gangs section!")
 
-
 # -------------------- Local Campaign Models --------------------
 
 class Equipment(BaseModel):
+    equipment_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     qty: int
+    cost: int = 0
+    traits: str = ""
 
 class GangFighter(BaseModel):
     ganger_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -95,7 +102,6 @@ class GangFighter(BaseModel):
     class Config:
         allow_population_by_field_name = True
 
-
 class Gang(BaseModel):
     gang_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     gang_name: str
@@ -110,10 +116,10 @@ class Territory(BaseModel):
     name: str
     type: str
     controlled_by: Optional[str] = None
-    x: Optional[float] = None  # Custom X coordinate
-    y: Optional[float] = None  # Custom Y coordinate
-    lat: Optional[float] = None  # Latitude coordinate
-    lng: Optional[float] = None  # Longitude coordinate
+    x: Optional[float] = None  # Custom X coordinate for abstract map
+    y: Optional[float] = None  # Custom Y coordinate for abstract map
+    lat: Optional[float] = None  # For geolocated maps (if needed)
+    lng: Optional[float] = None  # For geolocated maps (if needed)
 
 class LocalBattle(BaseModel):
     battle_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -530,7 +536,6 @@ def export_campaign():
             for battle in st.session_state.battles:
                 battle_gangs = []
                 for gang_name in battle.participating_gangs:
-                    # Try to find the gang in our local data
                     found_gang = next((g for g in st.session_state.gangs if g.gang_name == gang_name), None)
                     if found_gang:
                         battle_gangs.append({
@@ -572,21 +577,54 @@ def export_campaign():
             st.download_button("Download Full Campaign JSON", data=full_campaign_json, file_name="full_campaign_data.json", mime="application/json")
             st.success("Full campaign JSON generated!")
 
-# -------------------- Sidebar Navigation --------------------
+def show_equipment():
+    st.subheader("Equipment Management")
+    st.write("Manage your equipment library. Add new equipment items and view the current list.")
+    with st.form("add_equipment_form"):
+        equipment_name = st.text_input("Equipment Name")
+        equipment_qty = st.number_input("Quantity", min_value=1, value=1)
+        equipment_cost = st.number_input("Cost", min_value=0, value=0)
+        equipment_traits = st.text_input("Traits (comma-separated)", value="")
+        submit_equipment = st.form_submit_button("Add Equipment")
+        if submit_equipment:
+            if equipment_name:
+                try:
+                    new_equipment = Equipment(
+                        name=equipment_name,
+                        qty=equipment_qty,
+                        cost=equipment_cost,
+                        traits=equipment_traits
+                    )
+                    st.session_state.equipment_list.append(new_equipment)
+                    st.success(f"Added equipment: {equipment_name}")
+                except ValidationError as e:
+                    st.error(f"Error: {e}")
+            else:
+                st.error("Please enter an equipment name.")
+    st.markdown("---")
+    st.write("### Equipment Library")
+    if st.session_state.equipment_list:
+        for eq in st.session_state.equipment_list:
+            st.write(f"**{eq.name}** (Qty: {eq.qty}, Cost: {eq.cost}, Traits: {eq.traits})")
+    else:
+        st.info("No equipment added yet.")
 
+# -------------------- Sidebar Navigation --------------------
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Dashboard", "Gangs", "Territories", "Battles", "Full Campaign Overview", "Export Campaign"])
+page = st.sidebar.radio("Go to", [
+    "Dashboard", "Gangs", "Territories", "Battles", "Equipment", "Full Campaign Overview", "Export Campaign"
+])
 
 if st.sidebar.button("Reset Campaign"):
     st.session_state.gangs = []
     st.session_state.territories = []
     st.session_state.battles = []
+    st.session_state.equipment_list = []
     save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
     st.sidebar.warning("Campaign reset!")
     st.experimental_rerun()
 
 # -------------------- Render Selected Page --------------------
-
 if page == "Dashboard":
     show_dashboard()
 elif page == "Gangs":
@@ -595,6 +633,8 @@ elif page == "Territories":
     show_territories()
 elif page == "Battles":
     show_battles()
+elif page == "Equipment":
+    show_equipment()
 elif page == "Full Campaign Overview":
     show_full_campaign()
 elif page == "Export Campaign":
