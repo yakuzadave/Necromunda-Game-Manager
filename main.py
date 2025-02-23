@@ -271,6 +271,18 @@ def show_dashboard():
         else:
             gang_objects.append(g)
             
+    # Convert battles to proper LocalBattle objects
+    battle_objects = []
+    for b in st.session_state.battles:
+        if isinstance(b, dict):
+            try:
+                battle_objects.append(LocalBattle(**b))
+            except Exception as e:
+                st.error(f"Error converting battle: {e}")
+        else:
+            battle_objects.append(b)
+    st.session_state.battles = battle_objects
+            
     col3, col4, col5 = st.columns(3)
     with col3:
         st.metric("Total Gangs", len(gang_objects))
