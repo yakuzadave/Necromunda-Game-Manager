@@ -1,4 +1,12 @@
 import streamlit as st
+
+# Set page config must be the first Streamlit command
+st.set_page_config(
+    page_title="Necromunda Campaign Manager",
+    page_icon="🎮",
+    layout="wide"
+)
+
 import pandas as pd
 import json
 import os
@@ -7,9 +15,6 @@ from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
 import uuid
 from app import Gang
-
-# Set page config
-st.set_page_config(
     page_title="Necromunda Campaign Manager",
     page_icon="🎮",
     layout="wide"
