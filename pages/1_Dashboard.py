@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime
-from app import Gang  # Import Gang from app.py
+from common import Gang  # Import Gang from common.py
 
 def to_gang_obj(g):
     """

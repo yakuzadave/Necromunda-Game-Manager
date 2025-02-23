@@ -1,7 +1,8 @@
 # pages/FighterDetails.py
 
 import streamlit as st
-from common import Gang, GangFighter  # Adjust as needed
+from pages.2_Gangs import show_gangs
+from common import Gang, GangFighter
 
 def show_fighter_details():
     st.subheader("Fighter Details")
