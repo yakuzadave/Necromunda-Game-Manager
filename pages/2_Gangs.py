@@ -1,16 +1,15 @@
-
 # pages/2_Gangs.py
 
 import streamlit as st
 from datetime import datetime
 from pydantic import ValidationError
-from common import Gang, GangFighter, save_data  # Adjust your import as needed
+from common import Gang, GangFighter, save_data  # Adjust as needed
 
 def show_gangs():
     st.subheader("Gangs")
     col1, col2 = st.columns([2, 3])
 
-    # --- Left Column: Register New Gang ---
+    # --- Register New Gang ---
     with col1:
         st.write("### Register New Gang")
         gang_name_input = st.text_input("Gang Name")
@@ -38,6 +37,7 @@ def show_gangs():
         if st.button("Register Gang"):
             if gang_name_input:
                 try:
+                    # Create a new Gang instance directly from your model
                     new_gang = Gang(
                         gang_name=gang_name_input,
                         gang_type=gang_type_input,
@@ -45,8 +45,8 @@ def show_gangs():
                         credits=credits_input,
                         reputation=reputation_input
                     )
+                    # Add to session state and save
                     st.session_state.gangs.append(new_gang)
-                    # Save the updated data
                     save_data(
                         st.session_state.gangs,
                         st.session_state.territories,
@@ -58,21 +58,40 @@ def show_gangs():
             else:
                 st.error("Please enter a gang name.")
 
-    # --- Right Column: Active Gangs & Fighter Management ---
+    # --- Display Gangs & Fighter Management ---
     with col2:
         st.write("### Active Gangs & Fighter Management")
-
         if st.session_state.gangs:
             for idx, gang in enumerate(st.session_state.gangs):
                 with st.expander(f"{gang.gang_name} ({gang.gang_type})"):
                     col_a, col_b = st.columns(2)
                     with col_a:
-                        st.write(f"Credits: {gang.credits}")
-                        st.write(f"Reputation: {gang.reputation}")
+                        st.write(f"**Credits**: {gang.credits}")
+                        st.write(f"**Reputation**: {gang.reputation}")
                     with col_b:
-                        st.write(f"Territories: {len(gang.territories)}")
+                        st.write(f"**Territories**: {len(gang.territories)}")
 
-                    # Optional: Quick Battle button
+                    # Display a quick summary of fighters
+                    st.write("**Fighters:**")
+                    if gang.gangers:
+                        for fighter in gang.gangers:
+                            st.write(f"**{fighter.name}** "
+                                     f"(Type: {fighter.type}, "
+                                     f"M: {fighter.m}, WS: {fighter.ws}, BS: {fighter.bs})")
+
+                            # "View Details" button to navigate to Fighter Details page
+                            if st.button(
+                                f"View Details: {fighter.ganger_id}",
+                                key=f"view_{fighter.ganger_id}"
+                            ):
+                                st.session_state.selected_fighter_id = fighter.ganger_id
+                                st.session_state.selected_gang_id = gang.gang_id
+                                st.session_state.page = "Fighter Details"
+                                st.experimental_rerun()
+                    else:
+                        st.info("No fighters found for this gang.")
+
+                    # Record Battle & Remove Gang Buttons (optional)
                     if st.button("Record Battle (Quick)", key=f"battle_{idx}"):
                         gang.reputation += 5
                         gang.credits += 100
@@ -83,7 +102,6 @@ def show_gangs():
                         )
                         st.success("Battle recorded!")
 
-                    # Remove Gang button
                     if st.button("Remove Gang", key=f"remove_{idx}"):
                         st.session_state.gangs.pop(idx)
                         save_data(
@@ -93,28 +111,8 @@ def show_gangs():
                         )
                         st.experimental_rerun()
 
-                    # Display fighters
-                    st.write("**Fighters:**")
-                    if gang.gangers:
-                        for fighter in gang.gangers:
-                            # Show a concise summary
-                            summary = (f"{fighter.name} ({fighter.type}) "
-                                       f"- M:{fighter.m}, WS:{fighter.ws}, BS:{fighter.bs}")
-                            st.write(summary)
-
-                            # "View Details" button for dedicated FighterDetails page
-                            if st.button(f"View {fighter.name} Details", key=f"view_{fighter.ganger_id}"):
-                                st.session_state.selected_fighter_id = fighter.ganger_id
-                                st.session_state.selected_gang_id = gang.gang_id
-                                # Here we set a session var or direct nav
-                                # If you're using a multi-page app with pages/ structure,
-                                # you might do:
-                                st.session_state.page = "Fighter Details"
-                                st.experimental_rerun()
-                    else:
-                        st.info("No fighters found for this gang.")
-
-                    # Add Fighter form
+                    # --- Form to Add a New Fighter ---
+                    st.write("### Add a New Fighter")
                     with st.form(key=f"fighter_form_{idx}"):
                         fighter_name = st.text_input("Fighter Name")
                         fighter_type = st.text_input("Fighter Type")
@@ -168,9 +166,9 @@ def show_gangs():
                                     )
                                     st.success(f"Added fighter {fighter_name}!")
                                 except ValidationError as e:
-                                    st.error(f"Error: {e}")
+                                    st.error(f"Error creating fighter: {e}")
                             else:
-                                st.error("Provide both fighter name and type.")
+                                st.error("Provide both fighter name and fighter type.")
         else:
             st.info("No gangs registered yet.")
 

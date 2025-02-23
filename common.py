@@ -36,6 +36,7 @@ class GangFighter(BaseModel):
     ld: int
     cl: int
     wil: int
+    # intelligence: int = Field(..., alias="int")
     intelligence: int = Field(..., alias="int")
     cost: int
     xp: int
@@ -51,7 +52,8 @@ class GangFighter(BaseModel):
     datetime_updated: str
 
     class Config:
-        allow_population_by_field_name = True
+        # allow_population_by_field_name = True
+        populate_by_name = True
 
 class Gang(BaseModel):
     gang_id: str = Field(default_factory=lambda: str(uuid.uuid4()))

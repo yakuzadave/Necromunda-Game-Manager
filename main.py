@@ -51,19 +51,19 @@ else:
     st.info("Start by adding your first gang in the Gangs section!")
 
 # -------------------- Sidebar Navigation --------------------
-st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", [
-    "Dashboard", "Gangs", "Territories", "Battles", "Equipment", "Full Campaign Overview", "Export Campaign"
-])
+# st.sidebar.title("Navigation")
+# page = st.sidebar.radio("Go to", [
+#     "Dashboard", "Gangs", "Territories", "Battles", "Equipment", "Full Campaign Overview", "Export Campaign"
+# ])
 
-if st.sidebar.button("Reset Campaign"):
-    st.session_state.gangs = []
-    st.session_state.territories = []
-    st.session_state.battles = []
-    st.session_state.equipment_list = []
-    save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
-    st.sidebar.warning("Campaign reset!")
-    st.experimental_rerun()
+# if st.sidebar.button("Reset Campaign"):
+#     st.session_state.gangs = []
+#     st.session_state.territories = []
+#     st.session_state.battles = []
+#     st.session_state.equipment_list = []
+#     save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
+#     st.sidebar.warning("Campaign reset!")
+#     st.experimental_rerun()
 
 # -------------------- Render Selected Page --------------------
 # In a full multi-page app these pages would live in the 'pages/' folder.
