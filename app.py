@@ -8,12 +8,12 @@ from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
 import uuid
 
-# Set page config must be the first Streamlit command
-st.set_page_config(
-    page_title="Necromunda Campaign Manager",
-    page_icon="🎮",
-    layout="wide"
-)
+# # Set page config must be the first Streamlit command
+# st.set_page_config(
+#     page_title="Necromunda Campaign Manager",
+#     page_icon="🎮",
+#     layout="wide"
+# )
 
 # Models
 class Equipment(BaseModel):
