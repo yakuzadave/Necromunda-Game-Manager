@@ -1,93 +1,42 @@
-
 import streamlit as st
-import pandas as pd
-import json
 import os
-from typing import List, Optional
-from pydantic import BaseModel, Field, ValidationError
-from datetime import datetime
-import uuid
+import json
+from common import (
+    DATA_FILE, Gang, load_data
+)
 
-# # Set page config must be the first Streamlit command
-# st.set_page_config(
-#     page_title="Necromunda Campaign Manager",
-#     page_icon="🎮",
-#     layout="wide"
-# )
+# Set page config (this must be the very first Streamlit command)
+st.set_page_config(
+    page_title="Necromunda Campaign Manager",
+    page_icon="🎮",
+    layout="wide"
+)
 
-# Models
-class Equipment(BaseModel):
-    equipment_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    qty: int
-    cost: int = 0
-    traits: str = ""
-
-class GangFighter(BaseModel):
-    ganger_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    label_id: Optional[str] = ""
-    name: str
-    type: str
-    m: int
-    ws: int
-    bs: int
-    s: int
-    t: int
-    w: int
-    i: int
-    a: int
-    ld: int
-    cl: int
-    wil: int
-    intelligence: int = Field(..., alias="int")
-    cost: int
-    xp: int
-    kills: int
-    advance_count: int
-    equipment: List[Equipment] = []
-    skills: List[str] = []
-    injuries: List[str] = []
-    image: Optional[str] = None
-    status: str
-    notes: str
-    datetime_added: str
-    datetime_updated: str
-
-    class Config:
-        allow_population_by_field_name = True
-
-class Gang(BaseModel):
-    gang_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    gang_name: str
-    gang_type: str
-    campaign: str = ""
-    credits: int
-    reputation: int
-    territories: List[str] = []
-    gangers: List[GangFighter] = []
-
-# Initialize session state
+# -------------------- Session State Initialization --------------------
 if 'gangs' not in st.session_state:
-    if os.path.exists('campaign_data.json'):
-        with open('campaign_data.json', 'r') as f:
-            data = json.load(f)
-            st.session_state.gangs = [Gang(**g) for g in data.get('gangs', [])]
-    else:
-        st.session_state.gangs = []
-
-if 'territories' not in st.session_state:
-    st.session_state.territories = []
-
-if 'battles' not in st.session_state:
-    st.session_state.battles = []
+    gangs, territories, battles = load_data()
+    st.session_state.gangs = gangs
+    st.session_state.territories = territories
+    st.session_state.battles = battles
 
 if "equipment_list" not in st.session_state:
     st.session_state.equipment_list = []
 
-# Display welcome message
-st.title("Welcome to the Necromunda Campaign Manager")
-st.write("Use the sidebar to navigate between pages.")
+# -------------------- Main Page Content --------------------
+st.title("Welcome to Necromunda Campaign Manager")
+st.markdown("""
+## Getting Started
+Use the sidebar to navigate between different sections:
+- **Dashboard**: Overview of your campaign statistics
+- **Gangs**: Manage your gangs and fighters
+- **Territories**: Control territory distribution
+- **Battles**: Record battle outcomes
+- **Equipment**: Manage your equipment library
+- **Full Campaign Overview**: View imported campaign data
+- **Export Campaign**: Export your campaign data
+""")
 
+# Display quick metrics if data exists
 if st.session_state.gangs or st.session_state.territories or st.session_state.battles:
     col1, col2, col3 = st.columns(3)
     with col1:
