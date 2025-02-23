@@ -6,6 +6,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
 import uuid
+from app import Gang
 
 # Set page config
 st.set_page_config(
