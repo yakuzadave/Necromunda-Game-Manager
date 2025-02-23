@@ -20,3 +20,14 @@ externalPort = 80
 [[ports]]
 localPort = 8502
 externalPort = 3000
+
+[workflows]
+runButton = "Streamlit"
+
+[[workflows.workflow]]
+name = "Streamlit"
+author = 458199
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "streamlit run main.py --server.headless true"
