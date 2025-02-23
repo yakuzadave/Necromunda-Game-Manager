@@ -56,15 +56,6 @@ class GangFighter(BaseModel):
     class Config:
         allow_population_by_field_name = True
 
-class Territory(BaseModel):
-    name: str
-    type: str
-    controlled_by: Optional[str] = None
-    x: Optional[float] = None
-    y: Optional[float] = None
-    lat: Optional[float] = None
-    lng: Optional[float] = None
-
 class Gang(BaseModel):
     gang_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     gang_name: str

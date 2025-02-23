@@ -439,11 +439,9 @@ def show_territories():
     if st.button("Add Territory"):
         if territory_name_input:
             try:
-                from app import Territory
                 new_territory = Territory(
                     name=territory_name_input,
-                    type=territory_type_input,
-                    controlled_by=None
+                    type=territory_type_input
                 )
                 st.session_state.territories.append(new_territory)
                 save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
