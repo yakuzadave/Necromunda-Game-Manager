@@ -54,9 +54,6 @@ class Gang(BaseModel):
     territories: List[str] = []
     gangers: List[GangFighter] = []
 
-# Set page config for the whole app
-st.set_page_config(page_title="Necromunda Campaign Manager", layout="wide")
-
 # Initialize session state with proper Gang objects
 if 'gangs' not in st.session_state:
     if os.path.exists('campaign_data.json'):
