@@ -1,6 +1,7 @@
+
 import streamlit as st
 from datetime import datetime
-from common import Gang  # Replace 'common' with the module where your Gang model is defined
+from app import Gang  # Import Gang from app.py
 
 def to_gang_obj(g):
     """
