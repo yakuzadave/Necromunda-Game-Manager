@@ -65,6 +65,10 @@ class Territory(BaseModel):
     name: str
     type: str
     controlled_by: Optional[str] = None
+    x: Optional[float] = None  # Custom X coordinate
+    y: Optional[float] = None  # Custom Y coordinate
+    lat: Optional[float] = None  # Latitude coordinate
+    lng: Optional[float] = None  # Longitude coordinate
 
 class LocalBattle(BaseModel):
     battle_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
