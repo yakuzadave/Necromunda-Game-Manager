@@ -44,5 +44,33 @@ This tool is perfect for both game masters and players who want a digital compan
    ```bash
    git clone https://github.com/yakuzadave/Necromunda-Game-Manager
    cd Necromunda-Game-Manager
-```
+   ```
+
+2. **Create a virtual environment (recommended):**
+
+  ```
+  python -m venv venv
+  source venv/bin/activate  # On Windows: venv\Scripts\activate
+  ```
+
+3. **Install dependencies:**
+
+Ensure your requirements.txt includes at least:
+
+  ```
+  streamlit
+  pandas
+  ```
+Then run:
+
+  ```
+  pip install -r requirements.txt
+  ```
+
+## Usage
+Start the application with Streamlit by running:
+
+  ```
+  streamlit run main.py
+  ```
 
