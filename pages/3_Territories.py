@@ -1,5 +1,5 @@
 import streamlit as st
-import uuid
+from common import Territory  # Import the Territory model from your common module
 
 def show_territories():
     st.subheader("Territory Management")
@@ -8,10 +8,11 @@ def show_territories():
         'Trading Post', 'Mineral Deposits', 'Archaeotech Site', 
         'Promethium Cache', 'Water Still', 'Manufactory'
     ], key="territory_type")
+
     if st.button("Add Territory"):
         if territory_name_input:
             try:
-                new_territory = st.session_state.territories[0].__class__(
+                new_territory = Territory(
                     name=territory_name_input,
                     type=territory_type_input
                 )
@@ -21,6 +22,7 @@ def show_territories():
                 st.error(f"Error: {e}")
         else:
             st.error("Enter a territory name.")
+
     st.markdown("---")
     st.write("### Assign Territory to Gang")
     unassigned_territories = [t.name for t in st.session_state.territories if t.controlled_by is None]
@@ -29,8 +31,6 @@ def show_territories():
         territory_to_assign = st.selectbox("Select Territory", unassigned_territories, key="assign_territory")
         gang_to_assign = st.selectbox("Select Gang", gang_names, key="assign_gang")
         if st.button("Assign Territory"):
-            # Here, you would call your assign_territory() utility function.
-            # For example:
             for territory in st.session_state.territories:
                 if territory.name == territory_to_assign:
                     territory.controlled_by = gang_to_assign

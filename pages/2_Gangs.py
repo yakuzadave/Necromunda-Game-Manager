@@ -1,11 +1,7 @@
-# pages/2_Gangs.py
-
 import streamlit as st
 from datetime import datetime
 from pydantic import ValidationError
-from common import Gang, GangFighter, save_data, load_data # Added load_data import
-
-st.title("Gangs Management")
+from common import Gang, GangFighter, save_data, load_data
 
 # Initialize session state if needed
 if 'gangs' not in st.session_state:
@@ -14,11 +10,37 @@ if 'gangs' not in st.session_state:
     st.session_state.territories = territories
     st.session_state.battles = battles
 
+# Ensure a container for selected fighter exists
+if "selected_fighter" not in st.session_state:
+    st.session_state.selected_fighter = None
+
+st.title("Gangs Management")
+
 col1, col2 = st.columns([2, 3])
 
-# --- Register New Gang ---
+### Left Column: Gang & Fighter List
 with col1:
-    st.write("### Register New Gang")
+    st.header("Active Gangs & Fighters")
+    if not st.session_state.gangs:
+        st.info("No gangs registered yet.")
+    else:
+        for gang in st.session_state.gangs:
+            with st.expander(f"{gang.gang_name} ({gang.gang_type})"):
+                st.write(f"**Credits:** {gang.credits} | **Reputation:** {gang.reputation}")
+                st.write(f"**Territories:** {len(gang.territories)}")
+                st.write("**Fighters:**")
+                if gang.gangers:
+                    for fighter in gang.gangers:
+                        st.write(f"- {fighter.name} ({fighter.type})")
+                        if st.button(f"View {fighter.name} Details", key=f"view_{fighter.ganger_id}"):
+                            # Store both fighter and its gang in session state
+                            st.session_state.selected_fighter = {"fighter": fighter, "gang": gang}
+                            st.experimental_rerun()
+                else:
+                    st.info("No fighters found for this gang.")
+                st.markdown("---")
+
+    st.markdown("### Add New Gang")
     gang_name_input = st.text_input("Gang Name")
     gang_type_input = st.selectbox("Gang Type", [
         "House Orlock", "House Goliath", "House Escher",
@@ -30,7 +52,6 @@ with col1:
     campaign_input = st.text_input("Campaign", value="Power Play")
     credits_input = st.number_input("Starting Credits", min_value=0, value=160)
     reputation_input = st.number_input("Reputation", min_value=0, value=6)
-
     if st.button("Register Gang"):
         if gang_name_input:
             try:
@@ -49,65 +70,65 @@ with col1:
         else:
             st.error("Please enter a gang name.")
 
-# --- Display Gangs & Fighter Management ---
+### Right Column: Selected Fighter Details
 with col2:
-    st.write("### Active Gangs & Fighter Management")
-    for idx, gang in enumerate(st.session_state.gangs):
-        with st.expander(f"{gang.gang_name} ({gang.gang_type})"):
-            st.write(f"**Credits**: {gang.credits}")
-            st.write(f"**Reputation**: {gang.reputation}")
-            st.write(f"**Territories**: {len(gang.territories)}")
+    st.header("Fighter Details")
+    if st.session_state.selected_fighter is not None:
+        fighter_info = st.session_state.selected_fighter
+        fighter = fighter_info["fighter"]
+        gang = fighter_info["gang"]
 
-            # Display fighters
-            st.write("**Fighters:**")
-            for fighter in gang.gangers:
-                st.write(f"**{fighter.name}** (Type: {fighter.type})")
-                if st.button(f"View Details", key=f"view_{fighter.ganger_id}"):
-                    st.session_state.selected_fighter_id = fighter.ganger_id
-                    st.session_state.selected_gang_id = gang.gang_id
-                    st.session_state.page = "Fighter Details"
-                    st.experimental_rerun()
+        st.markdown(f"## {fighter.name} ({fighter.type})")
+        st.markdown("---")
 
-            # Add Fighter Form
-            st.write("### Add a New Fighter")
-            with st.form(key=f"fighter_form_{idx}"):
-                fighter_name = st.text_input("Fighter Name", key=f"name_{idx}")
-                fighter_type = st.text_input("Fighter Type", key=f"type_{idx}")
+        # Two-column layout for fighter stats
+        colA, colB = st.columns(2)
+        with colA:
+            st.markdown(f"**Movement (M):** {fighter.m}")
+            st.markdown(f"**Weapon Skill (WS):** {fighter.ws}")
+            st.markdown(f"**Ballistic Skill (BS):** {fighter.bs}")
+            st.markdown(f"**Strength (S):** {fighter.s}")
+            st.markdown(f"**Toughness (T):** {fighter.t}")
+            st.markdown(f"**Wounds (W):** {fighter.w}")
+            st.markdown(f"**Initiative (I):** {fighter.i}")
+        with colB:
+            st.markdown(f"**Attacks (A):** {fighter.a}")
+            st.markdown(f"**Leadership (Ld):** {fighter.ld}")
+            st.markdown(f"**Cool (Cl):** {fighter.cl}")
+            st.markdown(f"**Will (Wil):** {fighter.wil}")
+            st.markdown(f"**Int (Int):** {fighter.intelligence}")
+            st.markdown(f"**Cost:** {fighter.cost}")
+            st.markdown(f"**XP:** {fighter.xp}")
+            st.markdown(f"**Kills:** {fighter.kills}")
+            st.markdown(f"**Advance Count:** {fighter.advance_count}")
 
-                col_stats1, col_stats2 = st.columns(2)
-                with col_stats1:
-                    m = st.number_input("M", min_value=1, value=5, key=f"m_{idx}")
-                    ws = st.number_input("WS", min_value=1, value=4, key=f"ws_{idx}")
-                    bs = st.number_input("BS", min_value=1, value=3, key=f"bs_{idx}")
-                    s = st.number_input("S", min_value=1, value=3, key=f"s_{idx}")
-                with col_stats2:
-                    t = st.number_input("T", min_value=1, value=3, key=f"t_{idx}")
-                    w = st.number_input("W", min_value=1, value=1, key=f"w_{idx}")
-                    i = st.number_input("I", min_value=1, value=4, key=f"i_{idx}")
-                    a = st.number_input("A", min_value=1, value=1, key=f"a_{idx}")
+        st.markdown("---")
+        st.markdown("#### Equipment")
+        if fighter.equipment:
+            for eq in fighter.equipment:
+                st.markdown(f"- **{eq.name}** (Qty: {eq.qty})")
+        else:
+            st.markdown("_None_")
 
-                if st.form_submit_button("Add Fighter"):
-                    if fighter_name and fighter_type:
-                        try:
-                            now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_fighter = GangFighter(
-                                name=fighter_name,
-                                type=fighter_type,
-                                m=m, ws=ws, bs=bs, s=s, t=t, w=w, i=i, a=a,
-                                ld=7, cl=5, wil=6, intelligence=8,
-                                cost=300, xp=0, kills=0, advance_count=0,
-                                status="Alive", notes="",
-                                datetime_added=now_str,
-                                datetime_updated=now_str
-                            )
-                            gang.gangers.append(new_fighter)
-                            save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
-                            st.success(f"Added fighter {fighter_name}!")
-                        except ValidationError as e:
-                            st.error(f"Error creating fighter: {e}")
-                    else:
-                        st.error("Provide both fighter name and fighter type.")
+        st.markdown("#### Skills")
+        if fighter.skills:
+            st.markdown(", ".join(fighter.skills))
+        else:
+            st.markdown("_None_")
 
-def run_gangs_page():
-    show_gangs()
+        st.markdown("#### Injuries")
+        if fighter.injuries:
+            st.markdown(", ".join(fighter.injuries))
+        else:
+            st.markdown("_None_")
 
+        st.markdown(f"**Status:** {fighter.status}")
+        if fighter.notes:
+            st.markdown(f"**Notes:** {fighter.notes}")
+        st.markdown(f"**Last Updated:** {fighter.datetime_updated}")
+
+        if st.button("Clear Selection"):
+            st.session_state.selected_fighter = None
+            st.experimental_rerun()
+    else:
+        st.info("Select a fighter from the left to view details.")

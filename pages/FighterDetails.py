@@ -6,7 +6,10 @@ from common import Gang, GangFighter
 def show_fighter_details():
     st.subheader("Fighter Details")
 
-    # Check if a fighter is selected
+    # Debug: print session state keys to help ensure the required keys are set
+    st.write("Session state keys:", list(st.session_state.keys()))
+
+    # Check for selected fighter and gang IDs
     if "selected_fighter_id" not in st.session_state or "selected_gang_id" not in st.session_state:
         st.error("No fighter selected. Please go back to Gangs and select a fighter.")
         return
@@ -14,7 +17,7 @@ def show_fighter_details():
     fighter_id = st.session_state.selected_fighter_id
     gang_id = st.session_state.selected_gang_id
 
-    # Find the matching gang
+    # Find the matching gang using next()
     target_gang = next((g for g in st.session_state.gangs if g.gang_id == gang_id), None)
     if not target_gang:
         st.error("Selected gang not found.")
@@ -27,9 +30,10 @@ def show_fighter_details():
         return
 
     # Display fighter header
-    st.markdown(f"### {target_fighter.name} ({target_fighter.type})")
+    st.markdown(f"## {target_fighter.name} ({target_fighter.type})")
+    st.markdown("---")
 
-    # Use two columns to display stats neatly
+    # Display fighter stats in two columns
     col1, col2 = st.columns(2)
     with col1:
         st.markdown(f"**Movement (M):** {target_fighter.m}")
@@ -75,7 +79,7 @@ def show_fighter_details():
         st.markdown(f"**Notes:** {target_fighter.notes}")
     st.markdown(f"**Last Updated:** {target_fighter.datetime_updated}")
 
-    # Back button to return to Gangs view
+    # Back button to return to the Gangs page
     if st.button("Back to Gangs"):
         st.session_state.pop("selected_fighter_id", None)
         st.session_state.pop("selected_gang_id", None)

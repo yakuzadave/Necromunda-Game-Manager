@@ -1,24 +1,16 @@
 import streamlit as st
-from pydantic import BaseModel, Field, ValidationError
-import uuid
-
-# Define a simple Equipment model.
-class Equipment(BaseModel):
-    equipment_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    qty: int
-    cost: int = 0
-    traits: str = ""  # Comma-separated traits
-
-# Initialize the equipment list in session state if not already present.
-if "equipment_list" not in st.session_state:
-    st.session_state.equipment_list = []
+from common import Equipment  # Import Equipment model from the common module
+from pydantic import ValidationError
 
 st.title("Equipment Management")
 
-st.write("Manage your equipment library. Here you can add new equipment items and view the current list.")
+st.write("Manage your equipment library. Here you can add new equipment items, view the list, and remove items if needed.")
 
-# Form to add new equipment.
+# Ensure the equipment list exists in session state.
+if "equipment_list" not in st.session_state:
+    st.session_state.equipment_list = []
+
+# --- Form to add new equipment ---
 with st.form("add_equipment_form"):
     equipment_name = st.text_input("Equipment Name")
     equipment_qty = st.number_input("Quantity", min_value=1, value=1)
@@ -44,8 +36,26 @@ with st.form("add_equipment_form"):
 
 st.markdown("---")
 st.write("### Equipment Library")
+
+# If there are any equipment items, display them in a table
 if st.session_state.equipment_list:
-    for eq in st.session_state.equipment_list:
-        st.write(f"**{eq.name}** (Qty: {eq.qty}, Cost: {eq.cost}, Traits: {eq.traits})")
+    # Create a list of dictionaries for the dataframe view.
+    eq_data = [
+        {"Name": eq.name, "Quantity": eq.qty, "Cost": eq.cost, "Traits": eq.traits}
+        for eq in st.session_state.equipment_list
+    ]
+    st.dataframe(eq_data, use_container_width=True)
+
+    # Provide individual Remove buttons for each equipment item.
+    st.write("#### Remove Equipment")
+    for idx, eq in enumerate(st.session_state.equipment_list):
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            st.write(f"**{eq.name}** (Qty: {eq.qty}, Cost: {eq.cost}, Traits: {eq.traits})")
+        with col2:
+            if st.button("Remove", key=f"remove_eq_{idx}"):
+                st.session_state.equipment_list.pop(idx)
+                st.success(f"Removed equipment: {eq.name}")
+                st.experimental_rerun()
 else:
     st.info("No equipment added yet.")
