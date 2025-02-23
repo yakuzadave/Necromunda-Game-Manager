@@ -1,0 +1,53 @@
+{
+    "gangs": [
+        {
+            "gang_id": "170a569a-84f0-4799-bef6-5121caf1d838",
+            "gang_name": "Blood Brothers",
+            "gang_type": "Genestealer Cults",
+            "campaign": "Power Play",
+            "credits": 1000,
+            "reputation": 1,
+            "territories": [
+                "Black Market"
+            ],
+            "gangers": []
+        },
+        {
+            "gang_id": "56149fb6-5a3b-412d-93d2-0f7108d2c27d",
+            "gang_name": "The Chosen",
+            "gang_type": "Chaos Cults",
+            "campaign": "Power Play",
+            "credits": 1000,
+            "reputation": 1,
+            "territories": [
+                "The Gas Fields"
+            ],
+            "gangers": []
+        }
+    ],
+    "territories": [
+        {
+            "name": "Black Market",
+            "type": "Trading Post",
+            "controlled_by": "Blood Brothers"
+        },
+        {
+            "name": "The Gas Fields",
+            "type": "Promethium Cache",
+            "controlled_by": "The Chosen"
+        }
+    ],
+    "battles": [
+        {
+            "battle_id": "9e7e37e9-4f15-4f50-99a5-63acf48533f6",
+            "battle_created_datetime": "2025-02-23 19:39:59",
+            "battle_scenario": "Raid",
+            "winner_gang": "Blood Brothers",
+            "winner_territory": null,
+            "participating_gangs": [
+                "Blood Brothers",
+                "The Chosen"
+            ]
+        }
+    ]
+}
