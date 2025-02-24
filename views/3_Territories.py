@@ -14,9 +14,9 @@ if "gangs" not in st.session_state or "territories" not in st.session_state:
 campaign_name = "Necromunda Campaign"
 
 @st.cache_data(ttl=300)  # Cache territory visualization data for 5 minutes
-def prepare_territory_data(gangs, territories):
+def prepare_territory_data(_gangs, _territories):
     data = []
-    for gang in gangs:
+    for gang in _gangs:
         # Find territories controlled by this gang.
         controlled_territories = [t for t in st.session_state.territories if t.controlled_by == gang.gang_name]
 
