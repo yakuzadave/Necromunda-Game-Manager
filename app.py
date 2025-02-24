@@ -36,6 +36,8 @@ Use the sidebar to navigate between different sections:
 - **Export Campaign**: Export your campaign data
 """)
 
+
+# -------------------- Dashboard --------------------
 # Display quick metrics if data exists
 if st.session_state.gangs or st.session_state.territories or st.session_state.battles:
     col1, col2, col3 = st.columns(3)
