@@ -10,9 +10,9 @@ if "gangs" not in st.session_state or not st.session_state.gangs:
     st.stop()
 
 @st.cache_data(ttl=300)  # Cache gang summary data for 5 minutes
-def create_gang_summary(gangs):
+def create_gang_summary(_gangs):
     data = []
-    for gang in gangs:
+    for gang in _gangs:
         data.append({
         "Gang ID": gang.gang_id,
         "Name": gang.gang_name,
