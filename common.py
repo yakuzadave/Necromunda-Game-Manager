@@ -111,6 +111,7 @@ class Territory(BaseModel):
     y: Optional[float] = None  # For an abstract map
     lat: Optional[float] = None  # For geolocated maps (if needed)
     lng: Optional[float] = None  # For geolocated maps (if needed)
+    elevation: Optional[float] = None  # For maps (if needed)
 
 class TerritoryEffect(BaseModel):
     effect_id: str = Field(default_factory=lambda: str(uuid.uuid4()))

@@ -10,7 +10,7 @@ from common import (
 #     page_title="Necromunda Campaign Manager",
 #     page_icon="🎮",
 #     layout="wide"
-)
+# )
 
 # -------------------- Session State Initialization --------------------
 if 'gangs' not in st.session_state:

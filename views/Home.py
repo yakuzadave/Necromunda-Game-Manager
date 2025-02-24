@@ -1,11 +1,7 @@
 import streamlit as st
 import os
 
-# st.set_page_config(
-#     page_title="Necromunda Campaign Manager",
-#     page_icon="🎮",
-#     layout="wide"
-# )
+
 
 st.title("🎮 Necromunda Campaign Manager")
 st.markdown(

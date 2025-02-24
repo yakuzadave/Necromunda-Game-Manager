@@ -9,7 +9,8 @@
             "reputation": 6,
             "territories": [
                 "00. Gang Enclave",
-                "Black Market"
+                "Black Market",
+                "Gun Factory"
             ],
             "gangers": [
                 {
@@ -6192,28 +6193,41 @@
             "name": "Black Market",
             "type": "Trading Post",
             "controlled_by": "Blood Brothers",
-            "x": null,
-            "y": null,
+            "x": -122.42523444333993,
+            "y": 37.78446514710687,
             "lat": null,
-            "lng": null
+            "lng": null,
+            "elevation": 74.36529716505387
         },
         {
             "name": "Gas Fields",
             "type": "Promethium Cache",
             "controlled_by": "Dirty Pigs",
-            "x": null,
-            "y": null,
+            "x": -122.35032463665259,
+            "y": 37.7696048071998,
             "lat": null,
-            "lng": null
+            "lng": null,
+            "elevation": 159.9637845237478
         },
         {
             "name": "Dig Site",
             "type": "Archaeotech Site",
             "controlled_by": "Seventh Sanctum",
-            "x": null,
-            "y": null,
+            "x": -122.49254490699548,
+            "y": 37.781961531291145,
             "lat": null,
-            "lng": null
+            "lng": null,
+            "elevation": 186.24332897800153
+        },
+        {
+            "name": "Gun Factory",
+            "type": "Manufactory",
+            "controlled_by": "Blood Brothers",
+            "x": -122.49447210573435,
+            "y": 37.76106665517437,
+            "lat": null,
+            "lng": null,
+            "elevation": 162.92265711242584
         }
     ],
     "battles": [
