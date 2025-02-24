@@ -16,15 +16,15 @@ headers = {
     "Content-Type": "application/json",
 }
 
-payload = {
-    "messages" : [
+payload = json.dumps({
+    "messages": [
         {
-            "role" : "user",
-            "content" : "Hello, I want to create a new gang to use in Necromunda for Escher with a starting point value of 1000 points.  Can you help?"
+            "role": "user",
+            "content": "Hello, I want to create a new gang to use in Necromunda for Escher with a starting point value of 1000 points.  Can you help?"
         }
     ],
-    "model" : "llama-3.3-70b-versatile",
-}
+    "model": "llama-3.3-70b-versatile"
+})
 
 req = requests.post(url="https://api.groq.com/openai/v1/chat/completions", headers=headers, data=payload)
 print(req.text)
