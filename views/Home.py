@@ -1,4 +1,3 @@
-
 import streamlit as st
 
-st.link_button("Rebuild Campaign", "pages/0_Rebuild_Campaign")
+st.switch_page("./views/0_Rebuild_Campaign.py")
