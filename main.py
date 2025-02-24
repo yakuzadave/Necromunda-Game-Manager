@@ -1,6 +1,46 @@
 import streamlit as st
 import os
 import json
+import logging
+from datetime import datetime
+from rich.logging import RichHandler
+from rich.console import Console
+from rich.theme import Theme
+
+# Setup logger first
+if 'logger' not in st.session_state:
+    # Create logs directory if it doesn't exist
+    os.makedirs('logs', exist_ok=True)
+    
+    # Configure custom theme
+    custom_theme = Theme({
+        "info": "cyan",
+        "warning": "yellow",
+        "error": "red",
+        "debug": "grey70"
+    })
+    
+    console = Console(theme=custom_theme)
+    logger = logging.getLogger('NecromundaApp')
+    logger.setLevel(logging.DEBUG)
+    
+    rich_handler = RichHandler(console=console, rich_tracebacks=True, markup=True)
+    rich_handler.setLevel(logging.INFO)
+    
+    file_handler = logging.FileHandler(f'logs/app_{datetime.now().strftime("%Y%m%d")}.log')
+    file_handler.setLevel(logging.DEBUG)
+    
+    rich_formatter = logging.Formatter('%(message)s')
+    file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    
+    rich_handler.setFormatter(rich_formatter)
+    file_handler.setFormatter(file_formatter)
+    
+    logger.addHandler(rich_handler)
+    logger.addHandler(file_handler)
+    
+    st.session_state.logger = logger
+
 from utils.logger import log_info, log_error, log_debug
 
 from common import (
