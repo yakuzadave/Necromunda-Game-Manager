@@ -16,18 +16,18 @@ st.set_page_config(
 )
 
 # Define visible navigation pages
-home_page = st.Page("pages/Home.py", title="Home", icon="🏠")
-dashboard_page = st.Page("pages/1_Dashboard.py", title="Dashboard", icon=":material/dashboard:")
-gangs_page = st.Page("pages/2_Gangs.py", title="Gangs", icon=":material/group:")
-territories_page = st.Page("pages/3_Territories.py", title="Territories", icon=":material/map:")
-battles_page = st.Page("pages/4_Battles.py", title="Battles", icon=":material/swords:")
-equipment_page = st.Page("pages/7_Equipment.py", title="Equipment", icon=":material/sword_rose:")
-import_yak_page = st.Page("pages/8_ImportYaktribe.py", title="Import Yaktribe Data", icon=":material/cloud:")
-rebuild_page = st.Page("pages/Rebuild_Campaign.py", title="Rebuild Campaign", icon="🔄")
+home_page = st.Page("views/Home.py", title="Home", icon="🏠")
+dashboard_page = st.Page("views/1_Dashboard.py", title="Dashboard", icon=":material/dashboard:")
+gangs_page = st.Page("views/2_Gangs.py", title="Gangs", icon=":material/group:")
+territories_page = st.Page("views/3_Territories.py", title="Territories", icon=":material/map:")
+battles_page = st.Page("views/4_Battles.py", title="Battles", icon=":material/swords:")
+equipment_page = st.Page("views/7_Equipment.py", title="Equipment", icon=":material/sword_rose:")
+import_yak_page = st.Page("views/8_ImportYaktribe.py", title="Import Yaktribe Data", icon=":material/cloud:")
 
 # Hidden pages (not in navigation, but accessible via st.switch_page)
 hidden_pages = {
-    "pages/FighterDetails.py"
+    "views/Rebuild_Campaign.py",
+    "views/FighterDetails.py"
 }
 
 # Navigation
