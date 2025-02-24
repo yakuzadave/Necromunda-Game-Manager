@@ -78,6 +78,7 @@ page_groups = {
     "Tools": [
         st.Page("views/8_ImportYaktribe.py", title="Import Yaktribe", icon="☁️"),
         st.Page("views/10_MapGenerator.py", title="Map Generator", icon="🎨"),
+        st.Page("views/11_MermaidCharts.py", title="Campaign Charts", icon="📊"),
         st.Page("views/0_Rebuild_Campaign.py", title="Rebuild Campaign", icon="🔄"),
     ]
 }
