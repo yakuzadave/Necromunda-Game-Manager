@@ -80,6 +80,53 @@ def show_dashboard():
     except Exception as e:
         st.error(f"Could not generate credit chart: {e}")
 
+    # Battle Outcomes Timeline
+    try:
+        battle_data = []
+        for b in battles:
+            battle_data.append({
+                "Date": datetime.fromisoformat(b.battle_created_datetime),
+                "Winner": b.winner_gang,
+                "Scenario": b.battle_scenario
+            })
+        if battle_data:
+            df = pd.DataFrame(battle_data)
+            fig = px.scatter(df, x="Date", y="Winner", color="Winner",
+                           hover_data=["Scenario"],
+                           title="Battle Outcomes Timeline", height=300)
+            st.plotly_chart(fig, use_container_width=True)
+    except Exception as e:
+        st.error(f"Could not generate battle timeline: {e}")
+
+    # Gang Win Rate
+    try:
+        win_counts = {}
+        participation_counts = {}
+        for b in battles:
+            win_counts[b.winner_gang] = win_counts.get(b.winner_gang, 0) + 1
+            for gang in b.participating_gangs:
+                participation_counts[gang] = participation_counts.get(gang, 0) + 1
+        
+        win_rate_data = []
+        for gang in gang_objects:
+            wins = win_counts.get(gang.gang_name, 0)
+            participations = participation_counts.get(gang.gang_name, 0)
+            win_rate = (wins / participations * 100) if participations > 0 else 0
+            win_rate_data.append({
+                "Gang": gang.gang_name,
+                "Win Rate %": win_rate,
+                "Total Battles": participations
+            })
+        
+        if win_rate_data:
+            df = pd.DataFrame(win_rate_data)
+            fig = px.bar(df, x="Gang", y="Win Rate %",
+                        hover_data=["Total Battles"],
+                        title="Gang Win Rates", height=300)
+            st.plotly_chart(fig, use_container_width=True)
+    except Exception as e:
+        st.error(f"Could not generate win rate chart: {e}")
+
     # ---- Territory Control Section ----
     st.subheader("Territory Control")
 
