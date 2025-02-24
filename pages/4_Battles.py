@@ -21,6 +21,7 @@ def show_battles():
                     participating_gangs=participating_gangs
                 )
                 st.session_state.battles.append(new_battle)
+                save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
                 st.success("Battle recorded!")
             else:
                 st.error("Complete all battle details and select participants.")
