@@ -1,3 +1,4 @@
+
 from typing import List, Optional, Dict
 import json
 import requests
@@ -178,27 +179,27 @@ def get_valid_gang(gang_name: str, max_retries: int = 3) -> GangSchema:
 # --- Improved Output Formatting ---
 
 def print_gang(gang: GangSchema):
-    print(f"\n⚔️ {gang.gang_name} (Credits: {gang.credits}, Rep: {gang.reputation})")
+    print(f"\n{gang.gang_name} (Credits: {gang.credits}, Rep: {gang.reputation})")
 
-    print("\n🔫 Fighters:")
+    print("\nFighters:")
     for fighter in gang.gangers:
         print(f"\n{fighter.name} ({fighter.rank})")
-        print(f"⛓ Stats: M:{fighter.m} WS:{fighter.ws} BS:{fighter.bs} S:{fighter.s} T:{fighter.t} W:{fighter.w} I:{fighter.i} A:{fighter.a}")
-        print(f"💪 Characteristics: LD:{fighter.ld} CL:{fighter.cl} WIL:{fighter.wil} INT:{fighter.intelligence}")
-        print(f"🎯 XP: {fighter.xp} | Status: {fighter.status}")
+        print(f"Stats: M:{fighter.m} WS:{fighter.ws} BS:{fighter.bs} S:{fighter.s} T:{fighter.t} W:{fighter.w} I:{fighter.i} A:{fighter.a}")
+        print(f"Characteristics: LD:{fighter.ld} CL:{fighter.cl} WIL:{fighter.wil} INT:{fighter.intelligence}")
+        print(f"XP: {fighter.xp} | Status: {fighter.status}")
 
         if fighter.weapons:
-            print("🔫 Weapons:")
+            print("Weapons:")
             for weapon in fighter.weapons:
                 print(f"  - {weapon.name} ({weapon.type}, {weapon.cost}cr, Traits: {', '.join(weapon.traits)})")
 
         if fighter.equipment:
-            print("🎒 Equipment:")
+            print("Equipment:")
             for item in fighter.equipment:
                 print(f"  - {item.name} x{item.qty} ({item.cost}cr each, Traits: {', '.join(item.traits)})")
 
     if gang.stash:
-        print("\n📦 Gang Stash:")
+        print("\nGang Stash:")
         for item in gang.stash:
             print(f"  - {item.name} x{item.qty} ({item.cost}cr each)")
 
@@ -207,4 +208,4 @@ if __name__ == '__main__':
         gang = get_valid_gang("Venom's Blades", max_retries=3)
         print_gang(gang)
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
