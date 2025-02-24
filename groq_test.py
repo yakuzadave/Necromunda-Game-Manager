@@ -153,8 +153,11 @@ def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[s
         gang.validate_gang()
         return gang
     except (ValidationError, ValueError) as e:
-        error_messages = [err['msg'] for err in e.errors()] if isinstance(e, ValidationError) else [str(e)]
-        raise ValidationError(error_messages, model=GangSchema)
+        error_messages = e.errors() if isinstance(e, ValidationError) else [{'msg': str(e)}]
+        raise ValidationError.from_exception_data(
+            title='Gang Validation Error',
+            line_errors=error_messages
+        )
 
 def get_valid_gang(gang_name: str, max_retries: int = 3) -> GangSchema:
     validation_errors = []
