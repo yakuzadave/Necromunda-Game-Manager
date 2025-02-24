@@ -11,10 +11,10 @@ def assign_coordinates_if_missing(territory, default_x_range=(-122.5, -122.3), d
     """
     If the territory doesn't have x and/or y coordinates, assign random default values.
     """
-    if "x" not in territory or territory["x"] is None:
-        territory["x"] = random.uniform(*default_x_range)
-    if "y" not in territory or territory["y"] is None:
-        territory["y"] = random.uniform(*default_y_range)
+    if territory.x is None:
+        territory.x = random.uniform(*default_x_range)
+    if territory.y is None:
+        territory.y = random.uniform(*default_y_range)
     return territory
 
 # Initialize session state for territories if needed.
@@ -36,9 +36,9 @@ for t in st.session_state.territories:
     # Ensure coordinates are assigned if missing.
     t = assign_coordinates_if_missing(t)
     territory_data.append({
-        "name": t["name"],
-        "controlled_by": t["controlled_by"],
-        "coordinates": [t["x"], t["y"]]
+        "name": t.name,
+        "controlled_by": t.controlled_by if t.controlled_by else "Unclaimed",
+        "coordinates": [t.x, t.y]
     })
 
 # Create a custom PyDeck ScatterplotLayer for the territories.
