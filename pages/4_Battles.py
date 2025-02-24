@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime
-from common import LocalBattle
+from common import LocalBattle, save_data
 
 def show_battles():
     st.subheader("Battle Recording")
