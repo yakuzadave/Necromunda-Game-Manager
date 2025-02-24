@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import json
+from utils.logger import log_info, log_error, log_debug
 
 from common import (
     DATA_FILE, FULL_CAMPAIGN_DATA_FILE,
@@ -70,12 +71,18 @@ if 'backup_manager' not in st.session_state:
     st.session_state.backup_manager = BackupManager()
 
 if "gangs" not in st.session_state:
-    gangs, territories, battles = load_data()
-    st.session_state.gangs = gangs
-    st.session_state.territories = territories
-    st.session_state.battles = battles
-    # Create backup after loading data
-    st.session_state.backup_manager.create_backup()
+    log_info("Initializing session state with game data")
+    try:
+        gangs, territories, battles = load_data()
+        st.session_state.gangs = gangs
+        st.session_state.territories = territories
+        st.session_state.battles = battles
+        # Create backup after loading data
+        st.session_state.backup_manager.create_backup()
+        log_debug(f"Loaded {len(gangs)} gangs, {len(territories)} territories, {len(battles)} battles")
+    except Exception as e:
+        log_error(f"Error initializing session state: {str(e)}")
+        raise
 
 if "equipment_list" not in st.session_state:
     st.session_state.equipment_list = []
