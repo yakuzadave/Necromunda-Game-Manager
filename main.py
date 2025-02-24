@@ -8,12 +8,24 @@ from common import (
     load_data, save_data, assign_territory, to_gang_obj, load_full_campaign
 )
 
+# Define navigation
+
+dashboard_page = st.Page('./pages/1_Dashboard.py', title='Dashboard', icon=':material/add_circle:')
+gangs_page = st.Page('./pages/2_Gangs.py', title='Gangs' , icon=':material/add_circle:')
+territories_page = st.Page('./pages/3_Territories.py', title='Territories', icon=':material/add_circle:')
+battles_page = st.Page('./pages/4_Battles.py', title='Battles', icon=':material/add_circle:')
+equipment_page = st.Page('./pages/7_Equipment.py', title='Equipment', icon=':material/add_circle:')
+import_yak_page = st.Page('pages/8_ImportYaktribe.py', title='Import Yaktribe Data', icon=None)
+
+pg = st.navigation([dashboard_page, gangs_page, territories_page, battles_page, equipment_page, import_yak_page])
+
 # Set page config
 st.set_page_config(
     page_title="Necromunda Campaign Manager",
     page_icon="🎮",
     layout="wide"
 )
+pg.run()
 
 # Initialize session state
 if 'gangs' not in st.session_state:

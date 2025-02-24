@@ -5,11 +5,11 @@ from common import (
     DATA_FILE, Gang, load_data
 )
 
-# Set page config (this must be the very first Streamlit command)
-st.set_page_config(
-    page_title="Necromunda Campaign Manager",
-    page_icon="🎮",
-    layout="wide"
+# # Set page config (this must be the very first Streamlit command)
+# st.set_page_config(
+#     page_title="Necromunda Campaign Manager",
+#     page_icon="🎮",
+#     layout="wide"
 )
 
 # -------------------- Session State Initialization --------------------
