@@ -2,7 +2,7 @@ from typing import List, Optional, Dict
 import json
 import requests
 import os
-from pydantic import BaseModel, Field, ValidationError, validator
+from pydantic import BaseModel, Field, ValidationError, model_validator
 from datetime import datetime
 import uuid
 
@@ -62,13 +62,13 @@ class GangFighter(BaseModel):
     advancements: List[Advancement] = []
     status: str = Field("Active", pattern="^(Active|Injured|Retired|Dead)$")
 
-    @validator('weapons')
-    def validate_weapons(cls, v, values):
-        if 'rank' in values and values['rank'] == 'Juve':
-            for weapon in v:
+    @model_validator(mode='after')
+    def validate_weapons(self) -> 'GangFighter':
+        if self.rank == 'Juve':
+            for weapon in self.weapons:
                 if weapon.type in ['Heavy', 'Special']:
                     raise ValueError("Juves cannot carry Heavy or Special weapons")
-        return v
+        return self
 
 class GangSchema(BaseModel):
     gang_name: str
@@ -78,7 +78,8 @@ class GangSchema(BaseModel):
     gangers: List[GangFighter]
     stash: List[Equipment] = []
 
-    def validate_gang(self):
+    @model_validator(mode='after')
+    def validate_gang(self) -> 'GangSchema':
         total_cost = sum(
             fighter.cost +
             sum(w.cost for w in fighter.weapons) +
@@ -100,8 +101,7 @@ class GangSchema(BaseModel):
 
         if errors:
             raise ValueError("\n".join(errors))
-
-# --- Enhanced API Integration ---
+        return self
 
 def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[str] = None) -> GangSchema:
     from prompt_templates.gang_gen import (
@@ -175,30 +175,28 @@ def get_valid_gang(gang_name: str, max_retries: int = 3) -> GangSchema:
 
             print("Retrying with adjusted parameters...\n")
 
-# --- Improved Output Formatting ---
-
 def print_gang(gang: GangSchema):
-    print(f"\n⚔️ {gang.gang_name} (Credits: {gang.credits}, Rep: {gang.reputation})")
+    print(f"\n{gang.gang_name} (Credits: {gang.credits}, Rep: {gang.reputation})")
 
-    print("\n🔫 Fighters:")
+    print("\nFighters:")
     for fighter in gang.gangers:
         print(f"\n{fighter.name} ({fighter.rank})")
-        print(f"⛓ Stats: M:{fighter.m} WS:{fighter.ws} BS:{fighter.bs} S:{fighter.s} T:{fighter.t} W:{fighter.w} I:{fighter.i} A:{fighter.a}")
-        print(f"💪 Characteristics: LD:{fighter.ld} CL:{fighter.cl} WIL:{fighter.wil} INT:{fighter.intelligence}")
-        print(f"🎯 XP: {fighter.xp} | Status: {fighter.status}")
+        print(f"Stats: M:{fighter.m} WS:{fighter.ws} BS:{fighter.bs} S:{fighter.s} T:{fighter.t} W:{fighter.w} I:{fighter.i} A:{fighter.a}")
+        print(f"Characteristics: LD:{fighter.ld} CL:{fighter.cl} WIL:{fighter.wil} INT:{fighter.intelligence}")
+        print(f"XP: {fighter.xp} | Status: {fighter.status}")
 
         if fighter.weapons:
-            print("🔫 Weapons:")
+            print("Weapons:")
             for weapon in fighter.weapons:
                 print(f"  - {weapon.name} ({weapon.type}, {weapon.cost}cr, Traits: {', '.join(weapon.traits)})")
 
         if fighter.equipment:
-            print("🎒 Equipment:")
+            print("Equipment:")
             for item in fighter.equipment:
                 print(f"  - {item.name} x{item.qty} ({item.cost}cr each, Traits: {', '.join(item.traits)})")
 
     if gang.stash:
-        print("\n📦 Gang Stash:")
+        print("\nGang Stash:")
         for item in gang.stash:
             print(f"  - {item.name} x{item.qty} ({item.cost}cr each)")
 
@@ -207,4 +205,4 @@ if __name__ == '__main__':
         gang = get_valid_gang("Venom's Blades", max_retries=3)
         print_gang(gang)
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
