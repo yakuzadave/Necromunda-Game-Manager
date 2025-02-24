@@ -1,0 +1,1134 @@
+{
+    "gang_id": "407538",
+    "gang_name": "Redbeard&rsquo;s Reclaimers",
+    "gang_type": "Squat Prospectors",
+    "campaign": "Power Play",
+    "credits": 10,
+    "reputation": 11,
+    "territories": [
+        "00. Gang Enclave"
+    ],
+    "gangers": [
+        {
+            "ganger_id": "2740258",
+            "label_id": "",
+            "name": "Marty &ldquo;Redbeard&rdquo; Warbringer",
+            "type": "Charter Master",
+            "m": 6,
+            "ws": 2,
+            "bs": 2,
+            "s": 3,
+            "t": 6,
+            "w": 4,
+            "i": 5,
+            "a": 2,
+            "ld": 5,
+            "cl": 5,
+            "wil": 5,
+            "intelligence": 6,
+            "cost": 930,
+            "xp": 0,
+            "kills": 1,
+            "advance_count": 7,
+            "equipment": [
+                {
+                    "equipment_id": "c92b90af-0a22-4234-a654-c6e87d914c3c",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "074c7307-e4a3-4978-a436-855e707ef499",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e1e25240-b581-4198-a0e8-1903840600f5",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ea52d9ab-bed8-4fea-8272-4325dab96d78",
+                    "name": "Grav-chute",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9c7120ac-4987-4d5d-a368-008d7396a5de",
+                    "name": "Displacer Field",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c6f202ee-881f-42ed-a6a0-a387f4231082",
+                    "name": "Uphive Raiments",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ccf723b4-9271-49a3-a3f4-8020637ae9aa",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6c65553c-3018-4a9f-a1c6-0ced694a305e",
+                    "name": "Stone Burner",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "da8ebb42-7801-417c-a1ae-a2ce4d7cb90e",
+                    "name": "Ironhead Meltagun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "dd11dc2e-af98-4cd8-8e06-b4bb33b7b82e",
+                    "name": "Ironhead Arc Welder",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b8296123-d703-4e19-ae6e-b41cf57c0894",
+                    "name": "Ironhead Power Fist",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fearsome",
+                "Hip Shooting"
+            ],
+            "injuries": [
+                "Hobbled"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-05-21 8:34:06",
+            "datetime_updated": "2024-06-07 00:52:05"
+        },
+        {
+            "ganger_id": "2740265",
+            "label_id": "",
+            "name": "Krak Warbringer",
+            "type": "Drill Master",
+            "m": 5,
+            "ws": 4,
+            "bs": 2,
+            "s": 3,
+            "t": 5,
+            "w": 2,
+            "i": 5,
+            "a": 2,
+            "ld": 6,
+            "cl": 5,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 655,
+            "xp": 1,
+            "kills": 1,
+            "advance_count": 3,
+            "equipment": [
+                {
+                    "equipment_id": "b9ddeed5-2e76-4309-bf62-0d29e8998f9c",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "68e146a3-a018-422e-9d1f-8f5acb359a51",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7d661a42-7f7b-455e-98f2-521e72f4fedb",
+                    "name": "Grav-chute",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "babf547b-2b5b-4216-9094-dfce803475bf",
+                    "name": "Suspensor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "22b661bb-43da-4a22-9be0-1ac07617ed53",
+                    "name": "Infra-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "646ddde0-6187-4156-8a4d-3994b2253c6c",
+                    "name": "Mining Laser*",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "84207c25-2580-4eb3-bea3-952498a29ed5",
+                    "name": "Displacer Field",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d66b83c2-1d37-4bc7-8d66-322fed2947d3",
+                    "name": "Cameleoline Cloak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5d879bb5-f863-4e40-9429-a3407d9b8c3f",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "fd565314-1853-4362-bd05-a5c3b65964fa",
+                    "name": "Circular Stone Saw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Dependable Like Kin"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "Impressive Scars",
+            "datetime_added": "2023-05-21 8:34:55",
+            "datetime_updated": "2024-06-07 01:27:59"
+        },
+        {
+            "ganger_id": "2740263",
+            "label_id": "",
+            "name": "&ldquo;Ball Gag&rdquo; Balin",
+            "type": "Drill Master",
+            "m": 4,
+            "ws": 4,
+            "bs": 2,
+            "s": 3,
+            "t": 6,
+            "w": 2,
+            "i": 5,
+            "a": 2,
+            "ld": 6,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 740,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 4,
+            "equipment": [
+                {
+                    "equipment_id": "7f643f60-d5db-407c-8441-2dc24e354e6c",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a2291739-2ff5-4c92-aade-9c2222c4631a",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "46d891ae-d48a-42c2-b1ec-1e14a10cb0b1",
+                    "name": "Grav-chute",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5417f4c9-1215-4267-9b7b-012a75c8a4b7",
+                    "name": "Suspensor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "8bdfc216-e59b-4560-ba09-d8b5b9b448c3",
+                    "name": "Infra-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "43232fb8-98ee-4a09-8523-49bd4a587895",
+                    "name": "Displacer Field",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "88fcb6a4-2fe7-4d59-985b-3d7a166fc622",
+                    "name": "Lascannon*",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1c044430-d0a2-4e4c-bf01-43d1d92d0fff",
+                    "name": "Cameleoline Cloak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a5444bb3-0f3b-4aba-9e02-d154b4bcd661",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "895a44de-7052-4efe-b1db-a0816bddd3de",
+                    "name": "Circular Stone Saw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Dependable Like Kin",
+                "Nerves of Steel"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-05-21 8:34:39",
+            "datetime_updated": "2024-06-07 01:28:45"
+        },
+        {
+            "ganger_id": "3365354",
+            "label_id": "",
+            "name": "Slick Duceman",
+            "type": "Drill Master",
+            "m": 4,
+            "ws": 4,
+            "bs": 2,
+            "s": 3,
+            "t": 4,
+            "w": 2,
+            "i": 5,
+            "a": 2,
+            "ld": 6,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 615,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 2,
+            "equipment": [
+                {
+                    "equipment_id": "e10b620e-c225-4b4d-b5f6-6babb4811e7f",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1a7e3d6e-5194-4f76-b41d-f20d51c55c5e",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1c491af8-3b45-4703-b150-c4d32643316f",
+                    "name": "Grav-chute",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "908438c3-1890-4416-acb9-d338d8488ae4",
+                    "name": "Suspensor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6d6499c6-0ae7-4740-bb38-86cc559fa23e",
+                    "name": "Infra-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1926d47b-278e-450e-ac97-8a2ee3cd4617",
+                    "name": "Mining Laser*",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5630f5d4-6147-4364-aa9d-6be11a965f73",
+                    "name": "Displacer Field",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3a4a05fd-f0db-4de3-bb83-04d1d86a6282",
+                    "name": "Cameleoline Cloak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e205fe69-dac0-4ebb-8403-e01d174b9fcb",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b5640058-3cf9-48f6-949a-65089961c71a",
+                    "name": "Circular Stone Saw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Dependable Like Kin",
+                "Nerves of Steel"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-02-29 10:07:58",
+            "datetime_updated": "2024-06-03 15:10:28"
+        },
+        {
+            "ganger_id": "2740272",
+            "label_id": "",
+            "name": "Billy Small",
+            "type": "Drill-kyn Specialist",
+            "m": 4,
+            "ws": 4,
+            "bs": 3,
+            "s": 3,
+            "t": 5,
+            "w": 1,
+            "i": 5,
+            "a": 1,
+            "ld": 7,
+            "cl": 5,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 660,
+            "xp": 3,
+            "kills": 0,
+            "advance_count": 3,
+            "equipment": [
+                {
+                    "equipment_id": "c3d0baa8-1594-41a7-a45b-709477d91b1c",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e493f8a4-9a07-4149-bb56-e4518aa010e7",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e6cbc49e-66dc-4139-b9dc-ef9584970c24",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "279068ea-1ccd-472e-bdb0-af6d2e9617c8",
+                    "name": "Telescopic sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "49f8ed4a-7e2a-4701-94c7-33867b5d656a",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "30b8063a-fadd-4c7a-bcdc-992c646b0e96",
+                    "name": "Ablative Overlay",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4aa9f7fe-da2a-4d4f-bb89-a6ccdedd1b27",
+                    "name": "Ironhead Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "91746d52-d851-41ce-a7a2-c22f99549ab9",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "70fa0a6b-5e96-4fd9-bc69-8a2d1bbfe9fa",
+                    "name": "Ironhead Meltagun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "8bc7ab10-93fd-407d-ac51-a1fe9ec4932b",
+                    "name": "Circular Stone Saw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fast Shot"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "Impressive Scars",
+            "datetime_added": "2023-05-21 8:35:56",
+            "datetime_updated": "2024-06-03 15:13:04"
+        },
+        {
+            "ganger_id": "2740273",
+            "label_id": "",
+            "name": "Roddy &ldquo;Chops&rdquo; Tameno",
+            "type": "Drill-kyn Specialist",
+            "m": 4,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 5,
+            "a": 1,
+            "ld": 7,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 410,
+            "xp": 3,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "cb890cec-396a-4ebe-bc51-988d6c497a23",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "096461b2-9cd1-4bc6-9fce-4c560355939f",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3077bd76-e7eb-4c44-a570-6a066e666e18",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6fdb77c2-aa29-4661-9316-9b8ca96daf54",
+                    "name": "Telescopic sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "99c6de53-5721-4fd6-a0d7-8c151c846f1b",
+                    "name": "Power Axe",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b1816bf3-53cb-4758-85c8-23ca5ed66397",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "16117549-98f7-412b-b085-18f5c26f1bb8",
+                    "name": "Ablative Overlay",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "daa47151-c78b-4fcd-bde6-11925e5eabfa",
+                    "name": "Ironhead Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b32b2242-9f29-4641-b6ee-dd167b63a23d",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Trick Shot"
+            ],
+            "injuries": [
+                "Head Injury"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-05-21 8:36:31",
+            "datetime_updated": "2024-06-02 02:42:29"
+        },
+        {
+            "ganger_id": "3291197",
+            "label_id": "",
+            "name": "Grady Small",
+            "type": "Prospector Digger",
+            "m": 5,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 455,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "a8523fe9-a198-4f33-a376-adba26d0b7bb",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b5725c4d-6d06-42ac-aed9-3129951dff90",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f477fa44-6da3-4bdd-962c-0fe62d1f5863",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7ae2ff56-d419-4fea-8c09-ad641ba0313a",
+                    "name": "Telescopic sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "188f8fa3-1d70-4843-b1b9-3f1d7af4d40b",
+                    "name": "Blasting Charges",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f8917dcd-45a7-404d-a45a-abc6e1fcf284",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ba159579-baa9-4817-994e-8a783f17acf4",
+                    "name": "Ironhead Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f93d069a-fc36-44b5-bcad-0281558909b8",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b1fd6769-9783-4222-8381-cb6fda9c5fa9",
+                    "name": "Circular Stone Saw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-01-28 9:58:12",
+            "datetime_updated": "2024-06-07 01:31:21"
+        },
+        {
+            "ganger_id": "3325896",
+            "label_id": "",
+            "name": "Nature Boy",
+            "type": "Prospector Digger",
+            "m": 5,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 450,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "0c016e88-3972-42c3-8146-8c3502b89374",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b5d554f4-410f-474e-a7ad-01fa39e5df42",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c80af0b6-863f-4b7d-a4d2-536a44638089",
+                    "name": "Telescopic sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "04446b2a-9da3-4611-b1ed-fff85d302a2d",
+                    "name": "Blasting Charges",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "8e2bebcb-127e-470e-8739-f3920324690c",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c357f71d-7979-4f35-969e-b4bf4bb7e2c5",
+                    "name": "Ablative Overlay",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "04c8fb92-0074-4fe9-ba8a-c00b8d654824",
+                    "name": "Ironhead Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "efb6214f-f339-4696-b00d-374cb27bcbfe",
+                    "name": "Ironhead Bolt Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d3e25bbe-0166-4942-8a47-3963c0ab695c",
+                    "name": "Circular Stone Saw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fearsome"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-02-11 7:52:42",
+            "datetime_updated": "2024-06-07 01:31:43"
+        },
+        {
+            "ganger_id": "3399632",
+            "label_id": "",
+            "name": "Craig cragbuster ",
+            "type": "Vartijan exo-driller",
+            "m": 4,
+            "ws": 4,
+            "bs": 2,
+            "s": 4,
+            "t": 6,
+            "w": 3,
+            "i": 5,
+            "a": 2,
+            "ld": 7,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 405,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 3,
+            "equipment": [
+                {
+                    "equipment_id": "865b5278-d5ac-4d23-8e89-4f451214f18b",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3016a299-6743-449d-ab58-8d3af17914d2",
+                    "name": "Vartijan Fist",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "2c0ecfc8-720e-4a34-9212-38e14eac4d33",
+                    "name": "Vartijan heavy bolter",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f360bd8c-9768-44b3-8cc3-4d0a74b81a75",
+                    "name": "Seismic crusher",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Nerves of Steel",
+                "Nobody Pushes Kin Around",
+                "True Grit"
+            ],
+            "injuries": [
+                "Spinal Injury"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-03-15 9:41:39",
+            "datetime_updated": "2024-06-07 00:53:35"
+        },
+        {
+            "ganger_id": "3450780",
+            "label_id": "",
+            "name": "Sloppy Joe",
+            "type": "Slopper",
+            "m": 4,
+            "ws": 4,
+            "bs": 4,
+            "s": 2,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 9,
+            "cl": 9,
+            "wil": 5,
+            "intelligence": 7,
+            "cost": 0,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "00e25384-b6ac-4a01-aa65-915d0fcb9df7",
+                    "name": "Fighting Knife",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-04-06 5:10:01",
+            "datetime_updated": "2024-04-19 05:18:34"
+        },
+        {
+            "ganger_id": "3487025",
+            "label_id": "",
+            "name": "Urson Grimjarl",
+            "type": "Squat Bounty Hunter",
+            "m": 5,
+            "ws": 4,
+            "bs": 3,
+            "s": 3,
+            "t": 4,
+            "w": 2,
+            "i": 4,
+            "a": 1,
+            "ld": 6,
+            "cl": 5,
+            "wil": 6,
+            "intelligence": 6,
+            "cost": 160,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "e0180db5-7c28-406e-b1f0-a2707b72a3c9",
+                    "name": "Frag Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c9b4b03c-3743-4a48-8c50-53dc3ef89184",
+                    "name": "Krak Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7d5787d6-680f-4d18-b9da-9e88259fc937",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "56fde151-1a55-4fc8-b4b7-d1eeec0e94dc",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "093c03d0-bb82-43eb-a015-bdcf09e8dc65",
+                    "name": "Ironhead Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f314658b-07e4-4493-a66a-1d25483b7343",
+                    "name": "Jardlan &ldquo;Longshot&rdquo; Hunting Rifle",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "00d61353-7a2e-4ffb-8677-962bfa7380aa",
+                    "name": "Proximity Auspex",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Clamber",
+                "Overwatch",
+                "Precision Shot"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-04-20 5:27:03",
+            "datetime_updated": "2024-04-20 17:27:03"
+        },
+        {
+            "ganger_id": "3487064",
+            "label_id": "",
+            "name": "Bebo ",
+            "type": "Tehcmite Oculi",
+            "m": 7,
+            "ws": 5,
+            "bs": 5,
+            "s": 2,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 5,
+            "wil": 6,
+            "intelligence": 6,
+            "cost": 0,
+            "xp": 3,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "d44d982f-73a1-49df-8056-93601cf0859c",
+                    "name": "Flak Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "da5b3d43-c800-489d-860b-f423f25e3baa",
+                    "name": "Pincer",
+                    "qty": 2,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Escape Artist",
+                "Evade"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "Flight, Target Paint 6&rdquo;, Scout Drone 18&rdquo;",
+            "datetime_added": "2024-04-20 5:36:42",
+            "datetime_updated": "2024-06-02 02:53:34"
+        },
+        {
+            "ganger_id": "3611057",
+            "label_id": "",
+            "name": "Number 2",
+            "type": "Vartijan exo-driller",
+            "m": 4,
+            "ws": 4,
+            "bs": 3,
+            "s": 4,
+            "t": 5,
+            "w": 3,
+            "i": 5,
+            "a": 2,
+            "ld": 7,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 300,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "d80e54c3-bc12-4055-b674-4bd0165cda25",
+                    "name": "Vartijan heavy bolter",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Nobody Pushes Kin Around"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-06-07 12:38:20",
+            "datetime_updated": "2024-06-07 00:38:20"
+        },
+        {
+            "ganger_id": "3282789",
+            "label_id": "",
+            "name": "Keegan Small",
+            "type": "Prospector Digger",
+            "m": 5,
+            "ws": 5,
+            "bs": 5,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 35,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Dead",
+            "notes": "",
+            "datetime_added": "2024-01-25 3:48:54",
+            "datetime_updated": "2024-03-06 01:24:50"
+        }
+    ],
+    "stash": []
+}

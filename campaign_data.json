@@ -18,7 +18,7 @@
                     "label_id": "",
                     "name": "Xavier",
                     "type": "Cult Adept",
-                    "m": 5,
+                    "m": 6,
                     "ws": 3,
                     "bs": 4,
                     "s": 3,
@@ -36,56 +36,56 @@
                     "advance_count": 3,
                     "equipment": [
                         {
-                            "equipment_id": "03141675-80e7-4588-b0bf-0f5bec83165a",
+                            "equipment_id": "03d1d1bc-47f8-48fc-8343-1b024423b4cd",
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "75c5c08e-564a-46a5-82bd-12fd205b701e",
+                            "equipment_id": "213469d9-8e68-47d6-bd63-6ba0842462e2",
                             "name": "Hand Flamer",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "0511bf3e-742b-4bfb-b98f-c85c575a76ba",
+                            "equipment_id": "c601d98a-446f-4d71-97be-09a9e1bd6fed",
                             "name": "Respirator",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "6629ae09-e7ef-42b5-b5da-804f27a8d959",
+                            "equipment_id": "64b889cb-a5ec-4e8d-b88b-ae75adb3230f",
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "86fdf987-05fd-48f6-8d04-0cfca30c8701",
+                            "equipment_id": "47418f5b-5a9b-4e21-b1b2-b83f62d6a1bf",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "533d802a-10ca-4648-b575-6322ff37b72e",
+                            "equipment_id": "59e54281-1bec-405b-b052-80b9e8ae9ae3",
                             "name": "Cult Icon",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "b233c88d-2434-4897-8431-b45a69e47717",
+                            "equipment_id": "04182b16-f480-4bd1-8394-15337f780e74",
                             "name": "Psychic Familiar",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "db715200-0ce6-46ab-bd64-4f75b532a96f",
+                            "equipment_id": "de28180d-dfe0-43a6-95d3-72deaf42dfb0",
                             "name": "Ablative Overlay",
                             "qty": 1,
                             "cost": 0,
@@ -101,7 +101,7 @@
                     "status": "Alive",
                     "notes": "",
                     "datetime_added": "2024-01-21 1:46:30",
-                    "datetime_updated": "2024-06-02 19:43:49"
+                    "datetime_updated": "2025-02-24 18:33:46"
                 },
                 {
                     "ganger_id": "3271426",
