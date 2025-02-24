@@ -1,189 +1,116 @@
-from typing import List, Optional
-import json
-import requests
-import os
-from pydantic import BaseModel, Field, ValidationError
+        def generate_detailed_territory_schema() -> str:
+            """
+            Returns a JSON schema string combining Territory and TerritoryEffect data.
+            This schema is derived from the Pydantic models:
+              - Territory: fields include name, type, controlled_by, x, y, lat, lng, elevation.
+              - TerritoryEffect: fields include effect_id, name, description, income_bonus, reputation_bonus, special_rules.
+            """
+            schema = {
+                "title": "DetailedTerritorySchema",
+                "type": "object",
+                "properties": {
+                    "territory": {
+                        "type": "object",
+                        "properties": {
+                            "name": {"type": "string"},
+                            "type": {"type": "string"},
+                            "controlled_by": {"type": ["string", "null"]},
+                            "x": {"type": ["number", "null"]},
+                            "y": {"type": ["number", "null"]},
+                            "lat": {"type": ["number", "null"]},
+                            "lng": {"type": ["number", "null"]},
+                            "elevation": {"type": ["number", "null"]}
+                        },
+                        "required": ["name", "type"]
+                    },
+                    "effect": {
+                        "type": "object",
+                        "properties": {
+                            "effect_id": {"type": "string"},
+                            "name": {"type": "string"},
+                            "description": {"type": "string"},
+                            "income_bonus": {"type": "integer"},
+                            "reputation_bonus": {"type": "integer"},
+                            "special_rules": {
+                                "type": "array",
+                                "items": {"type": "string"}
+                            }
+                        },
+                        "required": ["effect_id", "name", "description"]
+                    }
+                },
+                "required": ["territory", "effect"]
+            }
+            import json
+            return json.dumps(schema, indent=2)
 
-# Importing game rules (ensure this module contains any additional game-specific logic)
-from common import Gang, GangFighter  # Placeholder; update as needed
+        def generate_territory_system_prompt(schema_json: str) -> str:
+            """
+            Generates a system prompt for detailed Necromunda territory generation.
 
-# Environment Variables
-groq_api_key = os.environ.get('GROQ_API_KEY')
-if not groq_api_key:
-    raise EnvironmentError("GROQ_API_KEY must be set in the environment variables.")
+            The prompt instructs the LLM to output a valid JSON object that strictly conforms
+            to the given schema. It emphasizes that all territories are unique and should
+            include detailed data on both the territory and its associated effect.
+            """
+            return (
+                "You are a Necromunda territory generator for a Dominion Campaign. "
+                "Each territory is unique and plays a critical role in the campaign by granting various boons. "
+                "A territory includes both its core properties (such as name, type, control status, and location) "
+                "and an associated effect detailing bonuses (income, reputation, and special rules).\n\n"
+                "Generate a valid JSON object that strictly conforms to the JSON schema provided below. "
+                "Do not include any extra commentary—output only the JSON object.\n\n"
+                f"{schema_json}"
+            )
 
-# --- NECROMUNDA GANG MODELS ---
+        def generate_territory_user_prompt(territory_name: str) -> str:
+            """
+            Generates a user prompt for requesting detailed information for a specific territory.
 
-class Weapon(BaseModel):
-    name: str
-    cost: int
-    type: str  # e.g., "Pistol", "Basic", "Special", "Heavy"
-    restrictions: Optional[List[str]] = []  # e.g., ["Leader", "Champion"]
+            Parameters:
+              - territory_name: The name of the territory to generate details for.
 
-class Equipment(BaseModel):
-    name: str
-    cost: int
+            The prompt asks the LLM to produce complete data on the territory and its effect.
+            """
+            return (
+                f"Provide detailed information for the territory named '{territory_name}' in a Dominion Campaign. "
+                "Include all relevant data for both the territory and its effect as specified by the JSON schema."
+            )
 
-class GangMember(BaseModel):
-    name: str
-    rank: str = Field(..., pattern="^(Leader|Champion|Ganger|Juve|Prospect)$")  # Use 'pattern' for Pydantic v2
-    cost: int
-    skills: Optional[List[str]] = []
-    weapons: Optional[List[Weapon]] = []
-    equipment: Optional[List[Equipment]] = []
+        def generate_territory_rerun_prompt(territory_name: str, schema_json: str, attempt: int) -> str:
+            """
+            Generates a re-run prompt for territory generation if the initial output fails validation.
 
-class GangSchema(BaseModel):
-    gang_name: str
-    members: List[GangMember]
-    territories: List[str]
+            Parameters:
+              - territory_name: The name of the territory.
+              - schema_json: The JSON schema the output must conform to.
+              - attempt: The current attempt number.
 
-    def validate_gang(self):
-        """
-        Validates that the gang adheres to the Escher rules:
-         - Exactly one Leader.
-         - At most two Champions.
-         - At least three Gangers.
-         - Total cost does not exceed 1000 credits.
-        """
-        total_cost = sum(
-            member.cost +
-            sum(w.cost for w in (member.weapons or [])) +
-            sum(e.cost for e in (member.equipment or []))
-            for member in self.members
-        )
+            The prompt reminds the LLM to strictly follow the schema and output only valid JSON.
+            """
+            return (
+                f"This is re-run attempt number {attempt} for generating the territory '{territory_name}'. "
+                "Ensure that your output strictly conforms to the JSON schema provided below. "
+                "Output only valid JSON with no extra commentary.\n\n"
+                f"{schema_json}"
+            )
 
-        leader_count = sum(1 for m in self.members if m.rank == "Leader")
-        champion_count = sum(1 for m in self.members if m.rank == "Champion")
-        ganger_count = sum(1 for m in self.members if m.rank == "Ganger")
-        juve_count = sum(1 for m in self.members if m.rank == "Juve")
+        # --- Example Usage ---
+        if __name__ == '__main__':
+            # Generate the detailed territory JSON schema from the Pydantic models.
+            territory_schema_json = generate_detailed_territory_schema()
 
-        errors = []
-        if leader_count != 1:
-            errors.append("An Escher gang must have exactly ONE Leader.")
-        if champion_count > 2:
-            errors.append("An Escher gang can have at most TWO Champions.")
-        if ganger_count < 3:
-            errors.append("An Escher gang must have at least THREE Gangers.")
-        if total_cost > 1000:
-            errors.append(f"Gang exceeds the 1000-credit limit! Current total cost: {total_cost} credits.")
+            # Generate the system prompt.
+            system_prompt = generate_territory_system_prompt(territory_schema_json)
 
-        if errors:
-            raise ValueError("Gang validation failed:\n" + "\n".join(errors))
+            # Generate a user prompt for a territory, e.g., "Gambling Den".
+            user_prompt = generate_territory_user_prompt("Gambling Den")
 
-# --- API CALL TO FETCH GANG DATA ---
+            # Generate a re-run prompt (for instance, on attempt number 2).
+            rerun_prompt = generate_territory_rerun_prompt("Gambling Den", territory_schema_json, attempt=2)
 
-def get_gang(gang_name: str, temperature: float = 0.5, attempt: int = 1) -> GangSchema:
-    """
-    Calls the Groq API to fetch gang data. The system prompt is modified on retries
-    to include a re-run instruction, and the temperature parameter introduces variance.
-    """
-    url = 'https://api.groq.com/openai/v1/chat/completions'
-    headers = {
-        'Authorization': f'Bearer {groq_api_key}',
-        'Content-Type': 'application/json'
-    }
-
-    from prompt_templates.gang_gen_v2 import generate_system_prompt
-
-    # Get the JSON schema
-    schema_json = json.dumps(GangSchema.model_json_schema(), indent=2)
-    
-    # Build the system prompt using the template
-    system_message = generate_system_prompt(
-        faction_name="Escher",  # You can make this dynamic based on gang_name
-        schema_json=schema_json,
-        credit_limit=1000,
-        rules="exactly one Leader, at most two Champions, and at least three Gangers"
-    )
-
-    payload = {
-        'messages': [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": f"Provide the details for the Escher gang called '{gang_name}' within a 1000-credit limit."}
-        ],
-        'model': "llama-3.3-70b-specdec",
-        'temperature': temperature,
-        'stream': False,
-        'response_format': {"type": "json_object"}
-    }
-
-    response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()
-    chat_completion = response.json()
-
-    try:
-        # Parse and validate JSON against the schema.
-        gang = GangSchema.model_validate_json(chat_completion['choices'][0]['message']['content'])
-        gang.validate_gang()  # Run custom gang composition validations.
-        return gang
-    except ValidationError as e:
-        print("Pydantic Validation Error:", e.json())
-        raise
-    except ValueError as e:
-        print("Gang Validation Failed:", str(e))
-        raise
-
-def get_valid_gang(gang_name: str, max_retries: int = 3) -> GangSchema:
-    """
-    Tries to fetch and validate gang data up to max_retries times.
-    Uses improved prompts on retries.
-    """
-    base_temperature = 0.5
-    schema_json = json.dumps(GangSchema.model_json_schema(), indent=2)
-    rules = "exactly one Leader, at most two Champions, and at least three Gangers"
-    
-    for attempt in range(1, max_retries + 1):
-        try:
-            # Increase temperature slightly with each attempt
-            current_temperature = base_temperature + (attempt - 1) * 0.1
-            print(f"Attempt {attempt} with temperature {current_temperature:.2f}...")
-            
-            # Use rerun prompt template for retry attempts
-            if attempt > 1:
-                from prompt_templates.gang_gen import generate_rerun_prompt
-                system_message = generate_rerun_prompt(
-                    gang_name=gang_name,
-                    schema_json=schema_json,
-                    credit_limit=1000,
-                    rules=rules,
-                    attempt=attempt
-                )
-                gang = get_gang(gang_name, temperature=current_temperature, attempt=attempt)
-            else:
-                gang = get_gang(gang_name, temperature=current_temperature, attempt=attempt)
-            return gang
-            
-        except (ValidationError, ValueError) as e:
-            print(f"Attempt {attempt} failed: {e}")
-            if attempt == max_retries:
-                raise RuntimeError("Failed to generate a valid gang after multiple attempts.")
-            else:
-                print("Retrying with improved prompt...\n")
-
-# --- PRINT GANG DETAILS ---
-
-def print_gang(gang: GangSchema):
-    print(f"\n=== Gang: {gang.gang_name} ===\n")
-    print("Members:")
-    for member in gang.members:
-        print(f"- {member.name}: {member.rank} ({member.cost} credits)")
-        if member.skills:
-            print(f"  Skills: {', '.join(member.skills)}")
-        if member.weapons:
-            weapons_str = ", ".join([f"{w.name} ({w.cost} credits)" for w in member.weapons])
-            print(f"  Weapons: {weapons_str}")
-        if member.equipment:
-            equipment_str = ", ".join([f"{e.name} ({e.cost} credits)" for e in member.equipment])
-            print(f"  Equipment: {equipment_str}")
-    print("\nTerritories:")
-    for territory in gang.territories:
-        print(f"- {territory}")
-
-# --- MAIN EXECUTION ---
-
-if __name__ == '__main__':
-    try:
-        gang = get_valid_gang("The Wild Bunch", max_retries=3)
-        print_gang(gang)
-    except Exception as e:
-        print("Error:", e)
+            print("=== System Prompt ===")
+            print(system_prompt)
+            print("\n=== User Prompt ===")
+            print(user_prompt)
+            print("\n=== Re-run Prompt ===")
+            print(rerun_prompt)
