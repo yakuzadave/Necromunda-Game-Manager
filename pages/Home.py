@@ -27,6 +27,12 @@ def show_home():
     Use the navigation menu on the left to explore different sections of the app.
     """)
 
+st.markdown("---")
+st.write("### 🔄 Campaign Data Management")
+
+if st.button("Rebuild Campaign Data"):
+    st.switch_page("./pages/0_Rebuild_Campaign.py")
+
     # Display some key metrics if data exists
     # if st.session_state.gangs or st.session_state.territories or st.session_state.battles:
     #     st.subheader("Current Campaign Status")

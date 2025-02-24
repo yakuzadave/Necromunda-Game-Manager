@@ -11,6 +11,19 @@ from pydantic import BaseModel, Field, ValidationError
 DATA_FILE = "campaign_data.json"
 FULL_CAMPAIGN_DATA_FILE = "full_campaign_data.json"
 
+DATA_DIR = "data"
+GANGS_DIR = os.path.join(DATA_DIR, "gangs")
+TERRITORIES_DIR = os.path.join(DATA_DIR, "territories")
+BATTLES_DIR = os.path.join(DATA_DIR, "battles")
+EQUIPMENT_DIR = os.path.join(DATA_DIR, "equipment")
+
+# Ensure directories exist
+for directory in [GANGS_DIR, TERRITORIES_DIR, BATTLES_DIR, EQUIPMENT_DIR]:
+    os.makedirs(directory, exist_ok=True)
+
+
+
+
 # -------------------- Local Campaign Models --------------------
 
 class Injury(BaseModel):
@@ -219,6 +232,35 @@ def save_data(gangs: List[Gang], territories: List[Territory], battles: List[Loc
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
+
+
+# Save a single gang
+def save_gang(gang):
+    """Saves a gang as a separate JSON file."""
+    file_path = os.path.join(GANGS_DIR, f"{gang.gang_id}.json")
+    with open(file_path, "w") as f:
+        json.dump(gang.dict(), f, indent=4)
+
+# Save a single territory
+def save_territory(territory):
+    """Saves a territory as a separate JSON file."""
+    file_path = os.path.join(TERRITORIES_DIR, f"{territory.name}.json")
+    with open(file_path, "w") as f:
+        json.dump(territory.dict(), f, indent=4)
+
+# Save a single battle
+def save_battle(battle):
+    """Saves a battle as a separate JSON file."""
+    file_path = os.path.join(BATTLES_DIR, f"{battle.battle_id}.json")
+    with open(file_path, "w") as f:
+        json.dump(battle.dict(), f, indent=4)
+
+# Save a single equipment item
+def save_equipment(equipment):
+    """Saves an equipment item as a separate JSON file."""
+    file_path = os.path.join(EQUIPMENT_DIR, f"{equipment.equipment_id}.json")
+    with open(file_path, "w") as f:
+        json.dump(equipment.dict(), f, indent=4)
 # -------------------- Utility Functions --------------------
 
 def assign_territory(territory_name: str, gang_name: str, gangs: List[Gang], territories: List[Territory]):
@@ -241,6 +283,8 @@ def to_gang_obj(g):
             print(f"Conversion error for gang {g.get('gang_name', 'Unknown')}: {e}")
             return None
     return g
+
+
 
 # -------------------- Load Full Campaign Data --------------------
 
