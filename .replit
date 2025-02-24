@@ -14,6 +14,10 @@ deploymentTarget = "cloudrun"
 run = ["sh", "-c", "streamlit run main.py --server.headless true"]
 
 [[ports]]
+localPort = 3001
+externalPort = 3001
+
+[[ports]]
 localPort = 8501
 externalPort = 80
 
