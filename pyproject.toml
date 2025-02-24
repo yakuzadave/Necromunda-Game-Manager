@@ -29,6 +29,7 @@ streamlit-visgraph = "^0.2.3"
 streamlit-d3graph = "^1.0.3"
 scipy = "^1.15.2"
 scikit-learn = "^1.6.1"
+rich = "^13.9.4"
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md

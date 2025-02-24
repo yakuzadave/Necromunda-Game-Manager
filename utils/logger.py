@@ -3,31 +3,52 @@ import streamlit as st
 import logging
 from datetime import datetime
 import os
+from rich.logging import RichHandler
+from rich.console import Console
+from rich.theme import Theme
 
 def setup_logger():
     # Create logs directory if it doesn't exist
     os.makedirs('logs', exist_ok=True)
     
+    # Configure custom theme
+    custom_theme = Theme({
+        "info": "cyan",
+        "warning": "yellow",
+        "error": "red",
+        "debug": "grey70"
+    })
+    
+    console = Console(theme=custom_theme)
+    
     # Configure logger
     logger = logging.getLogger('NecromundaApp')
     logger.setLevel(logging.DEBUG)
     
-    # File handler
-    file_handler = logging.FileHandler(f'logs/app_{datetime.now().strftime("%Y%m%d")}.log')
+    # Rich handler for console output
+    rich_handler = RichHandler(
+        console=console,
+        rich_tracebacks=True,
+        markup=True
+    )
+    rich_handler.setLevel(logging.INFO)
+    
+    # File handler for persistent logs
+    file_handler = logging.FileHandler(
+        f'logs/app_{datetime.now().strftime("%Y%m%d")}.log'
+    )
     file_handler.setLevel(logging.DEBUG)
     
-    # Stream handler
-    stream_handler = logging.StreamHandler()
-    stream_handler.setLevel(logging.INFO)
+    # Formatters
+    rich_formatter = logging.Formatter('%(message)s')
+    file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     
-    # Formatter
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(formatter)
-    stream_handler.setFormatter(formatter)
+    rich_handler.setFormatter(rich_formatter)
+    file_handler.setFormatter(file_formatter)
     
     # Add handlers
+    logger.addHandler(rich_handler)
     logger.addHandler(file_handler)
-    logger.addHandler(stream_handler)
     
     return logger
 
