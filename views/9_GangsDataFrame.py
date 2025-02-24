@@ -9,10 +9,11 @@ if "gangs" not in st.session_state or not st.session_state.gangs:
     st.error("No gangs loaded. Please add some gangs first.")
     st.stop()
 
-# Convert the list of Gang objects into a list of dictionaries with summary data.
-data = []
-for gang in st.session_state.gangs:
-    data.append({
+@st.cache_data(ttl=300)  # Cache gang summary data for 5 minutes
+def create_gang_summary(gangs):
+    data = []
+    for gang in gangs:
+        data.append({
         "Gang ID": gang.gang_id,
         "Name": gang.gang_name,
         "Type": gang.gang_type,

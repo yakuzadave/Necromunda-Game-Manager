@@ -13,11 +13,10 @@ if "gangs" not in st.session_state or "territories" not in st.session_state:
 # Define a constant campaign name (this could be dynamic if you have metadata).
 campaign_name = "Necromunda Campaign"
 
-# Build a list of dictionaries for the sunburst chart.
-# For each gang, we add a row for every territory that it controls.
-data = []
-
-for gang in st.session_state.gangs:
+@st.cache_data(ttl=300)  # Cache territory visualization data for 5 minutes
+def prepare_territory_data(gangs, territories):
+    data = []
+    for gang in gangs:
     # Find territories controlled by this gang.
     controlled_territories = [t for t in st.session_state.territories if t.controlled_by == gang.gang_name]
 

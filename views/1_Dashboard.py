@@ -14,11 +14,17 @@ def to_gang_obj(g):
             return None
     return g
 
+@st.cache_data(ttl=300)  # Cache dashboard data for 5 minutes
+def process_dashboard_data():
+    gangs, territories, battles = load_data()
+    gang_objects = [g for g in (to_gang_obj(g) for g in gangs) if g is not None]
+    return gangs, territories, battles, gang_objects
+
 def show_dashboard():
     st.title("Campaign Dashboard")
 
-    # Load all data
-    gangs, territories, battles = load_data()
+    # Load all data with caching
+    gangs, territories, battles, gang_objects = process_dashboard_data()
     gang_objects = [g for g in (to_gang_obj(g) for g in gangs) if g is not None]
 
     # ---- Key Metrics ----

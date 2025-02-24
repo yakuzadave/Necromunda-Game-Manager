@@ -199,6 +199,7 @@ class Campaign(BaseModel):
 
 # -------------------- Persistence Functions --------------------
 
+@st.cache_data(ttl=60)  # Cache for 60 seconds
 def load_data():
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
