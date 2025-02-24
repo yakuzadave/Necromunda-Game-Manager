@@ -114,15 +114,20 @@ if 'backup_manager' not in st.session_state:
 if "gangs" not in st.session_state:
     log_info("Initializing session state with game data")
     try:
+        log_debug("Loading data from storage")
         gangs, territories, battles = load_data()
         st.session_state.gangs = gangs
+        log_debug(f"Loaded {len(gangs)} gangs")
         st.session_state.territories = territories
+        log_debug(f"Loaded {len(territories)} territories")
         st.session_state.battles = battles
-        # Create backup after loading data
+        log_debug(f"Loaded {len(battles)} battles")
+        
+        log_info("Creating backup")
         st.session_state.backup_manager.create_backup()
-        log_debug(f"Loaded {len(gangs)} gangs, {len(territories)} territories, {len(battles)} battles")
+        log_info("Initial data load and backup completed successfully")
     except Exception as e:
-        log_error(f"Error initializing session state: {str(e)}")
+        log_error("Failed to initialize session state", exc_info=True)
         raise
 
 if "equipment_list" not in st.session_state:

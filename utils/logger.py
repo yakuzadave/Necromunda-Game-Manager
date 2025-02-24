@@ -6,6 +6,8 @@ import os
 from rich.logging import RichHandler
 from rich.console import Console
 from rich.theme import Theme
+import inspect
+import traceback
 
 def setup_logger():
     # Create logs directory if it doesn't exist
@@ -33,7 +35,7 @@ def setup_logger():
     )
     rich_handler.setLevel(logging.INFO)
     
-    # File handler for persistent logs
+    # File handler for persistent logs with detailed formatting
     file_handler = logging.FileHandler(
         f'logs/app_{datetime.now().strftime("%Y%m%d")}.log'
     )
@@ -41,7 +43,7 @@ def setup_logger():
     
     # Formatters
     rich_formatter = logging.Formatter('%(message)s')
-    file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_formatter = logging.Formatter('%(asctime)s - [%(levelname)s] - %(name)s - %(module)s:%(lineno)d - %(message)s')
     
     rich_handler.setFormatter(rich_formatter)
     file_handler.setFormatter(file_formatter)
@@ -52,18 +54,45 @@ def setup_logger():
     
     return logger
 
+def get_caller_info():
+    """Get information about the calling function"""
+    stack = inspect.stack()
+    caller = stack[2]  # Index 2 gets the caller of our logging function
+    return f"{caller.filename}:{caller.lineno} in {caller.function}"
+
 # Initialize logger in session state
 if 'logger' not in st.session_state:
     st.session_state.logger = setup_logger()
 
 def log_debug(msg):
-    st.session_state.logger.debug(msg)
+    caller = get_caller_info()
+    st.session_state.logger.debug(f"{caller} - {msg}")
 
 def log_info(msg):
-    st.session_state.logger.info(msg)
+    caller = get_caller_info()
+    st.session_state.logger.info(f"{caller} - {msg}")
 
 def log_warning(msg):
-    st.session_state.logger.warning(msg)
+    caller = get_caller_info()
+    st.session_state.logger.warning(f"{caller} - {msg}")
 
-def log_error(msg):
-    st.session_state.logger.error(msg)
+def log_error(msg, exc_info=None):
+    caller = get_caller_info()
+    if exc_info:
+        st.session_state.logger.error(f"{caller} - {msg}\n{traceback.format_exc()}", exc_info=True)
+    else:
+        st.session_state.logger.error(f"{caller} - {msg}")
+
+def log_function_call(func):
+    """Decorator to log function entry and exit"""
+    def wrapper(*args, **kwargs):
+        func_name = func.__name__
+        log_debug(f"Entering function {func_name}")
+        try:
+            result = func(*args, **kwargs)
+            log_debug(f"Exiting function {func_name}")
+            return result
+        except Exception as e:
+            log_error(f"Error in function {func_name}: {str(e)}", exc_info=True)
+            raise
+    return wrapper

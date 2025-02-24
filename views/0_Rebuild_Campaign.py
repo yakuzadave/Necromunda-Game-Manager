@@ -57,11 +57,21 @@ def save_all_data():
 # -------------------- Buttons --------------------
 # Button to reload campaign data from JSON files into session state
 if st.button("🔄 Rebuild Campaign Data"):
-    st.session_state.gangs = load_json_files(GANGS_DIR, Gang)
-    st.session_state.territories = load_json_files(TERRITORIES_DIR, Territory)
-    st.session_state.battles = load_json_files(BATTLES_DIR, LocalBattle)
-    st.session_state.equipment_list = load_json_files(EQUIPMENT_DIR, Equipment)
-    st.success("✅ Campaign data successfully reloaded!")
+    log_info("Starting campaign data rebuild")
+    try:
+        st.session_state.gangs = load_json_files(GANGS_DIR, Gang)
+        log_debug(f"Loaded {len(st.session_state.gangs)} gangs")
+        st.session_state.territories = load_json_files(TERRITORIES_DIR, Territory)
+        log_debug(f"Loaded {len(st.session_state.territories)} territories")
+        st.session_state.battles = load_json_files(BATTLES_DIR, LocalBattle)
+        log_debug(f"Loaded {len(st.session_state.battles)} battles")
+        st.session_state.equipment_list = load_json_files(EQUIPMENT_DIR, Equipment)
+        log_debug(f"Loaded {len(st.session_state.equipment_list)} equipment items")
+        log_info("Campaign data rebuild completed successfully")
+        st.success("✅ Campaign data successfully reloaded!")
+    except Exception as e:
+        log_error("Failed to rebuild campaign data", exc_info=True)
+        st.error("Failed to rebuild campaign data")
 
 # Button to save current session data into the respective JSON files
 if st.button("💾 Save Campaign Data"):
