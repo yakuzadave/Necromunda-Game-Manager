@@ -17,24 +17,28 @@ campaign_name = "Necromunda Campaign"
 def prepare_territory_data(gangs, territories):
     data = []
     for gang in gangs:
-    # Find territories controlled by this gang.
-    controlled_territories = [t for t in st.session_state.territories if t.controlled_by == gang.gang_name]
+        # Find territories controlled by this gang.
+        controlled_territories = [t for t in st.session_state.territories if t.controlled_by == gang.gang_name]
 
-    # If the gang controls at least one territory, add each territory as a row.
-    if controlled_territories:
-        for territory in controlled_territories:
+        # If the gang controls at least one territory, add each territory as a row.
+        if controlled_territories:
+            for territory in controlled_territories:
+                data.append({
+                    "Campaign": campaign_name,
+                    "Gang": gang.gang_name,
+                    "Territory": territory.name
+                })
+        else:
+            # If the gang controls no territory, add a row with a placeholder.
             data.append({
                 "Campaign": campaign_name,
                 "Gang": gang.gang_name,
-                "Territory": territory.name
+                "Territory": "None"
             })
-    else:
-        # If the gang controls no territory, add a row with a placeholder.
-        data.append({
-            "Campaign": campaign_name,
-            "Gang": gang.gang_name,
-            "Territory": "None"
-        })
+    return data
+
+# Create the data
+data = prepare_territory_data(st.session_state.gangs, st.session_state.territories)
 
 # Convert the list into a DataFrame.
 df = pd.DataFrame(data)
