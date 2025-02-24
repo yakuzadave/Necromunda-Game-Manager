@@ -270,6 +270,113 @@ def save_equipment(equipment):
         json.dump(equipment.dict(), f, indent=4)
 # -------------------- Utility Functions --------------------
 
+
+
+def get_gang_id(gang):
+    """
+    Returns a sanitized gang identifier.
+    If the gang already has a 'gang_id', sanitize and return it.
+    Otherwise, generate a new ID based on the gang name.
+    """
+    if hasattr(gang, "gang_id") and gang.gang_id:
+        return f"G_{gang.gang_id.replace('-', '_').replace(' ', '_')}"
+    else:
+        safe_name = gang.gang_name.replace(" ", "_")
+        new_id = f"G_{safe_name}_{uuid.uuid4().hex[:6]}"
+        try:
+            setattr(gang, "gang_id", new_id)
+        except Exception:
+            gang["gang_id"] = new_id
+        return new_id
+
+def get_gang_fighter_id(fighter):
+    """
+    Returns a sanitized fighter identifier.
+    Uses the fighter's 'ganger_id' if available, otherwise generates one from the fighter's name.
+    """
+    if hasattr(fighter, "ganger_id") and fighter.ganger_id:
+        return f"F_{fighter.ganger_id.replace('-', '_').replace(' ', '_')}"
+    else:
+        safe_name = fighter.name.replace(" ", "_")
+        new_id = f"F_{safe_name}_{uuid.uuid4().hex[:6]}"
+        try:
+            setattr(fighter, "ganger_id", new_id)
+        except Exception:
+            fighter["ganger_id"] = new_id
+        return new_id
+
+def get_territory_id(territory):
+    """
+    Returns a sanitized territory identifier.
+    Uses the territory's 'territory_id' if available; otherwise, generates one from its name.
+    """
+    if hasattr(territory, "territory_id") and territory.territory_id:
+        return f"T_{territory.territory_id.replace('-', '_').replace(' ', '_')}"
+    else:
+        safe_name = territory.name.replace(" ", "_")
+        new_id = f"T_{safe_name}_{uuid.uuid4().hex[:6]}"
+        try:
+            setattr(territory, "territory_id", new_id)
+        except Exception:
+            territory["territory_id"] = new_id
+        return new_id
+
+def get_equipment_id(equipment):
+    """
+    Returns a sanitized equipment identifier.
+    Uses the equipment's 'equipment_id' if available; otherwise, generates one from its name.
+    """
+    if hasattr(equipment, "equipment_id") and equipment.equipment_id:
+        return f"E_{equipment.equipment_id.replace('-', '_').replace(' ', '_')}"
+    else:
+        safe_name = equipment.name.replace(" ", "_")
+        new_id = f"E_{safe_name}_{uuid.uuid4().hex[:6]}"
+        try:
+            setattr(equipment, "equipment_id", new_id)
+        except Exception:
+            equipment["equipment_id"] = new_id
+        return new_id
+
+def get_battle_id(battle):
+    """
+    Returns a sanitized battle identifier.
+    Uses the battle's 'battle_id' if available; otherwise, generates one from its scenario.
+    """
+    if hasattr(battle, "battle_id") and battle.battle_id:
+        return f"B_{battle.battle_id.replace('-', '_').replace(' ', '_')}"
+    else:
+        # Use battle scenario as the base (assuming battle_scenario is a string).
+        safe_name = battle.battle_scenario.replace(" ", "_")
+        new_id = f"B_{safe_name}_{uuid.uuid4().hex[:6]}"
+        try:
+            setattr(battle, "battle_id", new_id)
+        except Exception:
+            battle["battle_id"] = new_id
+        return new_id
+
+
+def get_gang_id(gang):
+    """
+    Returns a safe identifier for the gang.
+    If the gang already has a 'gang_id', sanitize and return it.
+    Otherwise, generate a new ID based on the gang name.
+    """
+    # Check if gang has an attribute 'gang_id' and it's non-empty.
+    if hasattr(gang, "gang_id") and gang.gang_id:
+        # Sanitize the gang id by replacing problematic characters.
+        return f"G_{gang.gang_id.replace('-', '_').replace(' ', '_')}"
+    else:
+        # Generate a new id using the gang name (sanitized) and a short random UUID.
+        safe_name = gang.gang_name.replace(" ", "_")
+        new_id = f"G_{safe_name}_{uuid.uuid4().hex[:6]}"
+        try:
+            setattr(gang, "gang_id", new_id)
+        except Exception:
+            # If the gang is a dict instead of a model:
+            gang["gang_id"] = new_id
+        return new_id
+
+
 def assign_territory(territory_name: str, gang_name: str, gangs: List[Gang], territories: List[Territory]):
     for territory in territories:
         if territory.name == territory_name:

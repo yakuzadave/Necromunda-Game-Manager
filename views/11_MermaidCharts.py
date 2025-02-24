@@ -1,13 +1,14 @@
-
 import streamlit as st
 from streamlit_mermaid import st_mermaid
 
 st.title("Campaign Flow Charts")
 
-st.markdown("""
-Use this page to visualize campaign relationships and battle flows using Mermaid charts.
-Choose a chart type below to visualize different aspects of your campaign.
-""")
+st.markdown(
+    """
+    Use this page to visualize campaign relationships and battle flows using Mermaid charts.
+    Choose a chart type below to visualize different aspects of your campaign.
+    """
+)
 
 chart_type = st.selectbox(
     "Select Chart Type",
@@ -15,44 +16,46 @@ chart_type = st.selectbox(
 )
 
 if chart_type == "Gang Relationships":
-    gangs = st.session_state.gangs
-    # Create a flowchart showing gang relationships
-    chart = """
-    flowchart TD
-    """
-    for gang in gangs:
-        chart += f"\n    {gang.gang_id}[{gang.gang_name}]"
-        for territory in gang.territories:
-            chart += f"\n    {gang.gang_id} -->|controls| {territory}"
-    
-    st_mermaid(chart)
+    if "gangs" not in st.session_state or not st.session_state.gangs:
+        st.error("No gang data available.")
+    else:
+        # Build the flowchart diagram
+        lines = ["flowchart TD"]
+        for gang in st.session_state.gangs:
+            # Create a node for each gang using its ID and name.
+            lines.append(f"    {gang.gang_id}[{gang.gang_name}]")
+            # Create a link from the gang to each territory it controls.
+            for territory in gang.territories:
+                lines.append(f"    {gang.gang_id} -->|controls| {territory}")
+        chart = "\n".join(lines)
+        st_mermaid(chart)
 
 elif chart_type == "Battle Flow":
-    battles = st.session_state.battles
-    # Create a sequence diagram of battles
-    chart = """
-    sequenceDiagram
-    """
-    for battle in battles:
-        for gang in battle.participating_gangs:
-            chart += f"\n    participant {gang}"
-        chart += f"\n    Note over {battle.winner_gang}: Winner"
-    
-    st_mermaid(chart)
+    if "battles" not in st.session_state or not st.session_state.battles:
+        st.error("No battle data available.")
+    else:
+        # Build a sequence diagram for battles.
+        lines = ["sequenceDiagram"]
+        for battle in st.session_state.battles:
+            # Add each participating gang as a participant.
+            for gang in battle.participating_gangs:
+                lines.append(f"    participant {gang}")
+            # Add a note indicating the winner for the battle.
+            lines.append(f"    Note over {battle.winner_gang}: Winner")
+        chart = "\n".join(lines)
+        st_mermaid(chart)
 
 elif chart_type == "Territory Control":
-    territories = st.session_state.territories
-    # Create a pie chart of territory control
-    chart = """
-    pie
-    title Territory Control
-    """
-    control_count = {}
-    for territory in territories:
-        controller = territory.controlled_by or "Unclaimed"
-        control_count[controller] = control_count.get(controller, 0) + 1
-    
-    for controller, count in control_count.items():
-        chart += f'\n    "{controller}" : {count}'
-    
-    st_mermaid(chart)
+    if "territories" not in st.session_state or not st.session_state.territories:
+        st.error("No territory data available.")
+    else:
+        # Build a pie chart showing territory control.
+        lines = ["pie", "title Territory Control"]
+        control_count = {}
+        for territory in st.session_state.territories:
+            controller = territory.controlled_by or "Unclaimed"
+            control_count[controller] = control_count.get(controller, 0) + 1
+        for controller, count in control_count.items():
+            lines.append(f'    "{controller}" : {count}')
+        chart = "\n".join(lines)
+        st_mermaid(chart)
