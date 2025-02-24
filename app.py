@@ -22,30 +22,4 @@ if 'gangs' not in st.session_state:
 if "equipment_list" not in st.session_state:
     st.session_state.equipment_list = []
 
-# -------------------- Main Page Content --------------------
-st.title("Welcome to Necromunda Campaign Manager")
-st.markdown("""
-## Getting Started
-Use the sidebar to navigate between different sections:
-- **Dashboard**: Overview of your campaign statistics
-- **Gangs**: Manage your gangs and fighters
-- **Territories**: Control territory distribution
-- **Battles**: Record battle outcomes
-- **Equipment**: Manage your equipment library
-- **Full Campaign Overview**: View imported campaign data
-- **Export Campaign**: Export your campaign data
-""")
 
-
-# -------------------- Dashboard --------------------
-# Display quick metrics if data exists
-if st.session_state.gangs or st.session_state.territories or st.session_state.battles:
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Total Gangs", len(st.session_state.gangs))
-    with col2:
-        st.metric("Total Territories", len(st.session_state.territories))
-    with col3:
-        st.metric("Battles Fought", len(st.session_state.battles))
-else:
-    st.info("Start by adding your first gang in the Gangs section!")

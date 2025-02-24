@@ -36,19 +36,19 @@ if 'gangs' not in st.session_state:
 if "equipment_list" not in st.session_state:
     st.session_state.equipment_list = []
 
-# Main page content
-st.title("Welcome to Necromunda Campaign Manager")
-st.markdown("""
-## Getting Started
-Use the sidebar to navigate between different sections:
-- **Dashboard**: Overview of your campaign statistics
-- **Gangs**: Manage your gangs and fighters
-- **Territories**: Control territory distribution
-- **Battles**: Record battle outcomes
-- **Equipment**: Manage your equipment library
-- **Full Campaign Overview**: View imported campaign data
-- **Export Campaign**: Export your campaign data
-""")
+# # Main page content
+# st.title("Welcome to Necromunda Campaign Manager")
+# st.markdown("""
+# ## Getting Started
+# Use the sidebar to navigate between different sections:
+# - **Dashboard**: Overview of your campaign statistics
+# - **Gangs**: Manage your gangs and fighters
+# - **Territories**: Control territory distribution
+# - **Battles**: Record battle outcomes
+# - **Equipment**: Manage your equipment library
+# - **Full Campaign Overview**: View imported campaign data
+# - **Export Campaign**: Export your campaign data
+# """)
 
 # Display metrics
 if st.session_state.gangs or st.session_state.territories or st.session_state.battles:
