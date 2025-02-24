@@ -121,8 +121,7 @@ def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[s
         schema_json=schema_json,
         credit_limit=1000,
         rules=rules,
-        attempt=2,  # Dynamic in actual retry flow
-        validation_errors=validation_errors or []
+        attempt=attempt
     ) if validation_errors else generate_system_prompt(
         faction_name="Escher",
         schema_json=schema_json,
