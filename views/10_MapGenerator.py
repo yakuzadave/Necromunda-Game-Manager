@@ -71,12 +71,13 @@ view_state = pdk.ViewState(
     bearing=0
 )
 
-# Create the deck with map_provider set to None.
+# Create the deck with custom configuration
 deck = pdk.Deck(
     layers=layers,
     initial_view_state=view_state,
     tooltip={"text": "{name} - Controlled by {controlled_by}"},
-    map_provider=None  # Disables default Mapbox tiles
+    map_provider="custom",
+    map_style=""
 )
 
 # Render the map in Streamlit.
