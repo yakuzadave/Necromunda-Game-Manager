@@ -2,9 +2,8 @@ import streamlit as st
 import pydeck as pdk
 import random
 
-# Optionally set your custom tile server URL.
-# If you don't have one, you can leave it as an empty string.
-TILE_URL = "https://your-tile-server/{z}/{x}/{y}.png"  # Replace with your tile server URL, or leave blank
+# Set local tile server URL
+TILE_URL = "http://0.0.0.0:3001/tiles/{z}/{x}/{y}.png"
 
 # Helper function to assign coordinates if missing
 def assign_coordinates_if_missing(territory, default_x_range=(-122.5, -122.3), default_y_range=(37.75, 37.8)):
