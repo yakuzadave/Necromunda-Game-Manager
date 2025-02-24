@@ -88,6 +88,7 @@ class Gang(BaseModel):
     reputation: int
     territories: List[str] = []
     gangers: List[GangFighter] = []
+    stash: List[Equipment] = []
 
 class Territory(BaseModel):
     name: str
