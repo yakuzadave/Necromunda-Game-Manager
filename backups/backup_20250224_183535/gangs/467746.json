@@ -1,0 +1,2066 @@
+{
+    "gang_id": "467746",
+    "gang_name": "Lex Invictus",
+    "gang_type": "Enforcers",
+    "campaign": "Power Play",
+    "credits": 350,
+    "reputation": 10,
+    "territories": [
+        "00. Gang Enclave"
+    ],
+    "gangers": [
+        {
+            "ganger_id": "3151822",
+            "label_id": "",
+            "name": "Captain Samael Vimes",
+            "type": "Palanite Captain",
+            "m": 6,
+            "ws": 2,
+            "bs": 3,
+            "s": 3,
+            "t": 4,
+            "w": 2,
+            "i": 4,
+            "a": 2,
+            "ld": 4,
+            "cl": 6,
+            "wil": 5,
+            "intelligence": 6,
+            "cost": 1405,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 6,
+            "equipment": [
+                {
+                    "equipment_id": "4e760b26-e3a2-45be-ab67-09027d1ecc1c",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7d6ba93e-25b5-4066-ad50-24ff23d588c5",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9b4db2f0-f409-4286-9487-d87985ba5781",
+                    "name": "Las-projector",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "fbe90458-7902-4e67-9a16-6cee516d7edc",
+                    "name": "Stimm-slug stash",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a8c9f0b1-c7ac-48a9-9348-6edb7a5d9947",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b2c2548f-860f-4f63-bcec-5717d0951caf",
+                    "name": "Displacer Field",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "eb702feb-8219-44f6-b375-ae6ce8bcfd44",
+                    "name": "Servo harness - Full",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "575aea4a-d502-4666-ba40-d8bf03a75fd4",
+                    "name": "Inferno Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5e13b4b2-f335-4b89-b644-89e729504bfd",
+                    "name": "Power Fist",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "663b0e2f-bf8f-4ee0-b12c-52410eea4429",
+                    "name": "Archaeo-carapace",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e1600902-36ba-4b18-807d-9715999b075e",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ea96534e-06e3-4218-bef0-6dadc74007f8",
+                    "name": "Enforcer Hardcase",
+                    "qty": 2,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "906ab759-dfe3-4de0-a93e-75c29aac1959",
+                    "name": "Relic Storm Bolter",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Hip Shooting",
+                "Nerves of Steel",
+                "Trick Shot"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-11-29 7:50:32",
+            "datetime_updated": "2024-06-10 22:55:54"
+        },
+        {
+            "ganger_id": "3519086",
+            "label_id": "Vimes",
+            "name": "Fidelis",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 0,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "a9a6d0c4-f748-4607-9687-d7ac97025915",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-05-03 4:07:16",
+            "datetime_updated": "2024-06-10 22:56:17"
+        },
+        {
+            "ganger_id": "3151823",
+            "label_id": "",
+            "name": "Sgt. Jeffords",
+            "type": "Subjugator Sergeant",
+            "m": 6,
+            "ws": 3,
+            "bs": 3,
+            "s": 3,
+            "t": 3,
+            "w": 2,
+            "i": 4,
+            "a": 1,
+            "ld": 5,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 630,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 3,
+            "equipment": [
+                {
+                    "equipment_id": "b9c3d160-4a01-4bdc-83be-0845a1dca3ee",
+                    "name": "Plasma Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "72fbb895-070e-43b1-97cd-f3549f40a1fd",
+                    "name": "Meltagun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ee6cb834-12ce-4317-a2f9-cd9f3872da0a",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "121b8159-5b34-47cb-bc0f-730e30d76e28",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "2d7b9839-1a5a-4f58-ba71-91603a4f62c9",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "0ec73101-c850-4fa1-bcd3-fa06abe17922",
+                    "name": "Mono-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ca036a6a-fde7-425d-bcec-726b0c954c6d",
+                    "name": "Vigilance Assault Shield",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d16d7aec-55d3-4cc9-a757-a159696288bb",
+                    "name": "Hardened Layered Flak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b1aa5769-698b-4e2d-bd6a-2f0a7e53ea79",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9acf007b-ed95-4e65-bee2-cc4c16a5cd4f",
+                    "name": "Enforcer Hardcase",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Trick Shot"
+            ],
+            "injuries": [
+                "Hobbled"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-11-29 7:50:57",
+            "datetime_updated": "2024-06-10 22:56:27"
+        },
+        {
+            "ganger_id": "3451783",
+            "label_id": "Sgt.J",
+            "name": "Vulcan",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 2,
+            "bs": 0,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 20,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "91efe4d7-85ae-41df-9e15-18643571fd57",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-04-06 11:34:00",
+            "datetime_updated": "2024-06-10 22:56:52"
+        },
+        {
+            "ganger_id": "3443538",
+            "label_id": "",
+            "name": "Mahoney",
+            "type": "Palanite Rookie",
+            "m": 5,
+            "ws": 5,
+            "bs": 5,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 125,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "a2d97211-7ffe-4640-b93d-2af98975e56d",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f771a5a3-aa8b-49b7-a5dd-e495972dfb31",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a32db05e-77c4-4515-8772-be46e52abd6f",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "810c1ee9-f268-4602-bee1-6e1a1e70906a",
+                    "name": "Flak Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "645844d8-e771-487a-b139-7574b1684b32",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "69fd14ba-9317-4a5c-935f-278e73b673a2",
+                    "name": "Smoke Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "905909b2-5fe7-4d95-a453-393bf6a2a9ad",
+                    "name": "Enforcer Shotgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9576ba81-3014-4146-9f72-9b468a38d162",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-04-03 6:00:52",
+            "datetime_updated": "2024-05-16 23:51:40"
+        },
+        {
+            "ganger_id": "3151827",
+            "label_id": "",
+            "name": "Riggs",
+            "type": "Palanite Patrolman",
+            "m": 6,
+            "ws": 4,
+            "bs": 2,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 345,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 3,
+            "equipment": [
+                {
+                    "equipment_id": "e44d1800-932b-48b6-bff4-7c90c98fed90",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5f33816f-01e2-44c5-a7bc-1459f867a729",
+                    "name": "Lasgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "275e7aad-da10-4557-b059-198ee25b79a7",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ecbbcf86-7762-41e3-9c8e-6ef7b92988e0",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4b0f23f2-2a5b-45eb-9898-b3a9fa48a592",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "61937d51-3e89-47a5-8e52-e73fe5629aae",
+                    "name": "Infra-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6a969914-0b78-4469-bab7-20d08feb1615",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "bec6158c-9a78-478d-84ff-17de0b90eb73",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "2e80bf3e-29a1-4781-9d9a-78e21bcb6244",
+                    "name": "Hotshot Lasgun Pack",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "61555408-aa33-4778-b18a-2277a5908b97",
+                    "name": "Enforcer Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6ac81b34-a77d-4939-b397-14f8518b2e92",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1efb0739-2af4-4919-b692-0649daf634ee",
+                    "name": "Penetrator Rounds-Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "Horrid scars - Fearsome",
+            "datetime_added": "2023-11-29 7:51:40",
+            "datetime_updated": "2024-06-10 22:58:13"
+        },
+        {
+            "ganger_id": "3198092",
+            "label_id": "",
+            "name": "McClaine",
+            "type": "Palanite Patrolman",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 265,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "65478701-f63a-4c27-a8b2-72b1ebfa068c",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e12163f0-353a-4214-bc5f-dc12a3df04d4",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6df848d7-ff78-4e5c-8511-0562ff779338",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7e3484fa-d8cd-4eb5-b198-384ceafd9774",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b1616535-327c-41b7-936d-45385d849006",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4d6b0992-5be4-4bce-bce7-4ce1b89d80c1",
+                    "name": "Enforcer Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "0726faf6-2226-4bf7-a6b3-0b0854ffe219",
+                    "name": "Concussion Carbine",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7df9cb01-bf83-4c64-b795-b6c1db58c110",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9fa194ef-9def-40b7-993c-1dcee6cbae65",
+                    "name": "Penetrator Rounds-Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-12-21 4:02:22",
+            "datetime_updated": "2024-06-10 23:07:17"
+        },
+        {
+            "ganger_id": "3351184",
+            "label_id": "",
+            "name": "Spartan",
+            "type": "Palanite Patrolman",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 225,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "b1b784b2-66de-4c47-8480-00532803a138",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7d2f0e41-d065-40b3-8645-fe690fd65682",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "76ed66c0-3980-4099-9518-26b78939df88",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "10508675-b0d1-439d-b27a-5802663a19ca",
+                    "name": "Las-projector",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "65941415-df94-470b-85f4-1a48c5ee199f",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9b46377a-9e6a-4163-b81d-96a603596141",
+                    "name": "Enforcer Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e9441027-7298-4e0e-860b-e015a9e75607",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "672024dd-e546-4df0-b4ba-e83f75f3aa1b",
+                    "name": "Penetrator Rounds-Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [
+                "Hobbled"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-02-22 5:33:03",
+            "datetime_updated": "2024-06-02 19:06:24"
+        },
+        {
+            "ganger_id": "3387822",
+            "label_id": "",
+            "name": "Callahan",
+            "type": "Palanite Patrolman",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 215,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "604eb856-ed00-4865-9c2b-79f7fba47ff6",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9f466b68-d26c-436c-8978-58718f216799",
+                    "name": "Dum-Dum Ammo",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b7134696-dc8b-4919-b575-1c946b49747c",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c7eece57-567d-4d81-b1ba-f4479acef869",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "03ce8615-7cb1-48ba-824f-8a5ec1cd133d",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "71854c8d-d7af-49b9-8689-03786081e4d7",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e1c887f6-4453-4f40-93f3-678920200927",
+                    "name": "Enforcer Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c338e5e7-1d6a-400d-ba6a-00a4aeef4124",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3712ac4d-9d6c-4f49-92c5-77fa49e41cce",
+                    "name": "Penetrator Rounds-Boltgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-03-10 7:24:04",
+            "datetime_updated": "2024-05-16 23:53:42"
+        },
+        {
+            "ganger_id": "3151829",
+            "label_id": "",
+            "name": "Murtaugh",
+            "type": "Palanite Patrolman",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 195,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "07fb920f-9dfe-4c5b-aaf7-83f285324cfe",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "062b5930-72b6-407e-ac0e-f3191e069533",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e411fb29-384a-4769-b82d-13a6bea2c462",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "372866bb-3793-47be-af0e-55b07eb9ccf1",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "8891d231-e6c5-4597-afa7-1d9e7e88dcee",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "74236ec7-cee1-4a88-b32a-16c6bab197d4",
+                    "name": "Concussion Carbine",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7820769e-fd57-43d6-9276-76212c411b45",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2023-11-29 7:51:57",
+            "datetime_updated": "2024-05-16 23:54:34"
+        },
+        {
+            "ganger_id": "3276442",
+            "label_id": "",
+            "name": "Hightower",
+            "type": "Subjugator Patrolman",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 295,
+            "xp": 3,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "cb5cfb34-889a-4813-9ba5-8a7de8ed1060",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6da38268-8e85-42ea-b426-95362edff16f",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d562c42d-93d8-4f72-86ef-afaac82ae398",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6e9af9c8-d6c5-4d0c-9769-201c2da5b401",
+                    "name": "Mono-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "76fa36db-4202-4f57-ab97-cd97863d866f",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3d036c7a-84cf-4b26-ab10-2b32d9ae6255",
+                    "name": "Heavy Concussion Ram*",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d3283329-d809-400d-9c19-6a0264a26282",
+                    "name": "Hardened Layered Flak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "71766619-5bea-4a01-9032-cc634878058d",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-01-22 10:44:58",
+            "datetime_updated": "2024-06-02 19:03:11"
+        },
+        {
+            "ganger_id": "3335460",
+            "label_id": "",
+            "name": "Muldoon",
+            "type": "Subjugator Patrolman",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 335,
+            "xp": 6,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "f192ff35-1cbc-4527-8ce9-63a0b213e79e",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4cb1c640-3cb2-4cff-aab0-59c8a98d6fe8",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ca705591-12f4-4711-88f4-450c100f954a",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "610fd203-3898-4996-b5a3-1efb931171cb",
+                    "name": "Mono-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b7361c97-51e5-4494-89d6-1f4abdc4de4d",
+                    "name": "Grenade Launcher (Subjugator)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b9d9a0df-2501-4e75-94f7-e90df379bbcb",
+                    "name": "Vigilance Assault Shield",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "fc5fc288-49b1-455f-a34c-127828a9e96c",
+                    "name": "Hardened Layered Flak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3fcd6f13-adb2-4947-ba23-16ee2dd03033",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "cb6c35bf-a72c-4c48-a318-b8ef0eb07d69",
+                    "name": "Grenade Launcher Krak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "406102ea-ae88-4c68-804c-0a35eef33db5",
+                    "name": "Grenade Launcher-Photon Flash",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1be71fe5-3fbe-4bb2-bc31-c28ef4e39e6f",
+                    "name": "Grenade Launcher-Smoke",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-02-15 11:00:21",
+            "datetime_updated": "2024-06-10 22:58:24"
+        },
+        {
+            "ganger_id": "3320331",
+            "label_id": "",
+            "name": "Murphy",
+            "type": "Enforcer &quot;Sanctioner&quot; Automata",
+            "m": 5,
+            "ws": 3,
+            "bs": 3,
+            "s": 4,
+            "t": 5,
+            "w": 3,
+            "i": 5,
+            "a": 2,
+            "ld": 8,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 9,
+            "cost": 340,
+            "xp": 3,
+            "kills": 0,
+            "advance_count": 2,
+            "equipment": [
+                {
+                    "equipment_id": "8df667dd-767a-4f17-9215-e65e6cbad853",
+                    "name": "SLHG Assault Ram (Sanctioner)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "da165f5e-d6d0-4a9f-80e4-dc2bd0ec221c",
+                    "name": "Heavy Shock Baton (Sanctioner)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "81f6219f-d9f9-407e-8e39-43361424f2c8",
+                    "name": "Grenade Launcher Array - Photon Flash",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "1195c4bf-24d7-42a1-8f95-9bedf80f5603",
+                    "name": "Heavy Carapace (Sanctioner) ",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f9d72f61-3c99-4df6-812f-9c554d9e8ad7",
+                    "name": "SLHG Krak Grenades (Sanctioner)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "017cb05b-c382-4218-a296-2b22a3afb1de",
+                    "name": "SLHG Frag Grenades (Sanctioner) ",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7275824c-e1bf-48f5-85f3-9bbd47d67a6f",
+                    "name": "SLHG Choke Grenades (Sanctioner) ",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Got Your Six"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-02-09 3:33:32",
+            "datetime_updated": "2024-06-10 22:59:12"
+        },
+        {
+            "ganger_id": "3271924",
+            "label_id": "",
+            "name": "Crockett",
+            "type": "Palanite Companion",
+            "m": 5,
+            "ws": 4,
+            "bs": 3,
+            "s": 3,
+            "t": 3,
+            "w": 2,
+            "i": 4,
+            "a": 1,
+            "ld": 5,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 0,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "78f188c7-1409-4e39-925b-14be2721e7c0",
+                    "name": "Companion Layered Flak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7c2090f5-c3b4-47a0-b6c8-48c4a931a707",
+                    "name": "Companion Armored Undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "842a3e74-de3a-4507-8dd9-4610ae924bc3",
+                    "name": "Companion Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "dd6b0ee9-de28-4735-8234-0dc991a0985b",
+                    "name": "Companion Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b79ad437-3381-4585-ab4b-bdb6a9022041",
+                    "name": "Disintegration Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fearsome",
+                "Overwatch"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-01-21 7:09:36",
+            "datetime_updated": "2024-05-03 16:10:39"
+        },
+        {
+            "ganger_id": "3271925",
+            "label_id": "",
+            "name": "Tubbs",
+            "type": "Palanite Companion",
+            "m": 5,
+            "ws": 4,
+            "bs": 3,
+            "s": 3,
+            "t": 3,
+            "w": 2,
+            "i": 4,
+            "a": 1,
+            "ld": 5,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 0,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "a7d2e7c6-6b7d-45bc-9d6e-6277067e560d",
+                    "name": "Companion Layered Flak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "155922e5-cca5-4795-a3ce-a64fe39d5d6e",
+                    "name": "Companion Armored Undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "96cbb28c-490c-4b74-9e0b-d7fd096aed93",
+                    "name": "Companion Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9ed27ebb-a7f4-47c9-99a0-d6901470a67a",
+                    "name": "Companion Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7e4739da-cbfc-4161-8142-0e0b66d3192d",
+                    "name": "Disintegration Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fearsome",
+                "Overwatch"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-01-21 7:09:49",
+            "datetime_updated": "2024-05-03 16:10:36"
+        },
+        {
+            "ganger_id": "3499612",
+            "label_id": "Sgt.S",
+            "name": "Splinter",
+            "type": "Giant Rat",
+            "m": 6,
+            "ws": 4,
+            "bs": 0,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 10,
+            "cl": 8,
+            "wil": 10,
+            "intelligence": 9,
+            "cost": 0,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "28768851-7613-49e5-8b73-c72fd1a04027",
+                    "name": "Jaws (Giant Rat)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-04-25 9:55:50",
+            "datetime_updated": "2024-06-03 00:35:54"
+        },
+        {
+            "ganger_id": "3499613",
+            "label_id": "Sgt.S",
+            "name": "Templeton ",
+            "type": "Giant Rat",
+            "m": 6,
+            "ws": 4,
+            "bs": 0,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 10,
+            "cl": 8,
+            "wil": 10,
+            "intelligence": 9,
+            "cost": 0,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "504bdbeb-5a9a-4e65-8dcc-03255b077307",
+                    "name": "Jaws (Giant Rat)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-04-25 9:55:54",
+            "datetime_updated": "2024-06-03 00:35:59"
+        },
+        {
+            "ganger_id": "3499614",
+            "label_id": "Sgt.S",
+            "name": "Rizzo",
+            "type": "Giant Rat",
+            "m": 6,
+            "ws": 4,
+            "bs": 0,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 10,
+            "cl": 8,
+            "wil": 10,
+            "intelligence": 9,
+            "cost": 0,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "356adba9-0f68-4322-bae8-6b531ccfd8af",
+                    "name": "Jaws (Giant Rat)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "Small Target: Ranged attacks against the rat are made at -1 to hit. Never a potential target when working out a Stray Shot.\nNimble: 4+ save, never modified by AP.\nRat Cunning: A fighter with a rat gains a special 5+ save against damage from environmental effects. Take this save before any other kind of save.\nAlternatively, you can sacrifice one rat to completely ignore damage from an environmental effect. The rat is then removed from the gang&rsquo;s roster.",
+            "datetime_added": "2024-04-25 9:55:57",
+            "datetime_updated": "2024-06-03 00:36:04"
+        },
+        {
+            "ganger_id": "3518947",
+            "label_id": "",
+            "name": "Servalen, Scrutinator-Primus",
+            "type": "Servalen, Scrutinator-Primus",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 2,
+            "i": 4,
+            "a": 1,
+            "ld": 6,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 4,
+            "cost": 240,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "2af767eb-123c-4edf-81fd-9e7304f4d94e",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "cfbbffef-8259-49d3-8b88-097815f59cf2",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4474b87a-082b-44a9-97ee-d4ca273e3787",
+                    "name": "Infra-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "84c70ee9-06dd-4208-86e7-3e5b78328a3d",
+                    "name": "Flak Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "dabcbd27-4915-4642-b734-cc25143a5f59",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "613875a5-f7d8-4b5f-8e36-384a9d32a9da",
+                    "name": "Scrutinator Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b70d2ffb-686b-4429-a9a8-22c22f23b58d",
+                    "name": "Excrutiator Rounds",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Got Your Six"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "PSYCHIC NULL (PARIAH)\nCan Disrupt Wyrd Powers (as if being a Psyker).\nAll fighters within 6&quot; suffer the following (friend &amp; foe):\nPsychic powers can't be manifested.\n-2 modifier to Cool tests.\n\nINVESTIGATOR\nCan't be targeted by Tactics (can be affected if this fighter is not specifically targeted).",
+            "datetime_added": "2024-05-03 3:26:13",
+            "datetime_updated": "2024-05-03 16:08:03"
+        },
+        {
+            "ganger_id": "3519299",
+            "label_id": "Serv",
+            "name": "Justicar",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 0,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "f9a687d8-e209-4f6a-8e15-602386e2d87c",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-05-03 5:59:11",
+            "datetime_updated": "2024-05-03 18:00:08"
+        },
+        {
+            "ganger_id": "3610541",
+            "label_id": "Vimes",
+            "name": "Laika",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 0,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "5ff30ce9-ca71-4df6-ace6-8c8869f867d8",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2024-06-06 8:30:07",
+            "datetime_updated": "2024-06-10 22:56:40"
+        },
+        {
+            "ganger_id": "3151825",
+            "label_id": "",
+            "name": "Sgt. Serpico",
+            "type": "Palanite Sergeant",
+            "m": 6,
+            "ws": 4,
+            "bs": 3,
+            "s": 3,
+            "t": 3,
+            "w": 2,
+            "i": 4,
+            "a": 1,
+            "ld": 5,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 640,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 2,
+            "equipment": [
+                {
+                    "equipment_id": "677bb8a0-f35b-457b-a9aa-d1c787a736d0",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7aa557ba-8014-4932-8218-f9a6d81d1c6e",
+                    "name": "Plasma Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "83e6fcba-528b-4a05-8bc8-b07277c0afc9",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "0b7239a6-0c6a-4439-98cd-e66a936cddc9",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "089814a5-a3db-4763-a578-6b0a9e881712",
+                    "name": "Grapnel launcher",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3d477116-d750-4592-adb8-5fd6d99cea2a",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3b3bf7d9-83d3-4eaf-ba2f-c6743639c1ea",
+                    "name": "Las-projector",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3450ddd3-0171-4155-9a01-4b0e81d18ddf",
+                    "name": "Telescopic sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "154f2aec-f2c3-4447-83b4-0a5dad6ccfd5",
+                    "name": "Infra-sight",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e060d454-eb56-46ac-a73b-076367296e9e",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5522818c-d874-439d-9188-cc4347d969b3",
+                    "name": "Sniper Rifle",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "baf05bae-0c6d-42c4-bbe2-a757f8dcfafb",
+                    "name": "Cameleoline Cloak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "87c21e0b-aade-4f4e-b920-b1f82d53f956",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "55147f8e-4cf4-4afd-87e5-99a63c2a1dc5",
+                    "name": "Giant Rat",
+                    "qty": 3,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fast Shot"
+            ],
+            "injuries": [
+                "Enfeebled",
+                "Eye Injury"
+            ],
+            "image": null,
+            "status": "Recovery",
+            "notes": "",
+            "datetime_added": "2023-11-29 7:51:20",
+            "datetime_updated": "2024-06-06 21:46:48"
+        },
+        {
+            "ganger_id": "3290889",
+            "label_id": "",
+            "name": "Foley",
+            "type": "Palanite Rookie",
+            "m": 5,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 160,
+            "xp": 6,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "8e8634d5-9a26-4f38-ac98-3fa2aa552e03",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "60df6c2d-c077-4563-90ff-09426e9a9033",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "02379523-0ee4-4e26-885d-b7f3ed9eda0a",
+                    "name": "Bio-booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e8bc8bb8-27b1-4423-af47-b2cab90f9d6f",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5c924831-c7f8-4544-a961-c06d9342c2a6",
+                    "name": "Photon Flash Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c3a3a7e2-9821-4fd3-9c06-0bf38703e1e3",
+                    "name": "Smoke Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "094fffb0-769a-4ab7-9f43-92c8780de027",
+                    "name": "Enforcer Shotgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d4621d5b-f989-4459-acb4-4d8ea06f7406",
+                    "name": "Magnacles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [
+                "Enfeebled",
+                "Enfeebled"
+            ],
+            "image": null,
+            "status": "Recovery",
+            "notes": "",
+            "datetime_added": "2024-01-28 8:05:00",
+            "datetime_updated": "2024-05-17 14:58:28"
+        },
+        {
+            "ganger_id": "3460171",
+            "label_id": "",
+            "name": "ED-209",
+            "type": "Enforcer &quot;Sanctioner&quot; Automata",
+            "m": 5,
+            "ws": 4,
+            "bs": 3,
+            "s": 4,
+            "t": 5,
+            "w": 3,
+            "i": 5,
+            "a": 2,
+            "ld": 8,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 9,
+            "cost": 425,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "ebef06ef-10fb-43cb-8b0b-e144028e49af",
+                    "name": "Sanction Pattern Mancatcher (melee)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "bed7100a-54c4-4e5f-a79b-eb8feebc1347",
+                    "name": "Sanction Pattern Mancatcher (ranged)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d1e9341c-54a5-49c6-b637-7a4f54e959df",
+                    "name": "Concussion Cannon (Sanctioner)",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "49a4799b-7e6c-4071-bd46-409536d72887",
+                    "name": "Grenade Launcher Array - Photon Flash",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4f7e1adb-2896-4994-8804-19cbd3d9b3fa",
+                    "name": "Heavy Carapace (Sanctioner) ",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Got Your Six"
+            ],
+            "injuries": [
+                "Head Injury"
+            ],
+            "image": null,
+            "status": "Recovery",
+            "notes": "",
+            "datetime_added": "2024-04-09 9:54:45",
+            "datetime_updated": "2024-06-06 21:40:24"
+        },
+        {
+            "ganger_id": "3492736",
+            "label_id": "",
+            "name": "Ragnir Gunnstein",
+            "type": "Ragnir Gunnstein",
+            "m": 3,
+            "ws": 4,
+            "bs": 3,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 5,
+            "a": 1,
+            "ld": 9,
+            "cl": 7,
+            "wil": 6,
+            "intelligence": 7,
+            "cost": 100,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "0f4bbb14-86d9-4da5-b8d1-1c412b52dd45",
+                    "name": "Club",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3dd483a2-c783-43f2-8d76-eb20f45da504",
+                    "name": "Shotgun - Solid/Scatter",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "33702b63-bc77-4678-9605-90b4a78a258b",
+                    "name": "Frag Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "993e6599-ca0e-42ad-810d-e64d4bf62b29",
+                    "name": "Krak Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "5f91b586-508c-4596-961f-10474da59c98",
+                    "name": "Respirator",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "cfb911e4-e534-4edd-a934-97c2f04c4447",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Munitioneer"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Recovery",
+            "notes": "",
+            "datetime_added": "2024-04-22 9:43:12",
+            "datetime_updated": "2024-05-17 14:58:44"
+        },
+        {
+            "ganger_id": "3610542",
+            "label_id": "Sgt.J",
+            "name": "Russ",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 0,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "b39ee98d-64f1-4b5b-92d8-44f245b34496",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [
+                "Eye Injury"
+            ],
+            "image": null,
+            "status": "Recovery",
+            "notes": "",
+            "datetime_added": "2024-06-06 8:30:44",
+            "datetime_updated": "2024-06-10 23:08:36"
+        },
+        {
+            "ganger_id": "3353560",
+            "label_id": "Vimes",
+            "name": "Ripper                                            ",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 4,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 30,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "52e081df-b44a-4a01-b1ff-f3a92ce171f4",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Dead",
+            "notes": "",
+            "datetime_added": "2024-02-23 6:41:35",
+            "datetime_updated": "2024-06-02 23:00:30"
+        },
+        {
+            "ganger_id": "3351305",
+            "label_id": "",
+            "name": "Hooch",
+            "type": "Hardcase Cyber-Mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 8,
+            "cost": 5,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "08cefc7e-c826-4216-971e-ceb6fdb1568e",
+                    "name": "Shock Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Threat Response"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Dead",
+            "notes": "",
+            "datetime_added": "2024-02-22 6:43:22",
+            "datetime_updated": "2024-05-03 18:01:04"
+        }
+    ],
+    "stash": []
+}
