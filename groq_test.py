@@ -103,7 +103,7 @@ class GangSchema(BaseModel):
             raise ValueError("\n".join(errors))
         return self
 
-def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[str] = None) -> GangSchema:
+def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[str] = None, attempt: int = 1) -> GangSchema:
     from prompt_templates.gang_gen import (
         generate_system_prompt,
         generate_rerun_prompt
@@ -165,7 +165,7 @@ def get_valid_gang(gang_name: str, max_retries: int = 3) -> GangSchema:
     for attempt in range(1, max_retries + 1):
         try:
             print(f"Attempt {attempt} (Temperature: {temperature:.1f})")
-            gang = get_gang(gang_name, temperature, validation_errors)
+            gang = get_gang(gang_name, temperature, validation_errors, attempt)
             return gang
         except (ValidationError, ValueError) as e:
             validation_errors = e.args[0] if e.args else []
