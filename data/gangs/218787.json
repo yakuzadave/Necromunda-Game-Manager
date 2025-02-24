@@ -1,0 +1,1032 @@
+{
+    "gang_id": "218787",
+    "gang_name": "ShaftJackers",
+    "gang_type": "Orlock (HoI)",
+    "campaign": "2021 Grimdark Dick &amp; Fart Joke Summit",
+    "credits": 146,
+    "reputation": 15,
+    "territories": [
+        "Settlement"
+    ],
+    "gangers": [
+        {
+            "ganger_id": "1484171",
+            "label_id": "",
+            "name": "Boomer",
+            "type": "Road Captain",
+            "m": 5,
+            "ws": 3,
+            "bs": 3,
+            "s": 3,
+            "t": 4,
+            "w": 3,
+            "i": 4,
+            "a": 2,
+            "ld": 4,
+            "cl": 5,
+            "wil": 5,
+            "intelligence": 5,
+            "cost": 275,
+            "xp": 3,
+            "kills": 3,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "e73d69f2-b831-4052-a48f-6e709bd95463",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b6de6968-5d87-486f-bcaf-1f2f2d124152",
+                    "name": "Grenade Launcher w/Frag+Krak",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c40805c6-59e5-4188-b7b9-a1890c53f2d6",
+                    "name": "Frag Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7e29ee68-f9b1-491c-b46c-0f491af232d3",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c5249081-9e30-430b-a04f-b1d598d4b0c6",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Fixer",
+                "Too Pretty for Primus"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2021-10-09 4:01:15",
+            "datetime_updated": "2022-04-02 04:05:12"
+        },
+        {
+            "ganger_id": "1484173",
+            "label_id": "",
+            "name": "Meat Train",
+            "type": "Road Sergeant",
+            "m": 5,
+            "ws": 4,
+            "bs": 2,
+            "s": 3,
+            "t": 3,
+            "w": 2,
+            "i": 4,
+            "a": 2,
+            "ld": 5,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 6,
+            "cost": 365,
+            "xp": 10,
+            "kills": 5,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "15dc0317-9ee3-468d-a8a7-b9ed08d23290",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "e5c7c5e7-eb7b-4282-8478-4a623c5347dd",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "8123b158-d983-4057-b99b-96761b2a2831",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "aa83854f-7640-493c-a502-2bd71d24ff99",
+                    "name": "Suspensor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "072872be-e82d-42c3-b9f6-77778a859e87",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "ca7cc079-914f-423e-ad9b-3584dd74e6a0",
+                    "name": "Mining Laser*",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Bullet Dodger",
+                "True Grit"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2021-10-09 4:01:34",
+            "datetime_updated": "2022-04-02 03:47:53"
+        },
+        {
+            "ganger_id": "1484172",
+            "label_id": "",
+            "name": "Jabberwock",
+            "type": "Arms Master",
+            "m": 5,
+            "ws": 3,
+            "bs": 3,
+            "s": 3,
+            "t": 3,
+            "w": 3,
+            "i": 4,
+            "a": 2,
+            "ld": 5,
+            "cl": 6,
+            "wil": 6,
+            "intelligence": 6,
+            "cost": 490,
+            "xp": 2,
+            "kills": 3,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "219dce4f-36eb-4b75-bf87-ab828ae7dd49",
+                    "name": "Stub Gun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c549ae53-664c-4c3a-a846-5e9e501a9125",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "17e9ce5f-6555-4b77-94de-b7695a6ea0eb",
+                    "name": "Photo-goggles",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "bf3755c5-c379-4849-8840-ae46a9453525",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "71d65677-dcbf-4307-bc73-e66c51093303",
+                    "name": "Cyber-mastiff",
+                    "qty": 2,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a31dd6a2-e241-46eb-97b8-168a333edb46",
+                    "name": "Arc Hammer",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Blade Breaker",
+                "Nerves of Steel"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2021-10-09 4:01:23",
+            "datetime_updated": "2022-04-02 04:03:41"
+        },
+        {
+            "ganger_id": "1768736",
+            "label_id": "",
+            "name": "JewelThief",
+            "type": "Cyber-mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 6,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 0,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "e6fc43c4-fda3-40e9-8298-780ab265576e",
+                    "name": "Savage Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2022-03-12 11:09:30",
+            "datetime_updated": "2022-04-02 03:54:14"
+        },
+        {
+            "ganger_id": "1484175",
+            "label_id": "",
+            "name": "Jank",
+            "type": "Gunner",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 6,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 145,
+            "xp": 1,
+            "kills": 1,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "baad788c-229d-412e-a752-056f08b2008d",
+                    "name": "Combat Shotgun-w/Salvo+Shredder",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "6a9c6eff-3689-4eac-9da8-e50c6155dbec",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [
+                "Eye Injury"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "TOXIC GRENADES",
+            "datetime_added": "2021-10-09 4:01:56",
+            "datetime_updated": "2022-04-02 03:54:17"
+        },
+        {
+            "ganger_id": "1484176",
+            "label_id": "",
+            "name": "Porkinsson ",
+            "type": "Gunner",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 4,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 6,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 145,
+            "xp": 3,
+            "kills": 1,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "5e383a8d-9af3-469c-8531-fcb03ef77a62",
+                    "name": "Combat Shotgun-w/Salvo+Shredder",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "60f3afd8-31b6-4c30-a851-d30ab72c43ff",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2021-10-09 4:02:12",
+            "datetime_updated": "2022-04-02 03:54:21"
+        },
+        {
+            "ganger_id": "1755813",
+            "label_id": "",
+            "name": "Pitstain",
+            "type": "Gunner",
+            "m": 5,
+            "ws": 4,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 6,
+            "cl": 7,
+            "wil": 7,
+            "intelligence": 7,
+            "cost": 115,
+            "xp": 3,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "369af75b-8281-4729-a2b3-808e4f2aed77",
+                    "name": "Combat Shotgun-w/Salvo+Shredder",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "0ef8388e-1e79-49f9-b0e2-e24750d13990",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2022-03-06 3:18:49",
+            "datetime_updated": "2022-04-02 03:58:41"
+        },
+        {
+            "ganger_id": "1484174",
+            "label_id": "",
+            "name": "'Trix",
+            "type": "Wrecker",
+            "m": 7,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 9,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 240,
+            "xp": 4,
+            "kills": 2,
+            "advance_count": 1,
+            "equipment": [
+                {
+                    "equipment_id": "297e73da-577c-4d21-a905-bbe49752bec9",
+                    "name": "Fighting Knife",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "4ff5ab63-8107-41fa-8d35-c77aa1022726",
+                    "name": "Hand Flamer",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a7f31278-b258-443f-8bc7-9557e7877202",
+                    "name": "Choke Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "14a17424-a9f9-49a3-ad4d-ef48fe43a229",
+                    "name": "Armored undersuit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "9b955b32-b448-4cb3-bbec-1ffab022fd56",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "55af31e4-b4d7-4230-a094-2c083d063db5",
+                    "name": "Jump Booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [
+                "Spinal Injury"
+            ],
+            "image": null,
+            "status": "Alive",
+            "notes": "TOXIC GRENADES",
+            "datetime_added": "2021-10-09 4:01:47",
+            "datetime_updated": "2022-04-02 03:58:41"
+        },
+        {
+            "ganger_id": "1593875",
+            "label_id": "",
+            "name": "Boombox",
+            "type": "Wrecker",
+            "m": 6,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 9,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 125,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "1da03b3a-6412-4ce8-8e83-e9455a2b937e",
+                    "name": "Stub Gun",
+                    "qty": 2,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "c5ca85e7-5dbd-448f-bf37-5e49fcd28da1",
+                    "name": "Choke Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "d23e1724-6bce-4128-8f20-3fccd38e0633",
+                    "name": "Flak Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "57441326-c8e3-4367-8c51-bc740d05131c",
+                    "name": "Jump Booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "Choke Grenade",
+            "datetime_added": "2021-12-10 3:08:33",
+            "datetime_updated": "2022-04-02 03:58:34"
+        },
+        {
+            "ganger_id": "1755855",
+            "label_id": "",
+            "name": "Spess Mahreen Jones",
+            "type": "Wrecker",
+            "m": 6,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 9,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 190,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "b6b4507e-8db5-4ef4-82da-4b725a52822c",
+                    "name": "Plasma Pistol",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "635ace7a-2a9e-4079-ae1a-ddecd7dd8014",
+                    "name": "Choke Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "54b7fb26-f522-421f-ae6e-5d7ae74aa7b5",
+                    "name": "Flak Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f1b48417-bc29-4404-9be8-60c65b399e5b",
+                    "name": "Chainsword",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "bfadf7f1-e8a5-4bb0-b0a4-fddc074552b9",
+                    "name": "Jump Booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2022-03-06 3:47:49",
+            "datetime_updated": "2022-04-02 03:59:02"
+        },
+        {
+            "ganger_id": "1768885",
+            "label_id": "",
+            "name": "BlitzCraig",
+            "type": "Wrecker",
+            "m": 6,
+            "ws": 5,
+            "bs": 4,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 9,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 145,
+            "xp": 2,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "656b38db-f061-4881-b2f6-8eb99a46be25",
+                    "name": "Fighting Knife",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "366d7ce7-f867-4db3-a661-651c6b4320e2",
+                    "name": "Sawn-Off Shotgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "58997108-7c90-4cba-9bd9-7b5bd0aa287f",
+                    "name": "Choke Grenade",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "3f867330-89d1-4efb-9c42-ef8f803d1cb0",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "b43eb41e-829a-42b3-9b89-183600af9ff0",
+                    "name": "Jump Booster",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2022-03-13 12:28:36",
+            "datetime_updated": "2022-04-02 21:04:23"
+        },
+        {
+            "ganger_id": "1546322",
+            "label_id": "",
+            "name": "Queef",
+            "type": "Greenhorn",
+            "m": 6,
+            "ws": 5,
+            "bs": 5,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 7,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 65,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "ad51790d-ffec-4206-bc63-30657839d733",
+                    "name": "Sawn-Off Shotgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7ec8b043-bf0d-40d0-863a-8ba29aa9d82c",
+                    "name": "Mesh Armor",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "TOXIC GRENADES",
+            "datetime_added": "2021-11-13 2:50:02",
+            "datetime_updated": "2022-04-02 21:04:23"
+        },
+        {
+            "ganger_id": "1764296",
+            "label_id": "",
+            "name": "Beerpong",
+            "type": "Greenhorn",
+            "m": 6,
+            "ws": 5,
+            "bs": 5,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 7,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 65,
+            "xp": 1,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "0768404c-52de-4079-a832-a21b4af916b0",
+                    "name": "Fighting Knife",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "cfc0af0a-35c6-49c8-b103-d3f9c98c174c",
+                    "name": "Sawn-Off Shotgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2022-03-10 6:54:14",
+            "datetime_updated": "2022-04-02 03:55:48"
+        },
+        {
+            "ganger_id": "1795319",
+            "label_id": "",
+            "name": "Blanks",
+            "type": "Greenhorn",
+            "m": 6,
+            "ws": 5,
+            "bs": 5,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 3,
+            "a": 1,
+            "ld": 7,
+            "cl": 8,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 65,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "37586ee0-813c-4eec-992b-2d26fb0336f3",
+                    "name": "Fighting Knife",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "7440655d-249f-4349-b34a-82727d0c079a",
+                    "name": "Sawn-Off Shotgun",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2022-03-26 11:55:10",
+            "datetime_updated": "2022-04-02 21:07:27"
+        },
+        {
+            "ganger_id": "1808711",
+            "label_id": "",
+            "name": "Master80T",
+            "type": "Ambot",
+            "m": 4,
+            "ws": 3,
+            "bs": 5,
+            "s": 5,
+            "t": 5,
+            "w": 3,
+            "i": 5,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 8,
+            "intelligence": 9,
+            "cost": 275,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "89f5eb03-aef0-49e9-9c79-d24eda8cca23",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "a990d10e-a5ae-4bea-a597-f8839b8494e8",
+                    "name": "Tunneling Claw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "f3ef3e1c-3338-4bcf-8a4b-fdc198a187c3",
+                    "name": "Grav-Fist",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "-30 cost for orlock discount\n",
+            "datetime_added": "2022-04-02 3:45:49",
+            "datetime_updated": "2022-04-02 03:56:33"
+        },
+        {
+            "ganger_id": "1525171",
+            "label_id": "",
+            "name": "Doc Nub",
+            "type": "Rogue Doc",
+            "m": 5,
+            "ws": 5,
+            "bs": 5,
+            "s": 2,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 9,
+            "cl": 8,
+            "wil": 7,
+            "intelligence": 5,
+            "cost": 50,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "f142bc0a-0534-4549-b755-957a4e75684c",
+                    "name": "Medicae Kit",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Medicae"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2021-10-31 8:43:42",
+            "datetime_updated": "2022-04-02 03:52:49"
+        },
+        {
+            "ganger_id": "1593888",
+            "label_id": "",
+            "name": "Murray",
+            "type": "Prize Fighter",
+            "m": 5,
+            "ws": 3,
+            "bs": 5,
+            "s": 4,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 8,
+            "cl": 8,
+            "wil": 7,
+            "intelligence": 8,
+            "cost": 40,
+            "xp": 0,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [],
+            "skills": [
+                "Iron Jaw"
+            ],
+            "injuries": [],
+            "image": null,
+            "status": "Alive",
+            "notes": "",
+            "datetime_added": "2021-12-10 3:34:56",
+            "datetime_updated": "2022-04-02 03:52:35"
+        },
+        {
+            "ganger_id": "1593876",
+            "label_id": "",
+            "name": "PEN-15",
+            "type": "Ambot",
+            "m": 4,
+            "ws": 3,
+            "bs": 4,
+            "s": 5,
+            "t": 5,
+            "w": 3,
+            "i": 5,
+            "a": 2,
+            "ld": 8,
+            "cl": 6,
+            "wil": 8,
+            "intelligence": 9,
+            "cost": 315,
+            "xp": 4,
+            "kills": 0,
+            "advance_count": 2,
+            "equipment": [
+                {
+                    "equipment_id": "1ad955d4-f8e2-4235-bd16-9433d5b79d63",
+                    "name": "Carapace Armor - Light",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "95e3470c-772f-470b-891f-4f50c6ad906e",
+                    "name": "Tunneling Claw",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                },
+                {
+                    "equipment_id": "491e9cb6-423a-4ae8-91b4-6139ebf37445",
+                    "name": "Grav-Fist",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [
+                "Nerves of Steel"
+            ],
+            "injuries": [
+                "Enfeebled"
+            ],
+            "image": null,
+            "status": "Recovery",
+            "notes": "-80 cost for carapace -30 for orlock discount",
+            "datetime_added": "2021-12-10 3:09:25",
+            "datetime_updated": "2022-04-02 03:58:55"
+        },
+        {
+            "ganger_id": "1593887",
+            "label_id": "",
+            "name": "Razzmatazz",
+            "type": "Cyber-mastiff",
+            "m": 5,
+            "ws": 3,
+            "bs": 0,
+            "s": 3,
+            "t": 3,
+            "w": 1,
+            "i": 4,
+            "a": 1,
+            "ld": 7,
+            "cl": 6,
+            "wil": 8,
+            "intelligence": 8,
+            "cost": 0,
+            "xp": 5,
+            "kills": 0,
+            "advance_count": 0,
+            "equipment": [
+                {
+                    "equipment_id": "aa639237-b56e-4189-bc08-7c62ddc4ad33",
+                    "name": "Savage Bite",
+                    "qty": 1,
+                    "cost": 0,
+                    "traits": ""
+                }
+            ],
+            "skills": [],
+            "injuries": [
+                "Eye Injury",
+                "Grievous Injury"
+            ],
+            "image": null,
+            "status": "Recovery",
+            "notes": "",
+            "datetime_added": "2021-12-10 3:32:36",
+            "datetime_updated": "2022-04-02 03:58:59"
+        }
+    ],
+    "stash": []
+}

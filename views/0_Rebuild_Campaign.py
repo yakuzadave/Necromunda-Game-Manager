@@ -11,15 +11,15 @@ TERRITORIES_DIR = DATA_DIR / "territories"
 BATTLES_DIR = DATA_DIR / "battles"
 EQUIPMENT_DIR = DATA_DIR / "equipment"
 
-st.title("🔄 Rebuild Campaign Data")
+st.title("🔄 Rebuild & Save Campaign Data")
 
-st.write("Reload all gangs, territories, battles, and equipment from individual JSON files.")
+st.write("Use the buttons below to either reload all campaign data from the JSON files or save the current session data back to disk.")
 
 # Ensure directories exist
 for directory in [GANGS_DIR, TERRITORIES_DIR, BATTLES_DIR, EQUIPMENT_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
-# Function to load JSON data from files
+# -------------------- Loading Functions --------------------
 def load_json_files(directory, model_class):
     objects = []
     for file_path in directory.glob("*.json"):
@@ -30,7 +30,32 @@ def load_json_files(directory, model_class):
             st.error(f"⚠️ Error loading {file_path.name}: {e}")
     return objects
 
-# Button to rebuild campaign data
+# -------------------- Saving Functions --------------------
+def save_all_data():
+    # Save gangs individually
+    for gang in st.session_state.gangs:
+        file_path = GANGS_DIR / f"{gang.gang_id}.json"
+        with open(file_path, "w") as f:
+            json.dump(gang.dict(), f, indent=4)
+    # Save territories individually
+    for territory in st.session_state.territories:
+        # Here, using territory name as filename; ensure names are unique or consider adding an ID.
+        file_path = TERRITORIES_DIR / f"{territory.name}.json"
+        with open(file_path, "w") as f:
+            json.dump(territory.dict(), f, indent=4)
+    # Save battles individually
+    for battle in st.session_state.battles:
+        file_path = BATTLES_DIR / f"{battle.battle_id}.json"
+        with open(file_path, "w") as f:
+            json.dump(battle.dict(), f, indent=4)
+    # Save equipment individually
+    for eq in st.session_state.equipment_list:
+        file_path = EQUIPMENT_DIR / f"{eq.equipment_id}.json"
+        with open(file_path, "w") as f:
+            json.dump(eq.dict(), f, indent=4)
+
+# -------------------- Buttons --------------------
+# Button to reload campaign data from JSON files into session state
 if st.button("🔄 Rebuild Campaign Data"):
     st.session_state.gangs = load_json_files(GANGS_DIR, Gang)
     st.session_state.territories = load_json_files(TERRITORIES_DIR, Territory)
@@ -38,8 +63,12 @@ if st.button("🔄 Rebuild Campaign Data"):
     st.session_state.equipment_list = load_json_files(EQUIPMENT_DIR, Equipment)
     st.success("✅ Campaign data successfully reloaded!")
 
+# Button to save current session data into the respective JSON files
+if st.button("💾 Save Campaign Data"):
+    save_all_data()
+    st.success("✅ Campaign data successfully saved!")
 
-# Display campaign statistics
+# -------------------- Display Campaign Statistics --------------------
 st.markdown("---")
 st.write("### 📊 Current Campaign Data Summary")
 
@@ -48,7 +77,7 @@ st.metric("Total Territories", len(st.session_state.get("territories", [])))
 st.metric("Total Battles", len(st.session_state.get("battles", [])))
 st.metric("Total Equipment Items", len(st.session_state.get("equipment_list", [])))
 
-# Clear session state button
+# Option to clear session state
 if st.button("🗑️ Clear Session State"):
     st.session_state.clear()
     st.success("✅ Session state cleared! Reload campaign data to continue.")

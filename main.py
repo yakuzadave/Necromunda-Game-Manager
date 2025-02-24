@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import json
+
 from common import (
     DATA_FILE, FULL_CAMPAIGN_DATA_FILE,
     Equipment, GangFighter, Gang, Territory, LocalBattle,
@@ -15,56 +16,60 @@ st.set_page_config(
     layout="wide"
 )
 
-# Define visible navigation pages
+# Define pages in the 'views/' directory
 home_page = st.Page("views/Home.py", title="Home", icon="🏠")
 dashboard_page = st.Page("views/1_Dashboard.py", title="Dashboard", icon=":material/dashboard:")
 gangs_page = st.Page("views/2_Gangs.py", title="Gangs", icon=":material/group:")
 territories_page = st.Page("views/3_Territories.py", title="Territories", icon=":material/map:")
 battles_page = st.Page("views/4_Battles.py", title="Battles", icon=":material/swords:")
+fighter_page = st.Page("views/5_FighterManagement.py", title="Fighters", icon=":material/swords:")
 equipment_page = st.Page("views/7_Equipment.py", title="Equipment", icon=":material/sword_rose:")
 import_yak_page = st.Page("views/8_ImportYaktribe.py", title="Import Yaktribe Data", icon=":material/cloud:")
 
-# Hidden pages (not in navigation, but accessible via st.switch_page)
+# Optionally, if you want Rebuild Campaign in the navigation:
+rebuild_page = st.Page("views/0_Rebuild_Campaign.py", title="Rebuild Campaign", icon="🔄")
+
+# If you want Rebuild Campaign to appear in the navigation:
+pages_list = [
+    home_page, 
+    dashboard_page, 
+    gangs_page,
+    fighter_page,
+    territories_page, 
+    battles_page, 
+    equipment_page, 
+    import_yak_page,
+    rebuild_page
+]
+
+# If you'd rather hide Rebuild Campaign from the menu, omit `rebuild_page` from the list
+# and use st.switch_page("views/0_Rebuild_Campaign.py") programmatically.
+
+# Hidden page(s) that won't appear in the menu but can be switched to:
 hidden_pages = {
-    "views/Rebuild_Campaign.py",
-    "views/FighterDetails.py"
+    "views/FighterDetails.py"  # For example
 }
 
-# Navigation
-pg = st.navigation([home_page, dashboard_page, gangs_page, territories_page, battles_page, equipment_page, import_yak_page])
-
+# Define navigation
+pg = st.navigation(pages_list)
 pg.run()
 
-# Add a button to navigate to the hidden Fighter Details page
+# If a fighter is selected, show a button to navigate to the hidden Fighter Details page
 if "selected_fighter_id" in st.session_state and "selected_gang_id" in st.session_state:
     if st.button("View Fighter Details"):
         st.switch_page("views/FighterDetails.py")
 
-
-# Initialize session state
-if 'gangs' not in st.session_state:
+# Initialize session state for Gangs, Territories, Battles, Equipment if needed
+if "gangs" not in st.session_state:
     gangs, territories, battles = load_data()
     st.session_state.gangs = gangs
     st.session_state.territories = territories
     st.session_state.battles = battles
+
 if "equipment_list" not in st.session_state:
     st.session_state.equipment_list = []
 
-# # Main page content
-# st.title("Welcome to Necromunda Campaign Manager")
-# st.markdown("""
-# ## Getting Started
-# Use the sidebar to navigate between different sections:
-# - **Dashboard**: Overview of your campaign statistics
-# - **Gangs**: Manage your gangs and fighters
-# - **Territories**: Control territory distribution
-# - **Battles**: Record battle outcomes
-# - **Equipment**: Manage your equipment library
-# - **Full Campaign Overview**: View imported campaign data
-# - **Export Campaign**: Export your campaign data
-# """)
-
-# Display metrics
+# Quick metrics (optional)
 if st.session_state.gangs or st.session_state.territories or st.session_state.battles:
     col1, col2, col3 = st.columns(3)
     with col1:
