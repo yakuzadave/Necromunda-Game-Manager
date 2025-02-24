@@ -125,29 +125,30 @@ def show_dashboard():
         if matches_scenario and matches_date:
             filtered_battles.append(b)
 
-    # Battle list with expandable details
+    # Battle list with details
     if filtered_battles:
-        with st.expander("Battle Log", expanded=True):
-            for battle in filtered_battles:
-                with st.container():
-                    col1, col2 = st.columns([3, 1])
-                    with col1:
-                        st.markdown(f"**{battle.battle_scenario}**")
-                        st.caption(f"🕒 {battle.battle_created_datetime}")
-                    with col2:
-                        st.markdown(f"🏆 **{battle.winner_gang}**")
+        st.subheader("Battle Log")
+        for battle in filtered_battles:
+            with st.container():
+                # Battle header
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    st.markdown(f"**{battle.battle_scenario}**")
+                    st.caption(f"🕒 {battle.battle_created_datetime}")
+                with col2:
+                    st.markdown(f"🏆 **{battle.winner_gang}**")
 
-                    with st.expander("Battle Details"):
-                        st.write(f"**Participants:** {', '.join(battle.participating_gangs)}")
-                        if battle.winner_territory:
-                            st.write(f"**Territory Won:** {battle.winner_territory}")
-                        if hasattr(battle, 'xp_awards'):
-                            st.write("**XP Awards:**")
-                            st.json(battle.xp_awards)
-                        if hasattr(battle, 'credit_awards'):
-                            st.write("**Credit Awards:**")
-                            st.json(battle.credit_awards)
-                    st.markdown("---")
+                # Battle details
+                st.markdown(f"**Participants:** {', '.join(battle.participating_gangs)}")
+                if battle.winner_territory:
+                    st.markdown(f"**Territory Won:** {battle.winner_territory}")
+                if hasattr(battle, 'xp_awards'):
+                    st.markdown("**XP Awards:**")
+                    st.json(battle.xp_awards)
+                if hasattr(battle, 'credit_awards'):
+                    st.markdown("**Credit Awards:**")
+                    st.json(battle.credit_awards)
+                st.markdown("---")
     else:
         st.info("No battles found matching filters")
 
