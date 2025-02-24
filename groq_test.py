@@ -134,7 +134,7 @@ def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[s
             {"role": "system", "content": system_message},
             {"role": "user", "content": f"Generate the '{gang_name}' gang with full equipment traits and valid stats"}
         ],
-        'model': "llama3-70b-8192",
+        'model': "llama-3.3-70b-specdec",
         'temperature': temperature,
         'response_format': {"type": "json_object"}
     }
