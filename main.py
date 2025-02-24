@@ -9,13 +9,13 @@ from common import (
 )
 
 # Define navigation
-home_page = st.Page('./pages/Home.py', title='Home', icon=':material/home:')
+home_page = st.Page('./pages/Home.py', title='Home', icon="🏠")
 dashboard_page = st.Page('./pages/1_Dashboard.py', title='Dashboard', icon=':material/dashboard:')
 gangs_page = st.Page('./pages/2_Gangs.py', title='Gangs', icon=':material/group:')
 territories_page = st.Page('./pages/3_Territories.py', title='Territories', icon=':material/map:')
-battles_page = st.Page('./pages/4_Battles.py', title='Battles', icon=':material/sword:')
-equipment_page = st.Page('./pages/7_Equipment.py', title='Equipment', icon=':material/tools:')
-import_yak_page = st.Page('pages/8_ImportYaktribe.py', title='Import Yaktribe Data', icon=':material/import:')
+battles_page = st.Page('./pages/4_Battles.py', title='Battles', icon=':material/swords:')
+equipment_page = st.Page('./pages/7_Equipment.py', title='Equipment', icon=':material/sword_rose:')
+import_yak_page = st.Page('pages/8_ImportYaktribe.py', title='Import Yaktribe Data', icon=':material/cloud:')
 
 pg = st.navigation([home_page, dashboard_page, gangs_page, territories_page, battles_page, equipment_page, import_yak_page])
 
