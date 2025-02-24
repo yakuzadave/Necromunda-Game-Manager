@@ -68,5 +68,5 @@ def show_territories():
     else:
         st.info("Ensure unassigned territories and registered gangs exist.")
 
-if __name__ == "__main__":
-    show_territories()
+
+show_territories()

@@ -8,7 +8,8 @@
             "credits": 160,
             "reputation": 6,
             "territories": [
-                "00. Gang Enclave"
+                "00. Gang Enclave",
+                "Black Market"
             ],
             "gangers": [
                 {
@@ -859,7 +860,9 @@
             "campaign": "Power Play",
             "credits": 1000,
             "reputation": 1,
-            "territories": [],
+            "territories": [
+                "Gas Fields"
+            ],
             "gangers": [],
             "stash": []
         },
@@ -1903,7 +1906,8 @@
             "credits": 320,
             "reputation": 18,
             "territories": [
-                "00. Gang Enclave"
+                "00. Gang Enclave",
+                "Dig Site"
             ],
             "gangers": [
                 {
@@ -6183,6 +6187,34 @@
             "stash": []
         }
     ],
-    "territories": [],
+    "territories": [
+        {
+            "name": "Black Market",
+            "type": "Trading Post",
+            "controlled_by": "Blood Brothers",
+            "x": null,
+            "y": null,
+            "lat": null,
+            "lng": null
+        },
+        {
+            "name": "Gas Fields",
+            "type": "Promethium Cache",
+            "controlled_by": "Dirty Pigs",
+            "x": null,
+            "y": null,
+            "lat": null,
+            "lng": null
+        },
+        {
+            "name": "Dig Site",
+            "type": "Archaeotech Site",
+            "controlled_by": "Seventh Sanctum",
+            "x": null,
+            "y": null,
+            "lat": null,
+            "lng": null
+        }
+    ],
     "battles": []
 }
