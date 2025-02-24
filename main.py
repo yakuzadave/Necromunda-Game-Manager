@@ -22,7 +22,7 @@ page_groups = {
     "Overview": [
         st.Page("views/Home.py", title="Home", icon="🏠"),
         st.Page("views/1_Dashboard.py", title="Dashboard", icon="📊"),
-        
+
     ],
     "Campaign Management": [
         st.Page("views/2_Gangs.py", title="Gangs", icon="👥"),
@@ -60,11 +60,19 @@ nav.run()
 
 
 # -------------------- Session State Initialization --------------------
+from backup_manager import BackupManager
+
+# Initialize backup manager
+if 'backup_manager' not in st.session_state:
+    st.session_state.backup_manager = BackupManager()
+
 if "gangs" not in st.session_state:
     gangs, territories, battles = load_data()
     st.session_state.gangs = gangs
     st.session_state.territories = territories
     st.session_state.battles = battles
+    # Create backup after loading data
+    st.session_state.backup_manager.create_backup()
 
 if "equipment_list" not in st.session_state:
     st.session_state.equipment_list = []
@@ -113,14 +121,14 @@ if "selected_fighter_id" in st.session_state and "selected_gang_id" in st.sessio
         st.switch_page("views/FighterDetails.py")
 
 # Initialize session state for Gangs, Territories, Battles, Equipment if needed
-if "gangs" not in st.session_state:
-    gangs, territories, battles = load_data()
-    st.session_state.gangs = gangs
-    st.session_state.territories = territories
-    st.session_state.battles = battles
+#if "gangs" not in st.session_state:
+#    gangs, territories, battles = load_data()
+#    st.session_state.gangs = gangs
+#    st.session_state.territories = territories
+#    st.session_state.battles = battles
 
-if "equipment_list" not in st.session_state:
-    st.session_state.equipment_list = []
+#if "equipment_list" not in st.session_state:
+#    st.session_state.equipment_list = []
 
 # # Quick metrics (optional)
 # if st.session_state.gangs or st.session_state.territories or st.session_state.battles:

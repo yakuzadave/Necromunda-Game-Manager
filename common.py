@@ -232,6 +232,10 @@ def save_data(gangs: List[Gang], territories: List[Territory], battles: List[Loc
     }
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
+    
+    # Create backup after saving
+    if 'backup_manager' in st.session_state:
+        st.session_state.backup_manager.create_backup()
 
 
 
