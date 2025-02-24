@@ -43,30 +43,30 @@ col_nav1, col_nav2, col_nav3, col_nav4 = st.columns(4)
 
 with col_nav1:
     if st.button("📊 Dashboard"):
-        st.switch_page("views/1_Dashboard.py")
+        st.switch_page("pages/1_Dashboard.py")
 
 with col_nav2:
     if st.button("👥 Manage Gangs"):
-        st.switch_page("views/2_Gangs.py")
+        st.switch_page("pages/2_Gangs.py")
 
 with col_nav3:
     if st.button("🌍 Territories"):
-        st.switch_page("views/3_Territories.py")
+        st.switch_page("pages/3_Territories.py")
 
 with col_nav4:
     if st.button("⚔️ Battles"):
-        st.switch_page("views/4_Battles.py")
+        st.switch_page("pages/4_Battles.py")
 
 st.markdown("#### 🔄 Campaign Management")
 col_mgmt1, col_mgmt2 = st.columns(2)
 
 with col_mgmt1:
     if st.button("🛠️ Rebuild Campaign Data"):
-        st.switch_page("views/Rebuild_Campaign.py")
+        st.switch_page("pages/Rebuild_Campaign.py")
 
 with col_mgmt2:
     if st.button("☁️ Import Yaktribe Data"):
-        st.switch_page("views/8_ImportYaktribe.py")
+        st.switch_page("pages/8_ImportYaktribe.py")
 
 st.markdown("---")
 
