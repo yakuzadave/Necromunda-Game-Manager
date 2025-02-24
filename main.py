@@ -22,19 +22,22 @@ page_groups = {
     "Overview": [
         st.Page("views/Home.py", title="Home", icon="🏠"),
         st.Page("views/1_Dashboard.py", title="Dashboard", icon="📊"),
-
+        st.Page("views/9_GangsDataFrame.py", title="Gang Stats", icon="📈"),
     ],
-    "Campaign Management": [
+    "Gang Management": [
         st.Page("views/2_Gangs.py", title="Gangs", icon="👥"),
         st.Page("views/5_FighterManagement.py", title="Fighters", icon="⚔️"),
+        st.Page("views/7_Equipment.py", title="Equipment", icon="🔧"),
+    ],
+    "Campaign": [
         st.Page("views/3_Territories.py", title="Territories", icon="🗺️"),
         st.Page("views/4_Battles.py", title="Battles", icon="⚔️"),
-        st.Page("views/7_Equipment.py", title="Equipment", icon="🔧"),
-        st.Page("views/8_ImportYaktribe.py", title="Import Yaktribe Data", icon="☁️"),
-        st.Page("views/0_Rebuild_Campaign.py", title="Rebuild Campaign", icon="🔄")
+        st.Page("views/6_InteractivemMap.py", title="Map", icon="🌍"),
     ],
-    "Reports": [
-        st.Page('views/9_GangsDataFrame.py', title='Gang Summary DataFrame', icon='📊')
+    "Tools": [
+        st.Page("views/8_ImportYaktribe.py", title="Import Yaktribe", icon="☁️"),
+        st.Page("views/10_MapGenerator.py", title="Map Generator", icon="🎨"),
+        st.Page("views/0_Rebuild_Campaign.py", title="Rebuild Campaign", icon="🔄"),
     ]
 }
 
