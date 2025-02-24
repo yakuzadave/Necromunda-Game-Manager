@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+from common import LocalBattle
 
 def show_battles():
     st.subheader("Battle Recording")
@@ -13,7 +14,7 @@ def show_battles():
         if submit_battle:
             if battle_scenario and winner_gang and participating_gangs:
                 now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                new_battle = st.session_state.battles[0].__class__(
+                new_battle = LocalBattle(
                     battle_created_datetime=now_str,
                     battle_scenario=battle_scenario,
                     winner_gang=winner_gang,
