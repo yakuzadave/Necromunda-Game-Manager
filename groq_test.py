@@ -5,6 +5,7 @@ import os
 from pydantic import BaseModel, Field, ValidationError, model_validator
 from datetime import datetime
 import uuid
+import time
 
 # Environment Variables
 groq_api_key = os.environ.get('GROQ_API_KEY')
@@ -139,12 +140,33 @@ def get_gang(gang_name: str, temperature: float = 0.5, validation_errors: List[s
         'response_format': {"type": "json_object"}
     }
 
-    response = requests.post(
-        'https://api.groq.com/openai/v1/chat/completions',
-        headers={'Authorization': f'Bearer {groq_api_key}'},
-        json=payload
-    )
-    response.raise_for_status()
+    max_retries = 5
+    base_delay = 1  # Initial delay in seconds
+    
+    for retry in range(max_retries):
+        try:
+            response = requests.post(
+                'https://api.groq.com/openai/v1/chat/completions',
+                headers={'Authorization': f'Bearer {groq_api_key}'},
+                json=payload
+            )
+            
+            if response.status_code == 429:
+                if retry == max_retries - 1:
+                    raise Exception("Max retries reached after rate limit")
+                    
+                delay = base_delay * (2 ** retry)  # Exponential backoff
+                print(f"Rate limited. Retrying in {delay} seconds...")
+                time.sleep(delay)
+                continue
+                
+            response.raise_for_status()
+            break
+            
+        except requests.exceptions.RequestException as e:
+            if retry == max_retries - 1:
+                raise e
+            continue
 
     try:
         content = response.json()['choices'][0]['message']['content']
