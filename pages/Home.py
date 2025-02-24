@@ -62,7 +62,7 @@ col_mgmt1, col_mgmt2 = st.columns(2)
 
 with col_mgmt1:
     if st.button("🛠️ Rebuild Campaign Data"):
-        st.switch_page("pages/Rebuild_Campaign.py")
+        st.switch_page("/Rebuild_Campaign.py")
 
 with col_mgmt2:
     if st.button("☁️ Import Yaktribe Data"):
