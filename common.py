@@ -13,6 +13,30 @@ FULL_CAMPAIGN_DATA_FILE = "full_campaign_data.json"
 
 # -------------------- Local Campaign Models --------------------
 
+class Injury(BaseModel):
+    """Model for tracking fighter injuries"""
+    injury_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    severity: str  # Minor, Major, Critical
+    permanent: bool = False
+
+class Skill(BaseModel):
+    """Model for fighter skills and special abilities"""
+    skill_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    type: str  # Combat, Agility, Brawn, etc.
+    description: str
+    prerequisites: List[str] = []
+
+class Advancement(BaseModel):
+    """Model for tracking fighter experience advancements"""
+    advancement_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    type: str  # StatIncrease, Skill, Talent
+    description: str
+    xp_cost: int
+    date_acquired: datetime = Field(default_factory=datetime.now)
+
 class Equipment(BaseModel):
     equipment_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
@@ -73,6 +97,23 @@ class Territory(BaseModel):
     y: Optional[float] = None  # For an abstract map
     lat: Optional[float] = None  # For geolocated maps (if needed)
     lng: Optional[float] = None  # For geolocated maps (if needed)
+
+class TerritoryEffect(BaseModel):
+    effect_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    income_bonus: int = 0
+    reputation_bonus: int = 0
+    special_rules: List[str] = []
+
+class Scenario(BaseModel):
+    scenario_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    objectives: List[str] = []
+    special_rules: List[str] = []
+    min_players: int = 2
+    max_players: int = 4
 
 class LocalBattle(BaseModel):
     battle_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
