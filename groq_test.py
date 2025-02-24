@@ -83,18 +83,18 @@ def get_gang(gang_name: str, temperature: float = 0.5, attempt: int = 1) -> Gang
         'Content-Type': 'application/json'
     }
 
-    # Build the system prompt.
-    system_message = (
-        "You are a Necromunda gang database. You must generate a valid JSON object "
-        "that strictly conforms to the following JSON schema. Do not include any extra text.\n\n"
+    from prompt_templates.gang_gen_v2 import generate_system_prompt
+
+    # Get the JSON schema
+    schema_json = json.dumps(GangSchema.model_json_schema(), indent=2)
+    
+    # Build the system prompt using the template
+    system_message = generate_system_prompt(
+        faction_name="Escher",  # You can make this dynamic based on gang_name
+        schema_json=schema_json,
+        credit_limit=1000,
+        rules="exactly one Leader, at most two Champions, and at least three Gangers"
     )
-    if attempt > 1:
-        system_message += (
-            f"This is re-run attempt number {attempt}. Please reformat your output to contain only valid JSON "
-            "exactly according to the schema, with no additional commentary.\n\n"
-        )
-    # Append the JSON schema definition.
-    system_message += json.dumps(GangSchema.model_json_schema(), indent=2)
 
     payload = {
         'messages': [
@@ -126,22 +126,39 @@ def get_gang(gang_name: str, temperature: float = 0.5, attempt: int = 1) -> Gang
 def get_valid_gang(gang_name: str, max_retries: int = 3) -> GangSchema:
     """
     Tries to fetch and validate gang data up to max_retries times.
-    The temperature is increased with each attempt to introduce variance.
+    Uses improved prompts on retries.
     """
     base_temperature = 0.5
+    schema_json = json.dumps(GangSchema.model_json_schema(), indent=2)
+    rules = "exactly one Leader, at most two Champions, and at least three Gangers"
+    
     for attempt in range(1, max_retries + 1):
         try:
-            # Increase temperature slightly with each attempt.
+            # Increase temperature slightly with each attempt
             current_temperature = base_temperature + (attempt - 1) * 0.1
             print(f"Attempt {attempt} with temperature {current_temperature:.2f}...")
-            gang = get_gang(gang_name, temperature=current_temperature, attempt=attempt)
+            
+            # Use rerun prompt template for retry attempts
+            if attempt > 1:
+                from prompt_templates.gang_gen import generate_rerun_prompt
+                system_message = generate_rerun_prompt(
+                    gang_name=gang_name,
+                    schema_json=schema_json,
+                    credit_limit=1000,
+                    rules=rules,
+                    attempt=attempt
+                )
+                gang = get_gang(gang_name, temperature=current_temperature, attempt=attempt)
+            else:
+                gang = get_gang(gang_name, temperature=current_temperature, attempt=attempt)
             return gang
+            
         except (ValidationError, ValueError) as e:
             print(f"Attempt {attempt} failed: {e}")
             if attempt == max_retries:
                 raise RuntimeError("Failed to generate a valid gang after multiple attempts.")
             else:
-                print("Retrying with updated parameters...\n")
+                print("Retrying with improved prompt...\n")
 
 # --- PRINT GANG DETAILS ---
 
