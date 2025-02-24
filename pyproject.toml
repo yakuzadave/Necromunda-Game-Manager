@@ -31,6 +31,7 @@ scikit-learn = "^1.6.1"
 rich = "^13.9.4"
 streamlit-mermaid = "^0.3.0"
 flask = "^3.1.0"
+groq = "^0.18.0"
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md
