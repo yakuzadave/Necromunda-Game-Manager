@@ -23,8 +23,10 @@ def create_gang_summary(gangs):
         "Territories": ", ".join(gang.territories) if gang.territories else "",
         "Fighters Count": len(gang.gangers) if hasattr(gang, "gangers") else 0,
     })
+    return data
 
-# Create a DataFrame from the list of dictionaries.
+# Create a DataFrame from the list of dictionaries
+data = create_gang_summary(st.session_state.gangs)
 df = pd.DataFrame(data)
 
 st.markdown("### Gangs Summary Table")
