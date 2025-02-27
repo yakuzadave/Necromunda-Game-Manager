@@ -1,4 +1,3 @@
-
 import streamlit as st
 import logging
 from datetime import datetime
@@ -64,24 +63,45 @@ def get_caller_info():
 if 'logger' not in st.session_state:
     st.session_state.logger = setup_logger()
 
-def log_debug(msg):
-    caller = get_caller_info()
-    st.session_state.logger.debug(f"{caller} - {msg}")
-
-def log_info(msg):
-    caller = get_caller_info()
-    st.session_state.logger.info(f"{caller} - {msg}")
-
-def log_warning(msg):
-    caller = get_caller_info()
-    st.session_state.logger.warning(f"{caller} - {msg}")
-
-def log_error(msg, exc_info=None):
-    caller = get_caller_info()
-    if exc_info:
-        st.session_state.logger.error(f"{caller} - {msg}\n{traceback.format_exc()}", exc_info=True)
+def log_debug(message, exc_info=False):
+    """Log a debug message"""
+    if 'logger' in st.session_state:
+        logger = st.session_state.logger
+        logger.debug(message, exc_info=exc_info)
     else:
-        st.session_state.logger.error(f"{caller} - {msg}")
+        print(f"DEBUG: {message}")
+        if exc_info:
+            traceback.print_exc()
+
+def log_info(message, exc_info=False):
+    """Log an info message"""
+    if 'logger' in st.session_state:
+        logger = st.session_state.logger
+        logger.info(message, exc_info=exc_info)
+    else:
+        print(f"INFO: {message}")
+        if exc_info:
+            traceback.print_exc()
+
+def log_warning(message, exc_info=False):
+    """Log a warning message"""
+    if 'logger' in st.session_state:
+        logger = st.session_state.logger
+        logger.warning(message, exc_info=exc_info)
+    else:
+        print(f"WARNING: {message}")
+        if exc_info:
+            traceback.print_exc()
+
+def log_error(message, exc_info=True):
+    """Log an error message"""
+    if 'logger' in st.session_state:
+        logger = st.session_state.logger
+        logger.error(message, exc_info=exc_info)
+    else:
+        print(f"ERROR: {message}")
+        if exc_info:
+            traceback.print_exc()
 
 def log_function_call(func):
     """Decorator to log function entry and exit"""
