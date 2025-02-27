@@ -36,88 +36,56 @@
                     "advance_count": 3,
                     "equipment": [
                         {
-<<<<<<< HEAD
-                            "equipment_id": "048c5030-c4fb-4cc5-a3a5-2cd58a10047d",
-=======
-                            "equipment_id": "d268667b-e273-482f-9a8f-34e71a6d529b",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "03141675-80e7-4588-b0bf-0f5bec83165a",
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "22d0d8d3-1ddb-4c59-8854-466fcc1a4628",
-=======
-                            "equipment_id": "db9cc802-92fd-4616-8096-d09632f280c6",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "75c5c08e-564a-46a5-82bd-12fd205b701e",
                             "name": "Hand Flamer",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "2eca8ce0-8a36-44b8-b61c-6cf12863866d",
-=======
-                            "equipment_id": "590ed6ff-c101-40de-91cb-86b5096ce956",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "0511bf3e-742b-4bfb-b98f-c85c575a76ba",
                             "name": "Respirator",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "40c60849-4e90-4092-a909-476f062fcd3e",
-=======
-                            "equipment_id": "656a5fb3-36b7-4ce3-99c1-9d5d9bb556be",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "6629ae09-e7ef-42b5-b5da-804f27a8d959",
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "36fe5f67-4e4b-478b-812d-9d7fa3b2839b",
-=======
-                            "equipment_id": "013f06c6-7275-4cdf-8fca-e6490ea99f39",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "86fdf987-05fd-48f6-8d04-0cfca30c8701",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "f323cb0e-5404-47bc-8b90-e4596c126104",
-=======
-                            "equipment_id": "a1da4e20-f763-40ef-b9c7-fa543c556e61",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "533d802a-10ca-4648-b575-6322ff37b72e",
                             "name": "Cult Icon",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "b76b9080-a6c8-4f80-a8ec-ff4280cc70b4",
-=======
-                            "equipment_id": "1b9e9280-5ee8-416f-9a71-177eec8e27c6",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "b233c88d-2434-4897-8431-b45a69e47717",
                             "name": "Psychic Familiar",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-<<<<<<< HEAD
-                            "equipment_id": "f773ff71-827e-472a-b1fa-0191ebc00c3e",
-=======
-                            "equipment_id": "4eab0b68-24af-41c2-852a-a1c7538013e7",
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
+                            "equipment_id": "db715200-0ce6-46ab-bd64-4f75b532a96f",
                             "name": "Ablative Overlay",
                             "qty": 1,
                             "cost": 0,

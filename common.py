@@ -274,9 +274,6 @@ def save_equipment(equipment):
         json.dump(equipment.dict(), f, indent=4)
 # -------------------- Utility Functions --------------------
 
-<<<<<<< HEAD
-
-
 def get_gang_id(gang):
     """
     Returns a sanitized gang identifier.
@@ -359,38 +356,12 @@ def get_battle_id(battle):
             battle["battle_id"] = new_id
         return new_id
 
-
-def get_gang_id(gang):
-    """
-    Returns a safe identifier for the gang.
-    If the gang already has a 'gang_id', sanitize and return it.
-    Otherwise, generate a new ID based on the gang name.
-    """
-    # Check if gang has an attribute 'gang_id' and it's non-empty.
-    if hasattr(gang, "gang_id") and gang.gang_id:
-        # Sanitize the gang id by replacing problematic characters.
-        return f"G_{gang.gang_id.replace('-', '_').replace(' ', '_')}"
-    else:
-        # Generate a new id using the gang name (sanitized) and a short random UUID.
-        safe_name = gang.gang_name.replace(" ", "_")
-        new_id = f"G_{safe_name}_{uuid.uuid4().hex[:6]}"
-        try:
-            setattr(gang, "gang_id", new_id)
-        except Exception:
-            # If the gang is a dict instead of a model:
-            gang["gang_id"] = new_id
-        return new_id
-
-
-def assign_territory(territory_name: str, gang_name: str, gangs: List[Gang], territories: List[Territory]):
-=======
 def assign_territory(
     territory_name: str, 
     gang_name: str, 
     gangs: List[Gang], 
     territories: List[Territory]
 ):
->>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
     for territory in territories:
         if territory.name == territory_name:
             territory.controlled_by = gang_name
