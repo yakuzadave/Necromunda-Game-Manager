@@ -229,7 +229,7 @@ def show_dashboard():
             # Quick action buttons
             if st.button("View Details", key=f"view_{gang.gang_id}"):
                 st.session_state.current_gang = gang
-                st.switch_page("views/2_Gangs.py")  # Fix path reference - was pages/2_Gangs.py
+                st.switch_page("views/2_Gangs.py")  # Fixed path reference
 
 # Call show_dashboard function
 show_dashboard()

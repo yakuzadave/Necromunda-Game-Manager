@@ -254,6 +254,19 @@ def show_equipment_management():
                 else:
                     st.info("This gang has no fighters to equip.")
 
+    # Check if coming from fighter details page
+    if "from_fighter_details" in st.session_state and st.session_state.from_fighter_details:
+        st.info(f"Select equipment for your fighter and click 'Equip Fighter'")
+        # Clear the flag after use
+        st.session_state.from_fighter_details = False
+        
+        # Auto-select the fighter's gang if available
+        if "selected_gang_id" in st.session_state:
+            for i, gang in enumerate(gangs):
+                if gang.gang_id == st.session_state.selected_gang_id:
+                    st.session_state.gang_selector_index = i
+                    break
+
     # ------ Equipment Catalog Tab ------
     with tab2:
         st.subheader("Equipment Catalog")
