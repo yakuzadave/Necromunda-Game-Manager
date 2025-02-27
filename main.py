@@ -1,4 +1,12 @@
+"""
+Necromunda Campaign Manager - Main Application Entry Point
+
+This module serves as the main entry point for the Necromunda Campaign Manager 
+Streamlit application.
+It handles initial setup, session state management, and displays the main landing page.
+"""
 import streamlit as st
+<<<<<<< HEAD
 import os
 import json
 import logging
@@ -49,6 +57,10 @@ from common import (
     Member, CampaignGang, CampaignTerritory, BattleGang, Battle, Campaign,
     load_data, save_data, assign_territory, to_gang_obj, load_full_campaign
 )
+=======
+
+from common import load_data
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
 
 # Set page config **before anything else**
 st.set_page_config(

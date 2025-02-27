@@ -35,7 +35,7 @@ with col1:
                         if st.button(f"View {fighter.name} Details", key=f"view_{fighter.ganger_id}"):
                             # Store both fighter and its gang in session state
                             st.session_state.selected_fighter = {"fighter": fighter, "gang": gang}
-                            st.experimental_rerun()
+                            st.rerun()
                 else:
                     st.info("No fighters found for this gang.")
                 st.markdown("---")
@@ -129,6 +129,6 @@ with col2:
 
         if st.button("Clear Selection"):
             st.session_state.selected_fighter = None
-            st.experimental_rerun()
+            st.rerun()
     else:
         st.info("Select a fighter from the left to view details.")

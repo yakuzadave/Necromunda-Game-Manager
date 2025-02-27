@@ -1,6 +1,7 @@
 import streamlit as st
-from common import Equipment  # Import Equipment model from the common module
 from pydantic import ValidationError
+
+from common import Equipment  # Import Equipment model from the common module
 
 st.title("Equipment Management")
 
@@ -73,6 +74,6 @@ if st.session_state.equipment_list:
             if st.button("Remove", key=f"remove_eq_{idx}"):
                 st.session_state.equipment_list.pop(idx)
                 st.success(f"Removed equipment: {eq.name}")
-                st.experimental_rerun()
+                st.rerun()
 else:
     st.info("No equipment added yet.")

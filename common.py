@@ -4,8 +4,8 @@ import streamlit as st
 import json
 import os
 import uuid
-from datetime import datetime
 from typing import List, Optional
+
 from pydantic import BaseModel, Field, ValidationError
 
 # -------------------- Constants --------------------
@@ -226,7 +226,11 @@ def load_data():
     else:
         return [], [], []
 
-def save_data(gangs: List[Gang], territories: List[Territory], battles: List[LocalBattle]):
+def save_data(
+    gangs: List[Gang], 
+    territories: List[Territory], 
+    battles: List[LocalBattle]
+):
     data = {
         "gangs": [g.dict() for g in gangs],
         "territories": [t.dict() for t in territories],
@@ -270,6 +274,7 @@ def save_equipment(equipment):
         json.dump(equipment.dict(), f, indent=4)
 # -------------------- Utility Functions --------------------
 
+<<<<<<< HEAD
 
 
 def get_gang_id(gang):
@@ -378,6 +383,14 @@ def get_gang_id(gang):
 
 
 def assign_territory(territory_name: str, gang_name: str, gangs: List[Gang], territories: List[Territory]):
+=======
+def assign_territory(
+    territory_name: str, 
+    gang_name: str, 
+    gangs: List[Gang], 
+    territories: List[Territory]
+):
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
     for territory in territories:
         if territory.name == territory_name:
             territory.controlled_by = gang_name

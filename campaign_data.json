@@ -36,56 +36,88 @@
                     "advance_count": 3,
                     "equipment": [
                         {
+<<<<<<< HEAD
                             "equipment_id": "048c5030-c4fb-4cc5-a3a5-2cd58a10047d",
+=======
+                            "equipment_id": "d268667b-e273-482f-9a8f-34e71a6d529b",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "22d0d8d3-1ddb-4c59-8854-466fcc1a4628",
+=======
+                            "equipment_id": "db9cc802-92fd-4616-8096-d09632f280c6",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Hand Flamer",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "2eca8ce0-8a36-44b8-b61c-6cf12863866d",
+=======
+                            "equipment_id": "590ed6ff-c101-40de-91cb-86b5096ce956",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Respirator",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "40c60849-4e90-4092-a909-476f062fcd3e",
+=======
+                            "equipment_id": "656a5fb3-36b7-4ce3-99c1-9d5d9bb556be",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "36fe5f67-4e4b-478b-812d-9d7fa3b2839b",
+=======
+                            "equipment_id": "013f06c6-7275-4cdf-8fca-e6490ea99f39",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "f323cb0e-5404-47bc-8b90-e4596c126104",
+=======
+                            "equipment_id": "a1da4e20-f763-40ef-b9c7-fa543c556e61",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Cult Icon",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "b76b9080-a6c8-4f80-a8ec-ff4280cc70b4",
+=======
+                            "equipment_id": "1b9e9280-5ee8-416f-9a71-177eec8e27c6",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Psychic Familiar",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
+<<<<<<< HEAD
                             "equipment_id": "f773ff71-827e-472a-b1fa-0191ebc00c3e",
+=======
+                            "equipment_id": "4eab0b68-24af-41c2-852a-a1c7538013e7",
+>>>>>>> dd4192b (Refactor imports and improve Yaktribe gang import functionality)
                             "name": "Ablative Overlay",
                             "qty": 1,
                             "cost": 0,
@@ -126,21 +158,21 @@
                     "advance_count": 3,
                     "equipment": [
                         {
-                            "equipment_id": "825c6cc0-04f7-477c-b299-3fe6b3e60e23",
+                            "equipment_id": "fd30f421-53aa-4f44-bfb4-cbf12b28d9a5",
                             "name": "Medicae Kit",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "ea0eba8c-0c68-4bcd-9d0a-9d2c32b08055",
+                            "equipment_id": "82224b85-9f09-4c2f-9397-28989316701f",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "62e889a0-f2d0-4740-b482-ff7f18ff628b",
+                            "equipment_id": "1e3512e4-1231-4f1f-b76b-63585e67397f",
                             "name": "Power Pick",
                             "qty": 1,
                             "cost": 0,
@@ -180,42 +212,42 @@
                     "advance_count": 2,
                     "equipment": [
                         {
-                            "equipment_id": "4851c7d9-ec94-4b2f-bb68-adfe24d8d33e",
+                            "equipment_id": "7ebbe5b1-705d-4211-9fe1-8a6d5f5ec75e",
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "fd543255-e3aa-4155-b523-25bb6dc4e3bc",
+                            "equipment_id": "f22f6861-dba9-4f69-9789-fdb40f1d7521",
                             "name": "Boltgun",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "0def1ae9-eee9-4325-ae52-d9b8601ce02c",
+                            "equipment_id": "ce76ed15-255f-4983-94ab-a2b0946d1d20",
                             "name": "Grapnel launcher",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "9327a4ba-1c53-4904-8854-1ef7c5095436",
+                            "equipment_id": "0f9a7063-6ae0-4fb7-9a6c-f711eb4b1b5c",
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "bb3d482c-f735-4075-890b-3a9c1a615404",
+                            "equipment_id": "08e3f48a-f6d2-4051-83e5-7d773b8ec840",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "6966119d-f651-475a-b3b8-59fe9e23177e",
+                            "equipment_id": "ea84a586-8594-4643-b410-e22a4606ea64",
                             "name": "Web Gun",
                             "qty": 1,
                             "cost": 0,
@@ -255,70 +287,70 @@
                     "advance_count": 2,
                     "equipment": [
                         {
-                            "equipment_id": "233b53f4-a006-4b05-bbcb-2c3e053f9213",
+                            "equipment_id": "7c41f66a-7393-403f-9de0-0b6da5870592",
                             "name": "Autopistol",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "8915796d-6114-4ba9-aa80-ab94193c7bbc",
+                            "equipment_id": "2b405919-9faa-4694-9a1b-d70ab1223699",
                             "name": "Bolt Pistol",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "436dd3f2-c9e9-4d8c-b591-12c1ba18d6e0",
+                            "equipment_id": "f009d626-e4af-4dfa-bcff-40ecfc53053b",
                             "name": "Grapnel launcher",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "b321eca1-7752-4145-975d-5f4f1a82b241",
+                            "equipment_id": "d4b14f27-31cd-46ef-aea0-7fdbe28290e3",
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "5690b603-3dfe-4bf5-b9c8-fc5b024f65e4",
+                            "equipment_id": "47e583d5-0f9a-4501-a1fa-eb2dd56368f8",
                             "name": "Mono-sight",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "2b9a5e1e-2a40-41af-b5b1-3801e91dbb11",
+                            "equipment_id": "62d19b91-0bc1-4140-9919-877ab7a1f1a6",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "713a698b-6493-4c44-bfe6-3dddd0cd18a0",
+                            "equipment_id": "ae0b6cba-ee43-41fc-a579-dc67c33e64db",
                             "name": "Chainsword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "6a522f55-476b-412f-b197-3f544302a0f6",
+                            "equipment_id": "21a0cb7f-4cb1-4d11-be1b-7b13e89a6934",
                             "name": "Third Arm",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "86dd66fe-7877-43dd-88c0-c2256bdcd5f8",
+                            "equipment_id": "4cbd2d7f-45f5-403c-b13b-cf2b74778a01",
                             "name": "Demolition Charge",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "3391f7fc-6489-455c-b2a0-408add039a7b",
+                            "equipment_id": "eff1b367-233d-41a9-8983-e76946aca325",
                             "name": "Ablative Overlay",
                             "qty": 1,
                             "cost": 0,
@@ -358,42 +390,42 @@
                     "advance_count": 2,
                     "equipment": [
                         {
-                            "equipment_id": "a0ae89b1-0519-41d3-b89f-e1e693f9661a",
+                            "equipment_id": "328ab7ac-5837-4426-b5b1-60b0fde60d00",
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "2e4ec015-14dd-4dcb-a0ec-c7ead56023ef",
+                            "equipment_id": "53524738-ded2-4af3-b21e-cee891749d5c",
                             "name": "Grenade Launcher w/Frag+Krak",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "6f799d2c-d971-44c3-81e6-8879d9ee37bd",
+                            "equipment_id": "b647721c-a030-436e-bc70-e0eb89279ff2",
                             "name": "Respirator",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "2996c036-aa87-4c8a-bcbf-842e997c04b5",
+                            "equipment_id": "3c7d8311-b767-4a01-a40a-f230b8c4e8a7",
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "f9248c64-c7d9-472f-8124-9fa5f9f9381e",
+                            "equipment_id": "b561e698-6815-4de6-9c43-877f5f8e9c69",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "4bd92e6f-5b3c-412a-87ab-8de5d12fea34",
+                            "equipment_id": "a1152705-e50c-4235-9fc4-a9dbb8089050",
                             "name": "Incendiary Charge",
                             "qty": 1,
                             "cost": 0,
@@ -466,14 +498,14 @@
                     "advance_count": 1,
                     "equipment": [
                         {
-                            "equipment_id": "8830a966-b31c-4ed2-8880-531d3fb38828",
+                            "equipment_id": "f0166b20-7f4b-4ce5-8426-e1363b9c22f3",
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "3323c4ba-bc45-40cd-bf8b-4e7bf2c60cd6",
+                            "equipment_id": "c2a48771-df84-4faf-b97b-54fb41d7d82a",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
@@ -513,49 +545,49 @@
                     "advance_count": 2,
                     "equipment": [
                         {
-                            "equipment_id": "10200c24-295e-43e6-b447-bbb69d79b577",
+                            "equipment_id": "37f4f616-5780-4087-876b-30cdd90791db",
                             "name": "Power Sword",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "d9251c9f-fabd-41ba-9e65-92d18719a9f0",
+                            "equipment_id": "71909d7f-0ee0-4897-92c4-9f74b9042768",
                             "name": "Heavy Stubber*",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "8e60734c-db9c-44b8-811d-b071dce5ba28",
+                            "equipment_id": "3e26ebd4-3e9d-49df-9581-d1dc45ee7be7",
                             "name": "Photo-goggles",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "d8d581cd-d114-4ee4-833f-1e9145b22741",
+                            "equipment_id": "8c2cb39e-08a0-44d5-80bc-8c5f7449b67e",
                             "name": "Bio-booster",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "39a23d99-048a-4dac-bdfb-7552756987bb",
+                            "equipment_id": "716e51d6-0b1a-4af3-96fb-51e1cf77899f",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "8c46d277-67db-4b54-9d32-ba81fa2c2653",
+                            "equipment_id": "1ec2d9c6-40be-41f0-9492-de3285aa6d5a",
                             "name": "Third Arm",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "37e7bc7e-7706-429b-a440-b33d8210ce6b",
+                            "equipment_id": "3915f5cf-713e-4401-9573-6a8b9aee3268",
                             "name": "Stun Grenades",
                             "qty": 1,
                             "cost": 0,
@@ -595,28 +627,28 @@
                     "advance_count": 1,
                     "equipment": [
                         {
-                            "equipment_id": "d1ccbbcf-9e44-4393-aa21-7b396bfaa31b",
+                            "equipment_id": "a4ead391-4893-432a-9ac0-6725f799ad61",
                             "name": "Ferocious Jaws",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "dc25092b-bcdc-49fa-9942-f55804fad825",
+                            "equipment_id": "2c91b105-c8c1-4728-a703-ecbdede46dc5",
                             "name": "Crushing Claws",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "b1481f05-6fda-4970-9632-bf9a3aca00a1",
+                            "equipment_id": "84bb3126-e5ba-440f-aef7-44d40a3f5bee",
                             "name": "Multiple Legs",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "41253daf-1c64-48f1-8276-a25c87fe6240",
+                            "equipment_id": "8af3bf57-44df-490e-b4f6-5317955fe3db",
                             "name": "Scaly Hide",
                             "qty": 1,
                             "cost": 0,
@@ -654,35 +686,35 @@
                     "advance_count": 0,
                     "equipment": [
                         {
-                            "equipment_id": "8f941ddb-5809-43df-b44b-916521024126",
+                            "equipment_id": "1addd98c-e9ab-4df0-9544-685b409ea89a",
                             "name": "Carapace Armor - Light",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "b5d41ad2-257e-4d14-83c9-5085cf30c70b",
+                            "equipment_id": "bedb4134-850c-4799-bfb6-b5f46cabd452",
                             "name": "Carapace Armor - Heavy",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "bcd2dc57-be43-447c-9f66-6c7d4c0152a2",
+                            "equipment_id": "2612584f-4bdd-480a-a2a0-5db44dda2e28",
                             "name": "Tunneling Claw",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "78a8d7a6-2c29-4c83-9f29-458f9213904d",
+                            "equipment_id": "54873601-5f0e-450c-9686-487e43b24258",
                             "name": "Grav-Fist",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "a99b494d-3c53-47bb-87ee-2560983e99df",
+                            "equipment_id": "a22f3461-31e5-46a0-b932-865325dac04f",
                             "name": "Armor Spikes",
                             "qty": 1,
                             "cost": 0,
@@ -723,21 +755,21 @@
                     "advance_count": 0,
                     "equipment": [
                         {
-                            "equipment_id": "cb6b4c1e-1f98-432a-aab5-84f807baa9ad",
+                            "equipment_id": "6e56bcc0-191a-4b41-9231-fc9ed1f309a9",
                             "name": "Maul",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "0acef2b4-f86e-46ba-b4df-f3b666c1bc31",
+                            "equipment_id": "4cd7d4a8-951f-49bc-8962-7f2da1cd9910",
                             "name": "Shotgun - Solid/Scatter",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "f66f763e-b999-4bc6-ada4-8502e1894b81",
+                            "equipment_id": "8e45c11c-59fa-4ddd-a00b-2a9f9a2b981a",
                             "name": "Mesh Armor",
                             "qty": 1,
                             "cost": 0,
@@ -775,28 +807,28 @@
                     "advance_count": 0,
                     "equipment": [
                         {
-                            "equipment_id": "79ff97bf-88a6-4dfb-9fd9-4bfa9e8e99b8",
+                            "equipment_id": "df845aa6-9550-4f00-a132-4aba3042026c",
                             "name": "Axe",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "7e9fd7d2-8fcb-4de5-aba4-a8b974e0113d",
+                            "equipment_id": "ad12c2a6-b521-43e8-9ad7-4f100feff70f",
                             "name": "Laspistol",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "ba20ff56-489c-416d-8f9b-55e5f0a80b2b",
+                            "equipment_id": "dcb9ffe1-a693-4916-954c-1bff25642023",
                             "name": "Frag Grenade",
                             "qty": 1,
                             "cost": 0,
                             "traits": ""
                         },
                         {
-                            "equipment_id": "4e2149de-acb7-4ade-b00e-49fd63a56734",
+                            "equipment_id": "c0077e94-5b0e-4bb9-89a8-dab36dcf6f3c",
                             "name": "Flak Armor",
                             "qty": 1,
                             "cost": 0,
@@ -834,7 +866,7 @@
                     "advance_count": 0,
                     "equipment": [
                         {
-                            "equipment_id": "6a790e86-fe3e-454a-bdc8-fd53349cd2d9",
+                            "equipment_id": "aeaa5181-748a-4a85-a257-450043dded03",
                             "name": "Chainaxe",
                             "qty": 1,
                             "cost": 0,
