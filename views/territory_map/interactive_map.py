@@ -1,6 +1,7 @@
 import os
 import datetime
 import tempfile
+import math  # Added for zoom calculation
 import folium
 import folium.plugins
 import pandas as pd
@@ -18,10 +19,62 @@ from utils.map_utils import (
     generate_placeholder_map,
     get_random_coordinates,
 )
+from views.territory_map.map_config import get_map_settings
+from views.territory_map.label_placement import optimize_label_placement
+
+def fit_map_to_territories(territories, padding=0.1):
+    """
+    Calculate bounds to fit all territories in view
+    
+    Args:
+        territories: List of territories to include in the view
+        padding: Extra padding as a percentage of the total size
+    
+    Returns:
+        tuple: (center coordinates [y, x], zoom level)
+    """
+    if not territories:
+        return [2048, 2048], 1  # Default center and zoom if no territories
+    
+    # Extract valid coordinates
+    valid_coords = [(t.y, t.x) for t in territories if t.x is not None and t.y is not None]
+    
+    if not valid_coords:
+        return [2048, 2048], 1
+    
+    # Find bounds
+    min_y = min(coord[0] for coord in valid_coords)
+    max_y = max(coord[0] for coord in valid_coords)
+    min_x = min(coord[1] for coord in valid_coords)
+    max_x = max(coord[1] for coord in valid_coords)
+    
+    # Add padding
+    y_padding = (max_y - min_y) * padding
+    x_padding = (max_x - min_x) * padding
+    
+    # Calculate center
+    center_y = (min_y + max_y) / 2
+    center_x = (min_x + max_x) / 2
+    
+    # Calculate zoom level (approximate)
+    y_diff = max_y - min_y + 2 * y_padding
+    x_diff = max_x - min_x + 2 * x_padding
+    max_diff = max(y_diff, x_diff)
+    
+    # A simple formula to estimate the zoom level
+    if max_diff <= 0:
+        zoom_level = 1
+    else:
+        zoom_level = max(0, min(5, 5 - math.log(max_diff / 1000, 2)))
+    
+    return [center_y, center_x], zoom_level
 
 def render_interactive_map():
     """Render the interactive map tab content"""
     st.header("Interactive Necromunda Map")
+    
+    # Get map configuration
+    map_config = get_map_settings()
     
     # Add search functionality to find territories
     search_col1, search_col2 = st.columns([3, 1])
@@ -113,28 +166,37 @@ def render_interactive_map():
             st.session_state.territories[i] = Territory(**territory_dict)
 
     # Add territory filtering
-    col_filter1, col_filter2, col_filter3 = st.columns(3)
-    
-    with col_filter1:
-        # Get unique territory types and factions for filtering
-        territory_types = sorted(set(t.type for t in st.session_state.territories))
-        selected_types = st.multiselect(
-            "Filter by Territory Type",
-            options=territory_types,
-            default=[]
-        )
-    
-    with col_filter2:
-        factions = sorted(set(t.controlled_by for t in st.session_state.territories 
-                        if t.controlled_by))
-        selected_factions = st.multiselect(
-            "Filter by Faction",
-            options=["Unclaimed"] + factions,
-            default=[]
-        )
-    
-    with col_filter3:
-        show_all = st.checkbox("Show All Territories", value=True)
+    filter_expander = st.expander("Territory Filters", expanded=False)
+    with filter_expander:
+        col_filter1, col_filter2, col_filter3 = st.columns(3)
+        
+        with col_filter1:
+            # Get unique territory types and factions for filtering
+            territory_types = sorted(set(t.type for t in st.session_state.territories))
+            selected_types = st.multiselect(
+                "Filter by Territory Type",
+                options=territory_types,
+                default=[]
+            )
+        
+        with col_filter2:
+            factions = sorted(set(t.controlled_by for t in st.session_state.territories 
+                            if t.controlled_by))
+            selected_factions = st.multiselect(
+                "Filter by Faction",
+                options=["Unclaimed"] + factions,
+                default=[]
+            )
+        
+        with col_filter3:
+            show_all = st.checkbox("Show All Territories", value=True)
+            
+            # Add a button to fit map to all territories
+            if st.button("Fit Map to All Territories"):
+                center, zoom = fit_map_to_territories(st.session_state.territories)
+                st.session_state.map_center = center
+                st.session_state.map_zoom = zoom
+                st.rerun()
         
     # Filter territories based on selections
     filtered_territories = st.session_state.territories
@@ -162,29 +224,83 @@ def render_interactive_map():
         base_map_image = generate_placeholder_map()
 
     # --------------------- Map Controls ---------------------
-    with st.expander("Map Controls", expanded=False):
-        col1, col2, col3 = st.columns(3)
+    map_controls_col1, map_controls_col2 = st.columns([2, 1])
+    
+    with map_controls_col1:
+        view_options = st.expander("Map View Options", expanded=False)
+        with view_options:
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                show_grid = st.checkbox("Show Grid Lines", value=map_config["show_grid"])
+                show_labels = st.checkbox("Show Territory Labels", value=map_config["show_labels"])
+                show_faction_lines = st.checkbox(
+                    "Show Faction Connection Lines", value=map_config["show_faction_lines"]
+                )
+                
+            with col2:
+                marker_size = st.slider("Territory Marker Size", 5, 20, map_config["marker_size"])
+                label_size = st.slider("Label Size", 8, 24, map_config["label_size"])
+                map_opacity = st.slider("Map Opacity", 0.1, 1.0, map_config["map_opacity"], 0.1)
+                
+            with col3:
+                clustering_enabled = st.checkbox("Enable Clustering", value=map_config["clustering_enabled"])
+                if clustering_enabled:
+                    cluster_distance = st.slider("Cluster Distance", 100, 1000, map_config["cluster_distance"])
+                else:
+                    cluster_distance = map_config["cluster_distance"]
+                    
+                show_adjacent_lines = st.checkbox("Show Adjacent Territories", value=map_config["show_adjacent_lines"])
+                if show_adjacent_lines:
+                    adjacency_threshold = st.slider("Adjacency Threshold", 100, 1000, map_config["adjacency_threshold"])
+                else:
+                    adjacency_threshold = map_config["adjacency_threshold"]
+            
+            # Add viewport fitting options
+            st.subheader("Viewport Controls")
+            viewport_col1, viewport_col2 = st.columns(2)
+            
+            with viewport_col1:
+                if st.button("Fit to All Territories"):
+                    center, zoom = fit_map_to_territories(st.session_state.territories)
+                    st.session_state.map_center = center
+                    st.session_state.map_zoom = zoom
+                    st.rerun()
+                    
+                if filtered_territories and st.button("Fit to Filtered Territories"):
+                    center, zoom = fit_map_to_territories(filtered_territories)
+                    st.session_state.map_center = center
+                    st.session_state.map_zoom = zoom
+                    st.rerun()
+            
+            with viewport_col2:
+                auto_fit = st.checkbox("Auto-fit on Territory Creation", 
+                                       value=st.session_state.get("auto_fit_new_territories", False))
+                if auto_fit != st.session_state.get("auto_fit_new_territories", False):
+                    st.session_state.auto_fit_new_territories = auto_fit
+    
+    with map_controls_col2:
+        st.caption("Map Controls")
+        # Add buttons for common map operations
+        map_actions_col1, map_actions_col2 = st.columns(2)
         
-        with col1:
-            show_grid = st.checkbox("Show Grid Lines", value=True)
-            show_labels = st.checkbox("Show Territory Labels", value=True)
-            show_faction_lines = st.checkbox(
-                "Show Faction Connection Lines", value=True
-            )
+        with map_actions_col1:
+            if st.button("📏 Reset Zoom"):
+                st.session_state.map_zoom = 1
+                st.rerun()
             
-        with col2:
-            marker_size = st.slider("Territory Marker Size", 5, 20, 10)
-            label_size = st.slider("Label Size", 8, 24, 12)
-            map_opacity = st.slider("Map Opacity", 0.1, 1.0, 1.0, 0.1)
+            if st.button("📸 Export Map"):
+                st.session_state.show_export_dialog = True
+                st.rerun()
+                
+        with map_actions_col2:
+            if st.button("🔄 Recenter Map"):
+                st.session_state.map_center = [2048, 2048]
+                st.rerun()
             
-        with col3:
-            clustering_enabled = st.checkbox("Enable Clustering", value=False)
-            cluster_distance = 300  # Default value
-            if clustering_enabled:
-                cluster_distance = st.slider("Cluster Distance", 100, 1000, 300)
-            show_adjacent_lines = st.checkbox("Show Adjacent Territories", value=False)
-            if show_adjacent_lines:
-                adjacency_threshold = st.slider("Adjacency Threshold", 100, 1000, 400)
+            if st.button("🗺️ Distance Matrix"):
+                st.session_state.show_distance_matrix = True
+                st.rerun()
 
     # --------------------- Color Mapping ---------------------
     faction_color_mapping = {}
@@ -224,9 +340,12 @@ def render_interactive_map():
 
     # --------------------- Folium Map Setup ---------------------
     try:
+        # Use the zoom level from session state if available, otherwise default to 1
+        zoom_start = st.session_state.get("map_zoom", 1)
+        
         m = folium.Map(
             location=st.session_state.map_center,
-            zoom_start=1,
+            zoom_start=zoom_start,
             crs="Simple",
             min_zoom=-2,
             max_zoom=5
@@ -432,8 +551,33 @@ def render_interactive_map():
         except Exception as e:
             log_warning(f"Could not add measurement tool: {e}")
 
-        # Render the Folium map in Streamlit
-        st_data = st_folium(m, width=800, height=800)
+        # Render the Folium map in Streamlit with responsive sizing
+        map_container = st.container()
+        with map_container:
+            # Allow users to select map size
+            map_size_options = {
+                "Small (600x600)": 600,
+                "Medium (800x800)": 800,
+                "Large (1000x800)": 1000
+            }
+            
+            # Add a column layout to position the map size selector
+            size_col1, size_col2 = st.columns([4, 1])
+            with size_col2:
+                selected_size_label = st.selectbox(
+                    "Map Size",
+                    options=list(map_size_options.keys()),
+                    index=1  # Default to medium
+                )
+                selected_size = map_size_options[selected_size_label]
+            
+            with size_col1:
+                # Use the selected width for the map
+                st_data = st_folium(m, width=selected_size, height=min(selected_size, 800))
+        
+        # Store current zoom level
+        if st_data and "zoom" in st_data:
+            st.session_state.map_zoom = st_data["zoom"]
         
         # Handle map click events to capture coordinates
         if st_data and st_data.get("last_clicked"):
@@ -463,101 +607,214 @@ def render_interactive_map():
                     st.rerun()
                 
         # Add a new feature: shortest path calculation between territories
-        st.subheader("Calculate Path Between Territories")
-        
-        col_path1, col_path2 = st.columns(2)
-        with col_path1:
-            source_territory = st.selectbox(
-                "From Territory",
-                options=[t.name for t in st.session_state.territories],
-                key="source_territory"
-            )
-        with col_path2:
-            target_territory = st.selectbox(
-                "To Territory",
-                options=[t.name for t in st.session_state.territories],
-                key="target_territory" 
-            )
-            
-        if st.button("Calculate Distance"):
-            source = next((t for t in st.session_state.territories if t.name == source_territory), None)
-            target = next((t for t in st.session_state.territories if t.name == target_territory), None)
-            
-            if source and target and source.x and source.y and target.x and target.y:
-                dist = calculate_distance(source.x, source.y, target.x, target.y)
-                st.success(f"Distance from {source.name} to {target.name}: {dist:.1f} units")
+        path_calc = st.expander("Calculate Path Between Territories", expanded=False)
+        with path_calc:
+            col_path1, col_path2 = st.columns(2)
+            with col_path1:
+                source_territory = st.selectbox(
+                    "From Territory",
+                    options=[t.name for t in st.session_state.territories],
+                    key="source_territory"
+                )
+            with col_path2:
+                target_territory = st.selectbox(
+                    "To Territory",
+                    options=[t.name for t in st.session_state.territories],
+                    key="target_territory" 
+                )
                 
-                # Draw a line showing the path
-                folium.PolyLine(
-                    locations=[(source.y, source.x), (target.y, target.x)],
-                    color='red',
-                    weight=3,
-                    opacity=0.7,
-                    tooltip=f"Path: {dist:.1f} units"
-                ).add_to(m)
+            if st.button("Calculate Distance", key="calc_distance_btn"):
+                source = next((t for t in st.session_state.territories if t.name == source_territory), None)
+                target = next((t for t in st.session_state.territories if t.name == target_territory), None)
                 
-                # Update the map
-                st_folium(m, width=800, height=800)
-            else:
-                st.error("Could not calculate distance - coordinates unavailable")
+                if source and target and source.x and source.y and target.x and target.y:
+                    dist = calculate_distance(source.x, source.y, target.x, target.y)
+                    st.success(f"Distance from {source.name} to {target.name}: {dist:.1f} units")
+                    
+                    # Draw a line showing the path
+                    folium.PolyLine(
+                        locations=[(source.y, source.x), (target.y, target.x)],
+                        color='red',
+                        weight=3,
+                        opacity=0.7,
+                        tooltip=f"Path: {dist:.1f} units"
+                    ).add_to(m)
+                    
+                    # Update the map
+                    st_folium(m, width=800, height=800)
+                else:
+                    st.error("Could not calculate distance - coordinates unavailable")
                 
     except Exception as e:
         log_error(f"Error rendering map: {e}", exc_info=True)
         st.error("There was an error rendering the map. Please ensure all required libraries are installed.")
         st.error(f"Error details: {str(e)}")
 
-    # Add map export and distance matrix options
-    export_col1, export_col2 = st.columns(2)
-    with export_col1:
-        if st.button("📸 Export Current Map View", help="Save the current map view as a PNG image"):
-            try:
-                # Create a screenshot of the map div using HTML and JavaScript
-                with tempfile.NamedTemporaryFile(delete=False, suffix='.html') as tmpfile:
-                    html_content = f"""
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Map Export</title>
-                        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-                    </head>
-                    <body>
-                        <div id="map" style="width:800px;height:800px">{m.get_root().render()}</div>
-                        <script>
-                            window.onload = function() {{
-                                html2canvas(document.getElementById('map')).then(function(canvas) {{
-                                    var link = document.createElement('a');
-                                    link.download = 'necromunda_map_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.png';
-                                    link.href = canvas.toDataURL();
-                                    link.click();
-                                }});
-                            }};
-                        </script>
-                    </body>
-                    </html>
-                    """
-                    tmpfile.write(html_content.encode('utf-8'))
-                    tmpfile_name = tmpfile.name
+    # Add map export dialog
+    if st.session_state.get("show_export_dialog", False):
+        with st.form("export_map_form"):
+            st.subheader("Export Map")
+            
+            export_col1, export_col2 = st.columns(2)
+            
+            with export_col1:
+                export_width = st.number_input("Width", min_value=600, max_value=2000, value=1200)
+                include_legend = st.checkbox("Include Legend", value=True)
                 
-                st.info(f"""
-                Map export prepared!
-                
-                To complete the export:
-                1. Right-click on the map and select "Save image as..."
-                2. Choose a location on your computer
-                3. Click "Save"
-                """)
-            except Exception as e:
-                log_error(f"Error exporting map: {e}", exc_info=True)
-                st.error(f"Error exporting map: {str(e)}")
-    
-    with export_col2:
-        if st.button("🗺️ Generate Distance Matrix", help="Calculate distances between all territories"):
-            if len(st.session_state.territories) > 1:
-                st.session_state.show_distance_matrix = True
-                st.rerun()
-            else:
-                st.warning("Need at least 2 territories to create a distance matrix")
-    
+            with export_col2:
+                export_height = st.number_input("Height", min_value=600, max_value=2000, value=1200)
+                include_grid = st.checkbox("Include Grid", value=True)
+            
+            export_submitted = st.form_submit_button("Export Map")
+            
+            if export_submitted:
+                try:
+                    # Configure the export map with selected options
+                    export_map = folium.Map(
+                        location=st.session_state.map_center,
+                        zoom_start=st.session_state.get("map_zoom", 1),
+                        crs="Simple",
+                        min_zoom=-2,
+                        max_zoom=5,
+                        width=export_width,
+                        height=export_height
+                    )
+                    
+                    # Add the static image overlay
+                    ImageOverlay(
+                        image=base_map_image,
+                        bounds=image_bounds,
+                        origin="lower",
+                        opacity=map_opacity,
+                        interactive=True,
+                        cross_origin=False,
+                        zindex=1
+                    ).add_to(export_map)
+                    
+                    # Add grid conditionally
+                    if include_grid:
+                        grid_step = 512  # Grid cell size
+                        for x in range(0, 4096, grid_step):
+                            folium.PolyLine(
+                                locations=[[0, x], [4096, x]],
+                                color="lightgray",
+                                weight=1,
+                                opacity=0.5,
+                                dash_array="5,5"
+                            ).add_to(export_map)
+                            
+                            folium.PolyLine(
+                                locations=[[x, 0], [x, 4096]],
+                                color="lightgray",
+                                weight=1,
+                                opacity=0.5,
+                                dash_array="5,5"
+                            ).add_to(export_map)
+                    
+                    # Add territories
+                    for td in territory_data:
+                        popup_text = f"<b>{td['name']}</b><br>Type: {td['type']}<br>Controlled by: {td['controlled_by']}"
+                        folium.CircleMarker(
+                            location=[td["y"], td["x"]],
+                            radius=marker_size,
+                            color=td["color"],
+                            fill=True,
+                            fill_color=td["color"],
+                            fill_opacity=0.7,
+                            popup=folium.Popup(popup_text, max_width=300)
+                        ).add_to(export_map)
+                        
+                        # Add labels
+                        if show_labels:
+                            folium.Marker(
+                                location=[td["y"] + 50, td["x"]],
+                                icon=folium.DivIcon(
+                                    icon_size=(150, 36),
+                                    icon_anchor=(75, 0),
+                                    html=f'<div style="font-size: {label_size}pt; color: black; text-shadow: 1px 1px white;">{td["name"]}</div>'
+                                )
+                            ).add_to(export_map)
+                    
+                    # Add legend
+                    if include_legend:
+                        legend_html = '''
+                            <div style="position: fixed; 
+                                        bottom: 50px; left: 50px; 
+                                        border:2px solid grey; z-index:9999; 
+                                        background-color:white;
+                                        padding:10px;
+                                        border-radius:5px;
+                                        font-size:14px;">
+                            <p style="margin-bottom:5px; font-weight:bold;">Territory Control</p>
+                        '''
+                        
+                        for faction, color in faction_color_mapping.items():
+                            legend_html += f'''
+                                <div>
+                                <span style="background-color:{color}; 
+                                            border-radius:50%;
+                                            display:inline-block;
+                                            height:10px;
+                                            width:10px;
+                                            margin-right:5px;"></span>
+                                {faction}
+                                </div>
+                            '''
+                        
+                        legend_html += f'''
+                            <div>
+                            <span style="background-color:{default_color}; 
+                                        border-radius:50%;
+                                        display:inline-block;
+                                        height:10px;
+                                        width:10px;
+                                        margin-right:5px;"></span>
+                            Unclaimed
+                            </div>
+                        '''
+                        
+                        legend_html += '</div>'
+                        export_map.get_root().add_child(folium.Element(legend_html))
+                    
+                    # Create HTML for export
+                    with tempfile.NamedTemporaryFile(delete=False, suffix='.html') as tmpfile:
+                        html_content = f"""
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>Necromunda Map Export</title>
+                            <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+                        </head>
+                        <body>
+                            <div id="map" style="width:{export_width}px;height:{export_height}px">{export_map.get_root().render()}</div>
+                            <script>
+                                window.onload = function() {{
+                                    html2canvas(document.getElementById('map')).then(function(canvas) {{
+                                        var link = document.createElement('a');
+                                        link.download = 'necromunda_map_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.png';
+                                        link.href = canvas.toDataURL();
+                                        link.click();
+                                    }});
+                                }};
+                            </script>
+                        </body>
+                        </html>
+                        """
+                        tmpfile.write(html_content.encode('utf-8'))
+                    
+                    st.success("Map export prepared! The download should start automatically.")
+                    # Hide the export dialog after export
+                    st.session_state.show_export_dialog = False
+                    
+                except Exception as e:
+                    log_error(f"Error exporting map: {e}", exc_info=True)
+                    st.error(f"Error exporting map: {str(e)}")
+        
+        # Add a cancel button for the export dialog
+        if st.button("Cancel Export"):
+            st.session_state.show_export_dialog = False
+            st.rerun()
+
     # Show distance matrix if requested
     if st.session_state.get("show_distance_matrix", False):
         st.subheader("Territory Distance Matrix")
@@ -604,3 +861,51 @@ def render_interactive_map():
                 st.rerun()
         else:
             st.warning("No territories with valid coordinates found")
+    
+    # Update label placement with smart positioning
+    territory_data_with_labels = territory_data.copy()
+    
+    if show_labels:
+        # Get label positioning strategy from config
+        label_strategy = map_config.get("label_placement_strategy", "offset")
+        label_offset = map_config.get("label_offset", 50)
+        
+        # Generate list of territory positions for collision detection
+        territory_positions = [(td["y"], td["x"], td["name"]) for td in territory_data]
+        
+        # Apply smart label placement to territory data
+        try:
+            from views.territory_map.label_placement import optimize_label_placement
+            territory_data_with_labels = optimize_label_placement(territory_data, label_strategy)
+        except Exception as e:
+            log_warning(f"Smart label placement failed: {e}")
+            territory_data_with_labels = territory_data
+    
+    # Update the label rendering code in the map setup section
+    if show_labels:
+        for td in territory_data_with_labels:
+            # Use optimized label position if available, otherwise use default offset
+            label_y = td.get("label_y", td["y"] + label_offset)
+            label_x = td.get("label_x", td["x"])
+            
+            folium.Marker(
+                location=[label_y, label_x],
+                icon=folium.DivIcon(
+                    icon_size=(150, 36),
+                    icon_anchor=(75, 0),
+                    html=f'<div style="font-size: {label_size}pt; color: black; text-shadow: 1px 1px white; text-align: center;">{td["name"]}</div>'
+                )
+            ).add_to(m)
+    
+    # When a new territory is created or viewed, check if we should auto-fit
+    if st.session_state.get("auto_fit_new_territories", False) and st.session_state.get("new_territory_created", False):
+        # Get the newly created territory
+        new_territory = st.session_state.territories[-1]
+        
+        # Center on the new territory
+        if new_territory.x is not None and new_territory.y is not None:
+            st.session_state.map_center = [new_territory.y, new_territory.x]
+            st.session_state.map_zoom = 2  # Medium zoom level for new territory
+        
+        # Reset the flag
+        st.session_state.new_territory_created = False

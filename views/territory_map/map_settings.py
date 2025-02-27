@@ -7,7 +7,7 @@ from PIL import Image
 
 from common import Territory, save_data
 from utils.logger import log_error, log_info, log_warning
-from views.territory_map.map_config import get_map_settings, save_map_config, update_map_setting
+from views.territory_map.map_config import get_map_settings, save_map_config, update_map_setting, reset_map_config
 
 def render_map_settings():
     """Render the map settings tab content"""
@@ -17,8 +17,8 @@ def render_map_settings():
     map_config = get_map_settings()
     
     # Create tabs for different settings categories
-    settings_tab1, settings_tab2, settings_tab3 = st.tabs([
-        "Map Appearance", "Map Background", "Territory Generation"
+    settings_tab1, settings_tab2, settings_tab3, settings_tab4 = st.tabs([
+        "Map Appearance", "Map Background", "Territory Generation", "Advanced Layout"
     ])
     
     with settings_tab1:
@@ -203,3 +203,119 @@ def render_map_settings():
             except Exception as e:
                 log_error(f"Error generating territories: {str(e)}", exc_info=True)
                 st.error(f"Error generating territories: {str(e)}")
+                
+    with settings_tab4:
+        st.subheader("Advanced Layout Options")
+        
+        # Label placement settings
+        st.write("Label Placement Strategy")
+        label_placement = st.radio(
+            "How should territory labels be positioned?",
+            options=["Simple Offset", "Radial", "Smart Placement"],
+            index=0,  # Default to simple offset
+            horizontal=True,
+            help="Simple Offset places labels above territories. Radial places labels around territories. Smart Placement tries to avoid overlaps."
+        )
+        
+        # Map the user-friendly names to the internal strategies
+        strategy_mapping = {
+            "Simple Offset": "offset",
+            "Radial": "radial", 
+            "Smart Placement": "smart"
+        }
+        
+        selected_strategy = strategy_mapping[label_placement]
+        if selected_strategy != map_config.get("label_placement_strategy", "offset"):
+            update_map_setting("label_placement_strategy", selected_strategy)
+        
+        # Label offset setting
+        label_offset = st.slider(
+            "Label Offset Distance", 
+            min_value=20,
+            max_value=100, 
+            value=map_config.get("label_offset", 50),
+            help="Distance between territory marker and its label"
+        )
+        
+        if label_offset != map_config.get("label_offset", 50):
+            update_map_setting("label_offset", label_offset)
+            
+        # Territory styling options
+        st.subheader("Territory Styling")
+        
+        col_style1, col_style2 = st.columns(2)
+        
+        with col_style1:
+            territory_opacity = st.slider(
+                "Territory Opacity",
+                min_value=0.3,
+                max_value=1.0,
+                value=map_config.get("territory_opacity", 0.7),
+                step=0.1,
+                help="Opacity of territory markers"
+            )
+            
+            if territory_opacity != map_config.get("territory_opacity", 0.7):
+                update_map_setting("territory_opacity", territory_opacity)
+        
+        with col_style2:
+            border_width = st.slider(
+                "Territory Border Width",
+                min_value=0,
+                max_value=5,
+                value=map_config.get("territory_border_width", 1),
+                help="Width of the border around territory markers"
+            )
+            
+            if border_width != map_config.get("territory_border_width", 1):
+                update_map_setting("territory_border_width", border_width)
+        
+        # Add viewport settings
+        st.subheader("Viewport Settings")
+        
+        auto_fit = st.checkbox(
+            "Auto-fit Map on New Territory Creation", 
+            value=map_config.get("auto_fit_new_territories", True),
+            help="When enabled, the map will automatically center on newly created territories"
+        )
+        
+        if auto_fit != map_config.get("auto_fit_new_territories", True):
+            update_map_setting("auto_fit_new_territories", auto_fit)
+        
+        # Label placement strategy settings
+        st.subheader("Label Placement Strategy")
+        
+        placement_options = {
+            "Simple Offset": "offset",
+            "Radial": "radial",
+            "Smart Placement": "smart"
+        }
+        
+        current_strategy = map_config.get("label_placement_strategy", "offset")
+        current_option = next(
+            (k for k, v in placement_options.items() if v == current_strategy), 
+            "Simple Offset"
+        )
+        
+        selected_option = st.radio(
+            "Label Placement",
+            options=list(placement_options.keys()),
+            index=list(placement_options.keys()).index(current_option),
+            help="Choose how labels are positioned relative to territory markers",
+            horizontal=True
+        )
+        
+        if placement_options[selected_option] != current_strategy:
+            update_map_setting("label_placement_strategy", placement_options[selected_option])
+        
+        # Sample visualization of label placement strategies
+        st.caption("Label placement strategies:")
+        placement_examples = {
+            "Simple Offset": "↑ Labels are placed directly above territory markers",
+            "Radial": "○ Labels are placed in a circle around territory markers",
+            "Smart Placement": "⚙️ Labels are placed to minimize overlapping"
+        }
+        
+        for option, description in placement_examples.items():
+            if option == selected_option:
+                st.info(f"**{description}**")

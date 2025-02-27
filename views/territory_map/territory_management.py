@@ -48,6 +48,10 @@ def render_territory_management():
                 st.session_state.territories.append(new_territory)
                 save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
                 log_info(f"Added new territory: {territory_name_input}")
+                
+                # Set flag to indicate a new territory was created (for auto-fitting)
+                st.session_state.new_territory_created = True
+                
                 st.success(f"Added territory: {territory_name_input}")
                 st.session_state.last_clicked_x = None
                 st.session_state.last_clicked_y = None
