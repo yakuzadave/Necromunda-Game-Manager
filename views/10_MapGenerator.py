@@ -1,26 +1,26 @@
 import base64
+import math
 import os
 import random
 import shutil
+from collections import defaultdict
 from io import BytesIO
 
 import folium
 import folium.plugins
+
+# Add these imports to support new features
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import streamlit as st
 from folium.raster_layers import ImageOverlay
+from matplotlib.colors import LinearSegmentedColormap
 from PIL import Image, ImageDraw
 from streamlit_folium import st_folium
 
 from common import Territory, save_data
 from utils.logger import log_debug, log_error, log_info, log_warning
-
-# Add these imports to support new features
-import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap
-from collections import defaultdict
-import math
 
 # Create static directory if it doesn't exist
 os.makedirs("static", exist_ok=True)
@@ -29,20 +29,20 @@ st.title("Necromunda Territory Map Generator")
 
 # --------------------- Helper Functions ---------------------
 @st.cache_data
-def assign_coordinates_if_missing(
-    territory, 
+def assign_coordinates_if_missing(_territory, 
     default_x_range=(0, 4096), 
     default_y_range=(0, 4096)
 ):
     """
     If the territory lacks x/y coordinates, assign random defaults within a grid.
     This function is cached to ensure consistent coordinates between reruns.
+    Note: Leading underscore in '_territory' prevents Streamlit from trying to hash it.
     """
-    if territory.x is None:
-        territory.x = random.uniform(*default_x_range)
-    if territory.y is None:
-        territory.y = random.uniform(*default_y_range)
-    return territory
+    if _territory.x is None:
+        _territory.x = random.uniform(*default_x_range)
+    if _territory.y is None:
+        _territory.y = random.uniform(*default_y_range)
+    return _territory
 
 @st.cache_data
 def generate_placeholder_map(width=4096, height=4096):
@@ -1163,7 +1163,7 @@ with tab4:
                     # Display the heatmap
                     st.write("Areas with more territories appear darker:")
                     fig, ax = plt.subplots(figsize=(10, 8))
-                    ax.imshow(heatmap_data.T, origin='lower', extent=[0, 4096, 0, 4096], 
+                    ax.imshow(heatmap_data.T, origin='lower', extent=(0, 4096, 0, 4096), 
                               cmap='viridis', interpolation='gaussian')
                     ax.set_xlabel("X Coordinate")
                     ax.set_ylabel("Y Coordinate")
