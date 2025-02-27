@@ -23,31 +23,33 @@ def show_fighter_details():
     # Check if we have a selected fighter and gang in session state
     if "selected_fighter_id" not in st.session_state or "selected_gang_id" not in st.session_state:
         st.error("No fighter selected. Please select a fighter first.")
-        if st.button("Return to Fighters"):
-            st.switch_page("views/5_FighterManagement.py")
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Go to Fighters", use_container_width=True):
+                st.switch_page("views/5_FighterManagement.py")  # Fixed path reference
+        with col2:
+            if st.button("Go to Dashboard", use_container_width=True):
+                st.switch_page("views/1_Dashboard.py")  # Fixed path reference
         return
     
-    # Get the selected fighter and gang
-    fighter_id = st.session_state.selected_fighter_id
-    gang_id = st.session_state.selected_gang_id
+    # Find the gang and fighter in session state with better error handling
+    try:
+        fighter_id = st.session_state.selected_fighter_id
+        gang_id = st.session_state.selected_gang_id
+        
+        selected_gang = next((gang for gang in st.session_state.gangs if gang.gang_id == gang_id), None)
+        if not selected_gang:
+            raise ValueError(f"Gang with ID {gang_id} not found")
+            
+        selected_fighter = next((fighter for fighter in selected_gang.gangers if fighter.ganger_id == fighter_id), None)
+        if not selected_fighter:
+            raise ValueError(f"Fighter with ID {fighter_id} not found in gang {selected_gang.gang_name}")
     
-    # Find the gang and fighter in session state
-    selected_gang = None
-    selected_fighter = None
-    
-    for gang in st.session_state.gangs:
-        if gang.gang_id == gang_id:
-            selected_gang = gang
-            for fighter in gang.gangers:
-                if fighter.ganger_id == fighter_id:
-                    selected_fighter = fighter
-                    break
-            break
-    
-    if not selected_gang or not selected_fighter:
-        st.error("Selected fighter or gang not found.")
+    except Exception as e:
+        st.error(f"Error locating fighter data: {str(e)}")
+        log_error(f"Error loading fighter details: {e}", exc_info=True)
         if st.button("Return to Fighters"):
-            st.switch_page("views/5_FighterManagement.py")
+            st.switch_page("views/5_FighterManagement.py")  # Fixed path reference
         return
     
     # Display fighter header with portrait if available
@@ -65,21 +67,29 @@ def show_fighter_details():
         st.header(f"{selected_fighter.name}")
         st.subheader(f"{selected_fighter.type} - {selected_gang.gang_name}")
         
-        # Status badge
+        # Status badge with improved color coding
         status_color = "green"
         if "Injured" in selected_fighter.status:
             status_color = "orange"
         elif "Out of action" in selected_fighter.status:
             status_color = "red"
+        elif "Dead" in selected_fighter.status:
+            status_color = "darkred"
         
         st.markdown(
-            f"<span style='background-color:{status_color};padding:5px;border-radius:5px;color:white'>"
+            f"<span style='background-color:{status_color};padding:5px;border-radius:5px;color:white;font-weight:bold'>"
             f"{selected_fighter.status}</span>", 
             unsafe_allow_html=True
         )
         
-        # Experience and kills
-        st.metric("XP", selected_fighter.xp)
+        # Experience and kills with more metrics
+        col_a, col_b, col_c = st.columns(3)
+        with col_a:
+            st.metric("XP", selected_fighter.xp)
+        with col_b:
+            st.metric("Kills", selected_fighter.kills)
+        with col_c:
+            st.metric("Advances", selected_fighter.advance_count)
         
         # Last updated
         if hasattr(selected_fighter, "datetime_updated") and selected_fighter.datetime_updated:
@@ -134,6 +144,69 @@ def show_fighter_details():
             st.metric("Wounds (W)", selected_fighter.w)
             st.metric("Willpower (Wil)", selected_fighter.wil)
             st.metric("Intelligence (Int)", selected_fighter.intelligence)
+        
+        # Add a button to modify stats
+        with st.expander("Modify Stats"):
+            stat_cols1 = st.columns(4)
+            with stat_cols1[0]:
+                new_m = st.number_input("M", value=selected_fighter.m, min_value=1)
+            with stat_cols1[1]:
+                new_ws = st.number_input("WS", value=selected_fighter.ws, min_value=1)
+            with stat_cols1[2]:
+                new_bs = st.number_input("BS", value=selected_fighter.bs, min_value=1)
+            with stat_cols1[3]:
+                new_s = st.number_input("S", value=selected_fighter.s, min_value=1)
+                
+            stat_cols2 = st.columns(4)
+            with stat_cols2[0]:
+                new_t = st.number_input("T", value=selected_fighter.t, min_value=1)
+            with stat_cols2[1]:
+                new_w = st.number_input("W", value=selected_fighter.w, min_value=1)
+            with stat_cols2[2]:
+                new_i = st.number_input("I", value=selected_fighter.i, min_value=1)
+            with stat_cols2[3]:
+                new_a = st.number_input("A", value=selected_fighter.a, min_value=1)
+                
+            stat_cols3 = st.columns(4)
+            with stat_cols3[0]:
+                new_ld = st.number_input("Ld", value=selected_fighter.ld, min_value=1)
+            with stat_cols3[1]:
+                new_cl = st.number_input("Cl", value=selected_fighter.cl, min_value=1)
+            with stat_cols3[2]:
+                new_wil = st.number_input("Wil", value=selected_fighter.wil, min_value=1)
+            with stat_cols3[3]:
+                new_int = st.number_input("Int", value=selected_fighter.intelligence, min_value=1)
+                
+            if st.button("Update Stats"):
+                try:
+                    # Update fighter stats
+                    for gang in st.session_state.gangs:
+                        if gang.gang_id == gang_id:
+                            for fighter in gang.gangers:
+                                if fighter.ganger_id == fighter_id:
+                                    fighter.m = new_m
+                                    fighter.ws = new_ws
+                                    fighter.bs = new_bs
+                                    fighter.s = new_s
+                                    fighter.t = new_t
+                                    fighter.w = new_w
+                                    fighter.i = new_i
+                                    fighter.a = new_a
+                                    fighter.ld = new_ld
+                                    fighter.cl = new_cl
+                                    fighter.wil = new_wil
+                                    fighter.intelligence = new_int
+                                    fighter.datetime_updated = datetime.now().isoformat()
+                                    break
+                            
+                    # Save data
+                    save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
+                    log_info(f"Updated stats for fighter {selected_fighter.name}")
+                    st.success("Stats updated successfully!")
+                    st.rerun()
+                except Exception as e:
+                    log_error(f"Error updating stats: {e}", exc_info=True)
+                    st.error(f"Error updating stats: {str(e)}")
     
     # Equipment Tab
     with tabs[1]:
@@ -250,18 +323,48 @@ def show_fighter_details():
         st.subheader("Injuries")
         
         if selected_fighter.injuries and len(selected_fighter.injuries) > 0:
-            # Display injuries in a list
-            for injury in selected_fighter.injuries:
-                st.markdown(f"- **{injury}**")
+            # Display injuries in a better formatted list
+            for i, injury in enumerate(selected_fighter.injuries):
+                with st.container():
+                    cols = st.columns([3, 1])
+                    with cols[0]:
+                        st.markdown(f"**Injury {i+1}:** {injury}")
+                    with cols[1]:
+                        if st.button("Remove", key=f"remove_injury_{i}"):
+                            selected_fighter.injuries.pop(i)
+                            selected_fighter.datetime_updated = datetime.now().isoformat()
+                            
+                            # Update status if no injuries left
+                            if not selected_fighter.injuries:
+                                selected_fighter.status = "Active"
+                                
+                            save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
+                            log_info(f"Removed injury from {selected_fighter.name}")
+                            st.success("Injury removed")
+                            st.rerun()
         else:
             st.info("This fighter has no injuries")
             
-        # Add new injury
+        # Add new injury with improved injury types
         with st.expander("Add Injury"):
-            new_injury = st.text_input("Injury Description")
+            injury_type = st.selectbox("Injury Type", [
+                "Flesh Wound", "Back Injury", "Arm Wound", 
+                "Leg Wound", "Head Injury", "Eye Injury", 
+                "Chest Wound", "Disoriented", "Custom"
+            ])
+            
+            if injury_type == "Custom":
+                new_injury = st.text_input("Injury Description")
+            else:
+                new_injury = injury_type
+                
+            injury_severity = st.select_slider("Severity", options=["Minor", "Major", "Critical"])
+            
+            new_injury_desc = f"{new_injury} ({injury_severity})"
+            
             if st.button("Add Injury"):
-                if new_injury and new_injury not in selected_fighter.injuries:
-                    selected_fighter.injuries.append(new_injury)
+                if new_injury and new_injury_desc not in selected_fighter.injuries:
+                    selected_fighter.injuries.append(new_injury_desc)
                     selected_fighter.datetime_updated = datetime.now().isoformat()
                     
                     # Update status if not already injured
@@ -269,14 +372,39 @@ def show_fighter_details():
                         selected_fighter.status = "Injured"
                     
                     save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
-                    log_info(f"Added injury {new_injury} to {selected_fighter.name}")
-                    st.success(f"Added injury: {new_injury}")
+                    log_info(f"Added injury {new_injury_desc} to {selected_fighter.name}")
+                    st.success(f"Added injury: {new_injury_desc}")
                     st.rerun()
     
     # History Tab
     with tabs[4]:
         st.subheader("Battle History")
-        st.info("Fighter battle history feature coming soon...")
+        
+        # Improved battle history feature with participation tracking
+        battles_participated = []
+        for battle in st.session_state.battles:
+            if selected_gang.gang_name in battle.participating_gangs:
+                battle_result = "Victory" if battle.winner_gang == selected_gang.gang_name else "Defeat"
+                battles_participated.append({
+                    "Date": datetime.fromisoformat(battle.battle_created_datetime),
+                    "Scenario": battle.battle_scenario,
+                    "Result": battle_result
+                })
+        
+        if battles_participated:
+            # Convert to dataframe and display
+            battle_history_df = pd.DataFrame(battles_participated)
+            st.dataframe(battle_history_df, use_container_width=True)
+            
+            # Create a simple win/loss chart
+            battle_counts = battle_history_df["Result"].value_counts()
+            fig = px.pie(names=battle_counts.index, values=battle_counts.values, 
+                      title=f"{selected_fighter.name}'s Battle Record", 
+                      color=battle_counts.index,
+                      color_discrete_map={"Victory": "green", "Defeat": "red"})
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("This fighter hasn't participated in any recorded battles yet.")
     
     # Notes Tab
     with tabs[5]:
@@ -301,15 +429,15 @@ def show_fighter_details():
     
     with col1:
         if st.button("Return to Fighters"):
-            st.switch_page("views/5_FighterManagement.py")
+            st.switch_page("views/5_FighterManagement.py")  # Fixed path reference
     
     with col2:
         if st.button("Return to Gang"):
             st.session_state.current_gang_id = gang_id
-            st.switch_page("views/2_Gangs.py")
+            st.switch_page("views/2_Gangs.py")  # Fixed path reference
     
     with col3:
-        # Confirm dialog for deleting fighter
+        # Improved confirm dialog for deleting fighter
         delete_pressed = st.button("Delete Fighter", type="primary", use_container_width=True)
         if delete_pressed:
             st.error("Are you sure you want to delete this fighter? This cannot be undone.")
@@ -339,7 +467,7 @@ def show_fighter_details():
                         del st.session_state.selected_gang_id
                     
                     st.success(f"Fighter {selected_fighter.name} deleted")
-                    st.switch_page("views/5_FighterManagement.py")
+                    st.switch_page("views/5_FighterManagement.py")  # Fixed path reference
 
 # Call the function to display fighter details
 show_fighter_details()

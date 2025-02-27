@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from datetime import datetime
 import pandas as pd
+from utils.logger import log_info, log_error, log_debug
 
 from common import Gang, load_data, Territory, LocalBattle
 
@@ -32,8 +33,8 @@ def show_home():
         with col4:
             total_equipment = 0
             for gang in gangs:
-                if hasattr(gang, 'stash'):
-                    total_equipment += len(gang.stash)
+                if hasattr(gang, 'stash') and gang.stash:
+                    total_equipment += sum(e.qty for e in gang.stash)
             st.metric("🔧 Equipment Items", total_equipment)
 
         st.markdown("---")
@@ -44,30 +45,30 @@ def show_home():
         col_nav1, col_nav2, col_nav3, col_nav4 = st.columns(4)
 
         with col_nav1:
-            if st.button("📊 Dashboard"):
+            if st.button("📊 Dashboard", use_container_width=True):
                 st.switch_page("views/1_Dashboard.py")
 
         with col_nav2:
-            if st.button("👥 Manage Gangs"):
+            if st.button("👥 Manage Gangs", use_container_width=True):
                 st.switch_page("views/2_Gangs.py")
 
         with col_nav3:
-            if st.button("🌍 Territories"):
+            if st.button("🌍 Territories", use_container_width=True):
                 st.switch_page("views/3_Territories.py")
 
         with col_nav4:
-            if st.button("⚔️ Battles"):
+            if st.button("⚔️ Battles", use_container_width=True):
                 st.switch_page("views/4_Battles.py")
 
         st.markdown("#### 🔄 Campaign Management")
         col_mgmt1, col_mgmt2 = st.columns(2)
 
         with col_mgmt1:
-            if st.button("🛠️ Rebuild Campaign Data"):
+            if st.button("🛠️ Rebuild Campaign Data", use_container_width=True):
                 st.switch_page("views/0_Rebuild_Campaign.py")
 
         with col_mgmt2:
-            if st.button("☁️ Import Yaktribe Data"):
+            if st.button("☁️ Import Yaktribe Data", use_container_width=True):
                 st.switch_page("views/8_ImportYaktribe.py")
         
         # Recent activity
@@ -77,18 +78,25 @@ def show_home():
         # Recent battles
         if battles:
             st.markdown("### Recent Battles")
-            recent_battles = sorted(
-                battles, 
-                key=lambda b: datetime.fromisoformat(b.battle_created_datetime),
-                reverse=True
-            )[:3]
-            
-            for battle in recent_battles:
-                with st.container():
-                    st.markdown(f"**{battle.battle_scenario}** on {battle.battle_created_datetime}")
-                    st.markdown(f"Winner: **{battle.winner_gang}**")
-                    st.markdown(f"Participants: {', '.join(battle.participating_gangs)}")
-                    st.markdown("---")
+            try:
+                recent_battles = sorted(
+                    battles, 
+                    key=lambda b: datetime.fromisoformat(b.battle_created_datetime),
+                    reverse=True
+                )[:3]
+                
+                for battle in recent_battles:
+                    with st.container():
+                        col1, col2 = st.columns([3, 1])
+                        with col1:
+                            st.markdown(f"**{battle.battle_scenario}** on {battle.battle_created_datetime}")
+                            st.markdown(f"**Participants:** {', '.join(battle.participating_gangs)}")
+                        with col2:
+                            st.markdown(f"🏆 **{battle.winner_gang}**")
+                        st.markdown("---")
+            except Exception as e:
+                log_error(f"Error displaying recent battles: {e}", exc_info=True)
+                st.error("Error displaying recent battles")
 
         st.markdown("---")
 
@@ -111,8 +119,17 @@ def show_home():
         st.info("💡 Tip: Use the sidebar to quickly access different sections of the app.")
         
     except Exception as e:
-        st.error(f"Error loading data: {str(e)}")
-        st.info("You may need to create your first gang or rebuild campaign data.")
+        log_error(f"Error loading data for home page: {str(e)}", exc_info=True)
+        st.error("Error loading data. You may need to create your first gang or rebuild campaign data.")
+        
+        # Recovery options
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Create First Gang"):
+                st.switch_page("views/2_Gangs.py")
+        with col2:
+            if st.button("Rebuild Campaign Data"):
+                st.switch_page("views/0_Rebuild_Campaign.py")
 
 # Call the show_home function to display the page content
 show_home()
