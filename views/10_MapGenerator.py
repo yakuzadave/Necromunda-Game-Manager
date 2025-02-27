@@ -28,21 +28,54 @@ os.makedirs("static", exist_ok=True)
 st.title("Necromunda Territory Map Generator")
 
 # --------------------- Helper Functions ---------------------
-@st.cache_data
-def assign_coordinates_if_missing(_territory, 
+# Remove @st.cache_data from this function since Territory objects aren't serializable
+def assign_coordinates_if_missing(
+    territory, 
     default_x_range=(0, 4096), 
     default_y_range=(0, 4096)
 ):
     """
-    If the territory lacks x/y coordinates, assign random defaults within a grid.
-    This function is cached to ensure consistent coordinates between reruns.
-    Note: Leading underscore in '_territory' prevents Streamlit from trying to hash it.
+    If the territory lacks x/y coordinates, create a new Territory with random coordinates.
+    Returns a new Territory object to avoid mutating the original.
     """
-    if _territory.x is None:
-        _territory.x = random.uniform(*default_x_range)
-    if _territory.y is None:
-        _territory.y = random.uniform(*default_y_range)
-    return _territory
+    try:
+        # Create a dictionary from the territory for creating a new instance
+        territory_dict = {
+            "name": territory.name,
+            "type": territory.type,
+            "controlled_by": territory.controlled_by,
+            "x": territory.x,
+            "y": territory.y,
+            "lat": territory.lat,
+            "lng": territory.lng,
+            "elevation": territory.elevation
+        }
+        
+        # Assign random coordinates if needed
+        if territory_dict["x"] is None:
+            territory_dict["x"] = random.uniform(*default_x_range)
+        if territory_dict["y"] is None:
+            territory_dict["y"] = random.uniform(*default_y_range)
+            
+        # Create and return a new Territory object
+        return Territory(**territory_dict)
+    except Exception as e:
+        log_error(f"Error assigning coordinates to territory {territory.name}: {e}", exc_info=True)
+        # If something goes wrong, return the original territory to avoid crashing
+        return territory
+
+# Alternative simpler approach that can be cached
+@st.cache_data
+def get_random_coordinates(seed=None, default_x_range=(0, 4096), default_y_range=(0, 4096)):
+    """
+    Generate random coordinates that can be cached based on seed.
+    This function returns simple values that are serializable.
+    """
+    if seed is not None:
+        random.seed(seed)
+    x = random.uniform(*default_x_range)
+    y = random.uniform(*default_y_range)
+    return x, y
 
 @st.cache_data
 def generate_placeholder_map(width=4096, height=4096):
@@ -259,8 +292,25 @@ with tab1:
         ]
 
     # Ensure every territory has valid coordinates
-    for t in st.session_state.territories:
-        t = assign_coordinates_if_missing(t)
+    for i, t in enumerate(st.session_state.territories):
+        if t.x is None or t.y is None:
+            # Generate coordinates using the cacheable function
+            x, y = get_random_coordinates(seed=f"{t.name}_{i}")
+            
+            # Update territory with new coordinates
+            territory_dict = {
+                "name": t.name,
+                "type": t.type,
+                "controlled_by": t.controlled_by,
+                "x": t.x if t.x is not None else x,
+                "y": t.y if t.y is not None else y,
+                "lat": t.lat,
+                "lng": t.lng,
+                "elevation": t.elevation
+            }
+            
+            # Replace the territory in the list with updated version
+            st.session_state.territories[i] = Territory(**territory_dict)
 
     # Add territory filtering
     col_filter1, col_filter2, col_filter3 = st.columns(3)
