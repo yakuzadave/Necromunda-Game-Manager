@@ -231,6 +231,5 @@ def show_dashboard():
                 st.session_state.current_gang = gang
                 st.switch_page("pages/2_Gangs.py")  # Assuming you have a gang detail page
 
-
-
+# Call show_dashboard function
 show_dashboard()
