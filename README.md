@@ -15,20 +15,23 @@ A web-based game management tool for the tabletop wargame **Necromunda** built w
 ## Overview
 
 The **Necromunda Game Manager** simplifies the process of organizing and managing games for Necromunda. It provides an intuitive interface to:
-- Manage game sessions and player profiles.
-- Track scores and statistics.
-- Store and display faction data.
-- Visualize game progress using interactive charts.
+- Manage gangs and their fighters
+- Track territories and their ownership
+- Record battle results and campaign progression
+- Visualize game data through interactive charts and maps
+- Import data from Yaktribe
 
 This tool is perfect for both game masters and players who want a digital companion to enhance their tabletop experience.
 
 ## Features
 
-- **Interactive Dashboard:** Built with [Streamlit](https://docs.streamlit.io) for a smooth user experience.
-- **Game Session Management:** Create, update, and track multiple game sessions.
-- **Faction Management:** Easily add, edit, or remove factions.
-- **Score Tracking:** Record and analyze game scores and player statistics.
-- **Responsive Design:** Optimized for desktops and tablets.
+- **Interactive Dashboard:** Visual analytics including gang reputation, territory control, and battle history
+- **Gang Management:** Create and manage gangs, fighters, and equipment
+- **Territory System:** Track territory ownership with an interactive map
+- **Battle Tracking:** Record battle outcomes and their impact on the campaign
+- **Data Visualization:** Charts, maps, and data tables for campaign analysis
+- **Yaktribe Integration:** Import your gang data from Yaktribe
+- **Automatic Backups:** Secure backup system to prevent data loss
 
 ## Installation
 
@@ -48,29 +51,33 @@ This tool is perfect for both game masters and players who want a digital compan
 
 2. **Create a virtual environment (recommended):**
 
-  ```
-  python -m venv venv
-  source venv/bin/activate  # On Windows: venv\Scripts\activate
-  ```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
 3. **Install dependencies:**
 
-Ensure your requirements.txt includes at least:
-
-  ```
-  streamlit
-  pandas
-  ```
-Then run:
-
-  ```
-  pip install -r requirements.txt
-  ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
-Start the application with Streamlit by running:
 
-  ```
-  streamlit run main.py
-  ```
+1. **Run the application:**
+
+   ```bash
+   streamlit run main.py
+   ```
+
+2. **Navigate to the application in your browser:**
+   - The application will open automatically in your default browser
+   - If not, navigate to the URL shown in your terminal (typically http://localhost:8501)
+
+3. **First-time setup:**
+   - Create your first gang in the "Gangs" section
+   - Add territories in the "Territories" section
+   - Start recording battles in the "Battles" section
+
+## Project Structure
 
