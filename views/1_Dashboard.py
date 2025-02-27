@@ -267,7 +267,7 @@ def show_dashboard():
                 # Quick action buttons - fix the path reference
                 if st.button("View Details", key=f"view_{gang.gang_id}"):
                     st.session_state.current_gang = gang
-                    st.switch_page("views/2_Gangs.py")  # Updated path from pages/2_Gangs.py
+                    st.switch_page("views/2_Gangs.py")  # Ensure all page references use "views/" path
     
     except Exception as e:
         log_error(f"Dashboard error: {e}", exc_info=True)

@@ -1,16 +1,26 @@
-import streamlit as st
-import folium
-from folium.raster_layers import ImageOverlay
-from streamlit_folium import st_folium
-import random
+import base64
 import os
+import random
+import shutil
+from io import BytesIO
+
+import folium
+import folium.plugins
 import numpy as np
 import pandas as pd
+import streamlit as st
+from folium.raster_layers import ImageOverlay
 from PIL import Image, ImageDraw
-from io import BytesIO
-import base64
+from streamlit_folium import st_folium
+
 from common import Territory, save_data
-from utils.logger import log_info, log_error, log_debug, log_warning  # Added missing log_warning
+from utils.logger import log_debug, log_error, log_info, log_warning
+
+# Add these imports to support new features
+import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
+from collections import defaultdict
+import math
 
 # Create static directory if it doesn't exist
 os.makedirs("static", exist_ok=True)
@@ -25,7 +35,7 @@ def assign_coordinates_if_missing(
     default_y_range=(0, 4096)
 ):
     """
-    If the territory doesn't have x and/or y coordinates, assign random defaults within a grid.
+    If the territory lacks x/y coordinates, assign random defaults within a grid.
     This function is cached to ensure consistent coordinates between reruns.
     """
     if territory.x is None:
@@ -72,9 +82,11 @@ def generate_placeholder_map(width=4096, height=4096):
     except Exception as e:
         log_error(f"Error generating placeholder map: {e}", exc_info=True)
         # Return a fallback minimal image if there's an error
-        return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QcJEAolVPdz6wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABFklEQVR42u3BMQEAAADCoPVPbQlPoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgYtJQAAE49thhAAAAAElFTkSuQmCC"
+        return (
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8"
+            "AAAAASUVORK5CYII="
+        )
 
-# --------------------- Define color generator function ---------------------
 @st.cache_data
 def generate_distinct_colors(n):
     """Generate visually distinct colors for territories"""
@@ -97,7 +109,6 @@ def generate_distinct_colors(n):
             color_list.append(f"#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}")
     return color_list[:n]
 
-# --------------------- Calculate Map Statistics ---------------------
 @st.cache_data
 def calculate_territory_stats(territories):
     """Calculate statistics about territory control and distribution"""
@@ -127,13 +138,97 @@ def calculate_territory_stats(territories):
     
     return stats
 
-# --------------------- Calculate Distance Between Points ---------------------
 def calculate_distance(x1, y1, x2, y2):
     """Calculate Euclidean distance between two points"""
     return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
 
+# Add new helper functions for enhanced functionality
+@st.cache_data
+def cluster_territories(territories, max_distance=200):
+    """
+    Group territories that are close to each other into clusters
+    for better visualization when many territories exist.
+    """
+    clusters = []
+    processed = set()
+    
+    for i, t1 in enumerate(territories):
+        if i in processed:
+            continue
+            
+        # Start a new cluster with this territory
+        cluster = [t1]
+        processed.add(i)
+        
+        # Find all territories within max_distance
+        for j, t2 in enumerate(territories):
+            if j in processed or j == i:
+                continue
+                
+            if (t1.x and t1.y and t2.x and t2.y and 
+                calculate_distance(t1.x, t1.y, t2.x, t2.y) <= max_distance):
+                cluster.append(t2)
+                processed.add(j)
+                
+        clusters.append(cluster)
+        
+    return clusters
+
+def calculate_territory_adjacency(territories, adjacency_threshold=400):
+    """Calculate which territories are adjacent to each other"""
+    adjacency = defaultdict(list)
+    
+    for i, t1 in enumerate(territories):
+        if not t1.x or not t1.y:
+            continue
+            
+        for j, t2 in enumerate(territories):
+            if i == j or not t2.x or not t2.y:
+                continue
+                
+            distance = calculate_distance(t1.x, t1.y, t2.x, t2.y)
+            if distance <= adjacency_threshold:
+                adjacency[t1.name].append({
+                    "name": t2.name,
+                    "distance": distance,
+                    "controlled_by": t2.controlled_by
+                })
+    
+    return adjacency
+
+def calculate_faction_dominance(territories):
+    """Calculate which factions control strategic territory clusters"""
+    # Territory cluster analysis
+    clusters = cluster_territories(territories)
+    
+    # Analyze faction control in each cluster
+    faction_dominance = defaultdict(int)
+    
+    for cluster in clusters:
+        if not cluster:
+            continue
+            
+        # Count factions in this cluster
+        faction_count = defaultdict(int)
+        for territory in cluster:
+            if territory.controlled_by:
+                faction_count[territory.controlled_by] += 1
+        
+        # Determine dominant faction in cluster
+        if faction_count:
+            dominant_faction = max(faction_count.items(), key=lambda x: x[1])[0]
+            faction_dominance[dominant_faction] += len(cluster)
+    
+    return faction_dominance
+
 # --------------------- Initialize Territories ---------------------
-tab1, tab2, tab3, tab4 = st.tabs(["Interactive Map", "Territory Management", "Map Settings", "Statistics"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "Interactive Map", 
+    "Territory Management",
+    "Map Settings",
+    "Statistics",
+    "Advanced"
+])
 
 with tab1:
     st.header("Interactive Necromunda Map")
@@ -146,14 +241,62 @@ with tab1:
     if not st.session_state.territories:
         log_info("No territories found, creating sample territories")
         st.session_state.territories = [
-            Territory(name="Psi-Syndica Sector", type="Trading Post", controlled_by="Genestealer Cult", x=1000, y=3000),
-            Territory(name="Raucous Raccoon Saloon", type="Mineral Deposits", controlled_by="House Goliath", x=2500, y=3500),
+            Territory(
+                name="Psi-Syndica Sector",
+                type="Trading Post",
+                controlled_by="Genestealer Cult",
+                x=1000,
+                y=3000
+            ),
+            Territory(
+                name="Raucous Raccoon Saloon",
+                type="Mineral Deposits",
+                controlled_by="House Goliath",
+                x=2500,
+                y=3500
+            ),
             Territory(name="Trade Nexus", type="Archaeotech Site", controlled_by="House Escher")  # Missing coordinates intentionally
         ]
 
     # Ensure every territory has valid coordinates
     for t in st.session_state.territories:
         t = assign_coordinates_if_missing(t)
+
+    # Add territory filtering
+    col_filter1, col_filter2, col_filter3 = st.columns(3)
+    
+    with col_filter1:
+        # Get unique territory types and factions for filtering
+        territory_types = sorted(set(t.type for t in st.session_state.territories))
+        selected_types = st.multiselect(
+            "Filter by Territory Type",
+            options=territory_types,
+            default=[]
+        )
+    
+    with col_filter2:
+        factions = sorted(set(t.controlled_by for t in st.session_state.territories 
+                          if t.controlled_by))
+        selected_factions = st.multiselect(
+            "Filter by Faction",
+            options=["Unclaimed"] + factions,
+            default=[]
+        )
+    
+    with col_filter3:
+        show_all = st.checkbox("Show All Territories", value=True)
+        
+    # Filter territories based on selections
+    filtered_territories = st.session_state.territories
+    if not show_all:
+        if selected_types:
+            filtered_territories = [t for t in filtered_territories if t.type in selected_types]
+        if selected_factions:
+            filtered_territories = [
+                t for t in filtered_territories 
+                if (t.controlled_by in selected_factions) or 
+                   (not t.controlled_by and "Unclaimed" in selected_factions)
+            ]
 
     # --------------------- Static Base Image & Bounds ---------------------
     # Path to static grid image
@@ -170,19 +313,31 @@ with tab1:
 
     # --------------------- Map Controls ---------------------
     with st.expander("Map Controls", expanded=False):
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         
         with col1:
             show_grid = st.checkbox("Show Grid Lines", value=True)
             show_labels = st.checkbox("Show Territory Labels", value=True)
-            show_faction_lines = st.checkbox("Show Faction Connection Lines", value=True)
+            show_faction_lines = st.checkbox(
+                "Show Faction Connection Lines", value=True
+            )
             
         with col2:
             marker_size = st.slider("Territory Marker Size", 5, 20, 10)
             label_size = st.slider("Label Size", 8, 24, 12)
             map_opacity = st.slider("Map Opacity", 0.1, 1.0, 1.0, 0.1)
+            
+        with col3:
+            clustering_enabled = st.checkbox("Enable Clustering", value=False)
+            cluster_distance = 300  # Default value
+            if clustering_enabled:
+                cluster_distance = st.slider("Cluster Distance", 100, 1000, 300)
+            show_adjacent_lines = st.checkbox("Show Adjacent Territories", value=False)
+            if show_adjacent_lines:
+                adjacency_threshold = st.slider("Adjacency Threshold", 100, 1000, 400)
 
     # --------------------- Color Mapping ---------------------
+    faction_color_mapping = {}
     try:
         # Extract unique controlling factions from the territories
         factions = sorted(set(t.controlled_by for t in st.session_state.territories if t.controlled_by))
@@ -190,8 +345,8 @@ with tab1:
         # Use our improved color generation function
         color_list = generate_distinct_colors(len(factions))
         
-        faction_color_mapping = {faction: color_list[i] for i, faction in enumerate(factions)}
         default_color = "gray"
+        faction_color_mapping = {faction: color_list[i] for i, faction in enumerate(factions)}
 
         # Prepare territory data for map markers
         territory_data = []
@@ -210,6 +365,12 @@ with tab1:
         log_error(f"Error preparing territory data: {e}", exc_info=True)
         st.error(f"Error preparing territory data: {str(e)}")
         territory_data = []
+        default_color = "gray"  # Ensure default_color is defined even in case of an error
+
+    # Apply territory filtering to territory_data
+    if not show_all and territory_data:
+        territory_data = [td for td in territory_data 
+                          if any(t.name == td["name"] for t in filtered_territories)]
 
     # --------------------- Folium Map Setup ---------------------
     try:
@@ -292,7 +453,7 @@ with tab1:
         '''
         
         legend_html += '</div>'
-        m.get_root().html.add_child(folium.Element(legend_html))
+        m.get_root().add_child(folium.Element(legend_html))
 
         # Add scale bar (approximate since we're using Simple CRS)
         scale_html = '''
@@ -310,7 +471,7 @@ with tab1:
             </div>
             </div>
         '''
-        m.get_root().html.add_child(folium.Element(scale_html))
+        m.get_root().add_child(folium.Element(scale_html))
 
         # Add markers for each territory
         for td in territory_data:
@@ -356,14 +517,71 @@ with tab1:
                         dash_array='5, 10'
                     ).add_to(m)
 
+        # If clustering is enabled, show territory clusters
+        if clustering_enabled and filtered_territories:
+            clusters = cluster_territories(filtered_territories, cluster_distance)
+            
+            # Draw cluster boundaries
+            for cluster_index, cluster in enumerate(clusters):
+                if len(cluster) > 1:  # Only draw clusters with more than one territory
+                    # Get coordinates for cluster
+                    cluster_points = [(t.y, t.x) for t in cluster if t.x is not None and t.y is not None]
+                    
+                    # Calculate a convex hull or simpler boundary
+                    if len(cluster_points) >= 3:  # Need at least 3 points for a polygon
+                        # Draw a polygon around the cluster with some padding
+                        folium.Polygon(
+                            locations=cluster_points,
+                            color='gray',
+                            weight=2,
+                            fill=True,
+                            fill_color='gray',
+                            fill_opacity=0.1,
+                            popup=f"Cluster {cluster_index+1} - {len(cluster)} territories"
+                        ).add_to(m)
+
+        # If adjacency lines are enabled, show connections between nearby territories
+        if show_adjacent_lines:
+            adjacency_threshold = st.slider("Adjacency Threshold", 100, 1000, 400)
+            adjacency = calculate_territory_adjacency(
+                filtered_territories, adjacency_threshold
+            )
+            
+            # Draw lines between adjacent territories
+            for territory_name, adjacent_list in adjacency.items():
+                # Find the source territory
+                source_territory = next((t for t in filtered_territories if t.name == territory_name), None)
+                if not source_territory or not source_territory.x or not source_territory.y:
+                    continue
+                
+                for adj in adjacent_list:
+                    # Find the target territory
+                    target_territory = next((t for t in filtered_territories if t.name == adj["name"]), None)
+                    if not target_territory or not target_territory.x or not target_territory.y:
+                        continue
+                    
+                    # Draw a line between the territories
+                    folium.PolyLine(
+                        locations=[(source_territory.y, source_territory.x), 
+                                  (target_territory.y, target_territory.x)],
+                        color='gray',
+                        weight=1,
+                        opacity=0.4,
+                        dash_array='3,3',
+                        tooltip=f"Distance: {adj['distance']:.1f} units"
+                    ).add_to(m)
+
         # Add a measurement tool
-        measure = folium.plugins.MeasureControl(
-            position='topright',
-            primary_length_unit='pixels',
-            secondary_length_unit=None,
-            primary_area_unit=None
-        )
-        m.add_child(measure)
+        try:
+            measure = folium.plugins.MeasureControl(
+                position='topright',
+                primary_length_unit='pixels',
+                secondary_length_unit='',
+                primary_area_unit='sqmeters'
+            )
+            m.add_child(measure)
+        except Exception as e:
+            log_warning(f"Could not add measurement tool: {e}")
 
         # Render the Folium map in Streamlit
         st_data = st_folium(m, width=800, height=800)
@@ -392,7 +610,46 @@ with tab1:
                 if st.button("Center Map on This Territory"):
                     # This will need a rerun to update the map center
                     st.session_state.map_center = [nearest_territory.y, nearest_territory.x]
-                    st.experimental_rerun()
+                    st.rerun()
+                
+        # Add a new feature: shortest path calculation between territories
+        st.subheader("Calculate Path Between Territories")
+        
+        col_path1, col_path2 = st.columns(2)
+        with col_path1:
+            source_territory = st.selectbox(
+                "From Territory",
+                options=[t.name for t in st.session_state.territories],
+                key="source_territory"
+            )
+        with col_path2:
+            target_territory = st.selectbox(
+                "To Territory",
+                options=[t.name for t in st.session_state.territories],
+                key="target_territory" 
+            )
+            
+        if st.button("Calculate Distance"):
+            source = next((t for t in st.session_state.territories if t.name == source_territory), None)
+            target = next((t for t in st.session_state.territories if t.name == target_territory), None)
+            
+            if source and target and source.x and source.y and target.x and target.y:
+                dist = calculate_distance(source.x, source.y, target.x, target.y)
+                st.success(f"Distance from {source.name} to {target.name}: {dist:.1f} units")
+                
+                # Draw a line showing the path
+                folium.PolyLine(
+                    locations=[(source.y, source.x), (target.y, target.x)],
+                    color='red',
+                    weight=3,
+                    opacity=0.7,
+                    tooltip=f"Path: {dist:.1f} units"
+                ).add_to(m)
+                
+                # Update the map
+                st_folium(m, width=800, height=800)
+            else:
+                st.error("Could not calculate distance - coordinates unavailable")
                 
     except Exception as e:
         log_error(f"Error rendering map: {e}", exc_info=True)
@@ -444,7 +701,7 @@ with tab2:
                 st.success(f"Added territory: {territory_name_input}")
                 st.session_state.last_clicked_x = None
                 st.session_state.last_clicked_y = None
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Please enter a territory name.")
     
@@ -471,7 +728,7 @@ with tab2:
                 save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
                 log_info(f"Assigned {territory_to_assign} to {gang_to_assign}")
                 st.success(f"Assigned {territory_to_assign} to {gang_to_assign}")
-                st.experimental_rerun()
+                st.rerun()
         else:
             st.info("Ensure unassigned territories and registered gangs exist.")
     
@@ -618,12 +875,11 @@ with tab2:
                     save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
                     log_info(f"Imported {len(imported_territories)} territories")
                     st.success(f"Imported {len(imported_territories)} territories")
-                    st.experimental_rerun()
+                    st.rerun()
             except Exception as e:
                 log_error(f"Error importing territories: {e}", exc_info=True)
                 st.error(f"Error importing territories: {str(e)}")
 
-# --------------------- Map Settings Tab ---------------------
 with tab3:
     st.header("Map Settings")
     
@@ -711,7 +967,7 @@ with tab3:
         except Exception as e:
             log_error(f"Error generating territories: {str(e)}", exc_info=True)
             st.error(f"Error generating territories: {str(e)}")
-    
+
     # Add map image gallery option
     st.subheader("Map Gallery")
     st.write("Select from pre-made map designs or upload your own.")
@@ -753,7 +1009,7 @@ with tab3:
                 log_error(f"Error uploading template: {e}", exc_info=True)
                 st.error(f"Error uploading template: {str(e)}")
 
-# --------------------- Statistics Tab ---------------------
+# Enhanced Statistics Tab
 with tab4:
     st.header("Territory Statistics")
     
@@ -770,25 +1026,124 @@ with tab4:
         with col3:
             st.metric("Unclaimed Territories", territory_stats["unclaimed"])
         
-        # Display faction control chart
-        if territory_stats["faction_counts"]:
-            st.subheader("Territory Control by Faction")
-            faction_df = pd.DataFrame({
-                "Faction": list(territory_stats["faction_counts"].keys()),
-                "Territories": list(territory_stats["faction_counts"].values())
-            })
-            st.bar_chart(faction_df.set_index("Faction"))
+        # Calculate territory value by faction
+        faction_dominance = calculate_faction_dominance(st.session_state.territories)
         
-        # Display territory types chart
-        if territory_stats["type_counts"]:
-            st.subheader("Territory Types")
-            type_df = pd.DataFrame({
-                "Type": list(territory_stats["type_counts"].keys()),
-                "Count": list(territory_stats["type_counts"].values())
-            })
-            st.bar_chart(type_df.set_index("Type"))
+        # Create tabs for different statistics views
+        stat_tab1, stat_tab2, stat_tab3 = st.tabs([
+            "Faction Control", "Territory Types", "Strategic Analysis"
+        ])
+        
+        with stat_tab1:
+            if territory_stats["faction_counts"]:
+                st.subheader("Territory Control by Faction")
+                
+                # Add faction control visualization options
+                viz_type = st.radio(
+                    "Visualization Type",
+                    options=["Bar Chart", "Pie Chart"],
+                    horizontal=True
+                )
+                
+                faction_df = pd.DataFrame({
+                    "Faction": list(territory_stats["faction_counts"].keys()),
+                    "Territories": list(territory_stats["faction_counts"].values())
+                })
+                
+                if viz_type == "Bar Chart":
+                    st.bar_chart(faction_df.set_index("Faction"))
+                else:
+                    try:
+                        fig, ax = plt.subplots()
+                        ax.pie(
+                            faction_df["Territories"],
+                            labels=faction_df["Faction"].tolist(),
+                            autopct='%1.1f%%',
+                            startangle=90
+                        )
+                        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
+                        st.pyplot(fig)
+                    except Exception:
+                        st.bar_chart(faction_df.set_index("Faction"))
+                        st.warning("Could not generate pie chart - matplotlib may not be installed")
+            else:
+                st.info("No faction control data available yet.")
+                
+        with stat_tab2:
+            if territory_stats["type_counts"]:
+                st.subheader("Territory Types Distribution")
+                
+                type_df = pd.DataFrame({
+                    "Type": list(territory_stats["type_counts"].keys()),
+                    "Count": list(territory_stats["type_counts"].values())
+                })
+                
+                # Add a visualization selector
+                viz_type = st.radio(
+                    "Visualization Type",
+                    options=["Bar Chart", "Pie Chart"],
+                    horizontal=True,
+                    key="type_viz"
+                )
+                
+                if viz_type == "Bar Chart":
+                    st.bar_chart(type_df.set_index("Type"))
+                else:
+                    try:
+                        fig, ax = plt.subplots()
+                        ax.pie(
+                            type_df["Count"],
+                            labels=type_df["Type"].tolist(),
+                            autopct='%1.1f%%',
+                            startangle=90
+                        )
+                        ax.axis('equal')
+                        st.pyplot(fig)
+                    except Exception:
+                        st.bar_chart(type_df.set_index("Type"))
+                        st.warning("Could not generate pie chart - matplotlib may not be installed")
+            else:
+                st.info("No territory type data available yet.")
+        
+        with stat_tab3:
+            st.subheader("Strategic Territory Analysis")
             
-        # Display territory density heatmap
+            if faction_dominance:
+                st.write("Faction Strategic Control (based on territory clusters):")
+                
+                faction_dom_df = pd.DataFrame({
+                    "Faction": list(faction_dominance.keys()),
+                    "Strategic Value": list(faction_dominance.values())
+                })
+                
+                st.bar_chart(faction_dom_df.set_index("Faction"))
+                
+                # Find the strategically dominant faction
+                dominant_faction = max(faction_dominance.items(), key=lambda x: x[1])[0]
+                dom_value = faction_dominance[dominant_faction]
+                
+                st.info(f"**{dominant_faction}** has the strongest strategic position with control of {dom_value} clustered territories.")
+            
+            # Calculate territory isolation/connectivity
+            if len(st.session_state.territories) > 1:
+                adjacency = calculate_territory_adjacency(st.session_state.territories)
+                
+                # Identify isolated territories
+                isolated = [t.name for t in st.session_state.territories 
+                           if t.name not in adjacency or not adjacency[t.name]]
+                
+                if isolated:
+                    st.warning(f"Found {len(isolated)} isolated territories with no connections to other territories.")
+                    st.write(", ".join(isolated))
+                else:
+                    st.success("All territories are connected to at least one other territory.")
+                
+                # Territory with most connections
+                if adjacency:
+                    most_connected = max(adjacency.items(), key=lambda x: len(x[1]))
+                    st.write(f"**{most_connected[0]}** is the most connected territory with {len(most_connected[1])} connections.")
+        
+        # Create a 2D histogram for territory locations
         st.subheader("Territory Density Map")
         
         # Create a 2D histogram for territory locations
@@ -797,25 +1152,151 @@ with tab4:
             y_coords = [t.y for t in st.session_state.territories if t.y is not None]
             
             if x_coords and y_coords:
-                # Create grid for heatmap
-                x_bins = np.linspace(0, 4096, 20)
-                y_bins = np.linspace(0, 4096, 20)
-                
-                heatmap_data, _, _ = np.histogram2d(x_coords, y_coords, bins=[x_bins, y_bins])
-                
-                # Display the heatmap
-                st.write("Areas with more territories appear darker:")
-                fig, ax = plt.subplots(figsize=(10, 8))
-                ax.imshow(heatmap_data.T, origin='lower', extent=[0, 4096, 0, 4096], 
-                          cmap='viridis', interpolation='gaussian')
-                ax.set_xlabel("X Coordinate")
-                ax.set_ylabel("Y Coordinate")
-                ax.set_title("Territory Density Heatmap")
-                st.pyplot(fig)
+                try:
+                    import matplotlib.pyplot as plt  # Import inside try block as fallback
+                    
+                    # Create grid for heatmap
+                    x_bins = np.linspace(0, 4096, 20)
+                    y_bins = np.linspace(0, 4096, 20)
+                    heatmap_data, _, _ = np.histogram2d(x_coords, y_coords, bins=[x_bins, y_bins])
+                    
+                    # Display the heatmap
+                    st.write("Areas with more territories appear darker:")
+                    fig, ax = plt.subplots(figsize=(10, 8))
+                    ax.imshow(heatmap_data.T, origin='lower', extent=[0, 4096, 0, 4096], 
+                              cmap='viridis', interpolation='gaussian')
+                    ax.set_xlabel("X Coordinate")
+                    ax.set_ylabel("Y Coordinate")
+                    ax.set_title("Territory Density Heatmap")
+                    st.pyplot(fig)
+                except ImportError:
+                    st.warning("Matplotlib is required for the density heatmap. Install with 'pip install matplotlib'")
+                    st.info("Alternatively, you can view territory distribution in the tables above")
         else:
             st.info("Need at least 2 territories with coordinates to generate a density map.")
-    
+                
     except Exception as e:
         log_error(f"Error generating statistics: {e}", exc_info=True)
         st.error(f"Error generating statistics: {str(e)}")
-```
+
+# New Advanced Tab
+with tab5:
+    st.header("Advanced Territory Management")
+    
+    # Territory network visualization
+    st.subheader("Territory Network")
+    st.write("Analyze how territories are connected to each other.")
+    
+    # Calculate adjacency for visualization
+    adjacency = calculate_territory_adjacency(st.session_state.territories) if st.session_state.territories else {}
+    
+    if adjacency:
+        # Create network data
+        nodes = []
+        edges = []
+        
+        for territory_name, adjacent_list in adjacency.items():
+            source = next((t for t in st.session_state.territories if t.name == territory_name), None)
+            if source:
+                controlled_by = source.controlled_by or "Unclaimed"
+                nodes.append(f"{territory_name} ({controlled_by})")
+                
+                for adj in adjacent_list:
+                    edges.append((
+                        f"{territory_name} ({controlled_by})",
+                        f"{adj['name']} ({adj['controlled_by'] or 'Unclaimed'})",
+                        f"{adj['distance']:.1f}"
+                    ))
+        
+        # Generate Mermaid diagram code
+        if nodes and edges:
+            try:
+                from streamlit_mermaid import st_mermaid
+                
+                # Prepare mermaid graph
+                mermaid_code = ["graph TD"]
+                
+                # Add nodes
+                for node in nodes:
+                    safe_id = "".join([c if c.isalnum() else "_" for c in node])
+                    mermaid_code.append(f"    {safe_id}[\"{node}\"]")
+                
+                # Add edges
+                for source, target, label in edges:
+                    source_id = "".join([c if c.isalnum() else "_" for c in source])
+                    target_id = "".join([c if c.isalnum() else "_" for c in target])
+                    mermaid_code.append(f"    {source_id} -- \"{label}\" --> {target_id}")
+                
+                # Render diagram
+                st_mermaid("\n".join(mermaid_code))
+            except Exception as e:
+                st.warning("Could not generate network visualization. Install streamlit-mermaid with: pip install streamlit-mermaid")
+        else:
+            st.info("Not enough connected territories to generate a network.")
+    else:
+        st.info("Add more territories with coordinates to generate a network visualization.")
+    
+    # Territory batch operations
+    st.subheader("Batch Operations")
+    st.write("Perform operations on multiple territories at once.")
+    
+    col_batch1, col_batch2 = st.columns(2)
+    
+    with col_batch1:
+        # Batch faction assignment
+        st.write("Assign multiple territories to a faction:")
+        selected_territories = st.multiselect(
+            "Select territories",
+            options=[t.name for t in st.session_state.territories]
+        )
+        
+        if selected_territories:
+            gang_options = ["Unclaimed"] + [g.gang_name for g in st.session_state.get("gangs", [])]
+            batch_faction = st.selectbox("Assign to faction", options=gang_options)
+            
+            if st.button("Assign Selected Territories"):
+                try:
+                    # Process unclaimed selection
+                    controller = None if batch_faction == "Unclaimed" else batch_faction
+                    
+                    # Update territory controllers
+                    for territory in st.session_state.territories:
+                        if territory.name in selected_territories:
+                            territory.controlled_by = controller
+                    
+                    # If assigning to a gang, update gang's territory list
+                    if controller:
+                        for gang in st.session_state.gangs:
+                            if gang.gang_name == controller:
+                                for territory_name in selected_territories:
+                                    if territory_name not in gang.territories:
+                                        gang.territories.append(territory_name)
+                    
+                    # Save changes
+                    save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
+                    st.success(f"Assigned {len(selected_territories)} territories to {batch_faction}")
+                    st.rerun()
+                except Exception as e:
+                    log_error(f"Error in batch assign: {e}", exc_info=True)
+                    st.error(f"Error assigning territories: {str(e)}")
+    
+    with col_batch2:
+        # Batch type assignment
+        st.write("Set territory type for multiple territories:")
+        territory_type_options = sorted(set(t.type for t in st.session_state.territories))
+        batch_type = st.selectbox("New Territory Type", options=territory_type_options)
+        
+        if selected_territories and batch_type and st.button("Set Territory Type"):
+            try:
+                # Update territory types
+                for territory in st.session_state.territories:
+                    if territory.name in selected_territories:
+                        territory.type = batch_type
+                        
+                # Save changes
+                save_data(st.session_state.gangs, st.session_state.territories, st.session_state.battles)
+                st.success(f"Updated type for {len(selected_territories)} territories to {batch_type}")
+                st.rerun()
+            except Exception as e:
+                log_error(f"Error in batch type update: {e}", exc_info=True)
+                st.error(f"Error updating territory types: {str(e)}")
